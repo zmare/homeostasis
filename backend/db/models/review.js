@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     static associate(models) {
       // define association here
-      // Review.hasMany(
-      //   models.ReviewImage, { foreignKey: 'reviewId' }
-      // )
+      Review.hasMany(
+        models.ReviewImage, { foreignKey: 'reviewId', onDelete: 'cascade', hooks: true }
+      )
 
     }
   }

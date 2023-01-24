@@ -11,10 +11,11 @@ module.exports = {
       },
       reviewId: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Reviews',
-        //   key: 'id'
-        // },
+        references: {
+          model: 'Reviews',
+          key: 'id'
+        },
+        onDelete: 'cascade',
         allowNull: false
       },
       url: {

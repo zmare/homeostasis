@@ -3,7 +3,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
-const { Spots, SpotImage, Review, Users } = require('../../db/models')
+const { Spot, SpotImage, Review, ReviewImage } = require('../../db/models')
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
@@ -44,17 +44,37 @@ router.get(
 );
 
 
-router.get('/test', async function (req, res) {
-    let reviews = await Review.findAll({
-        where: {
-            spotId: 1,
-        },
-        include: Users
-    })
-    console.log(reviews)
-    res.json(reviews);
-});
+router.get('/test/spot', async function (req, res) {
+    // let review = await Review.findAll({
+    //     where: {
+    //         id: 1
+    //     },
+    //     include: ReviewImage
+    // }
+    // )
 
+    let spotImages = await SpotImage.findAll({
+        where: {
+            spotId: 3
+        },
+        include: Spot
+    })
+
+    res.json(spotImages);
+});
+router.get('/test/review', async function (req, res) {
+    let reviewImages = await ReviewImage.findAll({
+        where: {
+            reviewId: 1
+        },
+        include: Review
+    })
+
+    let review = await reviewImages[0].getReview();
+    console.log(review)
+
+    res.json(reviewImages);
+});
 
 
 module.exports = router;
