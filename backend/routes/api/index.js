@@ -3,6 +3,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
+const { Spot, SpotImage } = require('../../db/models')
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
@@ -43,8 +44,15 @@ router.get(
 );
 
 
-router.post('/test', function (req, res) {
-    res.json({ requestBody: req.body });
+router.get('/test', async function (req, res) {
+    let spotImages = await SpotImage.findAll({
+        where: {
+            spotId: 4
+        },
+        include: Spot
+    })
+    console.log(spotImages)
+    res.json(spotImages);
 });
 
 
