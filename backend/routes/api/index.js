@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const spotsRouter = require('./spots.js')
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 const { Spot, SpotImage, Review, ReviewImage } = require('../../db/models')
@@ -11,6 +12,7 @@ const { Spot, SpotImage, Review, ReviewImage } = require('../../db/models')
 router.use(restoreUser);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/spots', spotsRouter);
 
 // GET /api/restore-user
 router.get(
