@@ -10,43 +10,43 @@ const reviewImages = [
   {
     reviewId: 1,
     url: 'https://testURL.review1Image1.com'
-  },
-  {
-    reviewId: 1,
-    url: 'https://testURL.review1Image2.com'
-  },
-  {
-    reviewId: 1,
-    url: 'https://testURL.review1Image3.com'
-  },
-  {
-    reviewId: 2,
-    url: 'https://testURL.review2Image1.com'
-  },
-  {
-    reviewId: 2,
-    url: 'https://testURL.review2Image2.com'
-  },
-  {
-    reviewId: 3,
-    url: 'https://testURL.review3Image1.com'
-  },
-  {
-    reviewId: 4,
-    url: 'https://testURL.review4Image1.com'
-  },
-  {
-    reviewId: 4,
-    url: 'https://testURL.review4Image2.com'
-  },
-  {
-    reviewId: 4,
-    url: 'https://testURL.review4Image3.com'
-  },
-  {
-    reviewId: 5,
-    url: 'https://testURL.review5Image1.com'
   }
+  // {
+  //   reviewId: 1,
+  //   url: 'https://testURL.review1Image2.com'
+  // },
+  // {
+  //   reviewId: 1,
+  //   url: 'https://testURL.review1Image3.com'
+  // },
+  // {
+  //   reviewId: 2,
+  //   url: 'https://testURL.review2Image1.com'
+  // },
+  // {
+  //   reviewId: 2,
+  //   url: 'https://testURL.review2Image2.com'
+  // },
+  // {
+  //   reviewId: 3,
+  //   url: 'https://testURL.review3Image1.com'
+  // },
+  // {
+  //   reviewId: 4,
+  //   url: 'https://testURL.review4Image1.com'
+  // },
+  // {
+  //   reviewId: 4,
+  //   url: 'https://testURL.review4Image2.com'
+  // },
+  // {
+  //   reviewId: 4,
+  //   url: 'https://testURL.review4Image3.com'
+  // },
+  // {
+  //   reviewId: 5,
+  //   url: 'https://testURL.review5Image1.com'
+  // }
 ]
 
 
