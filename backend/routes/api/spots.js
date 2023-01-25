@@ -50,7 +50,8 @@ router.get('/current', requireAuth, async (req, res) => {
                 sum += review.stars;
             }
             let avg = sum / reviews.length;
-            spot.avgRating = avg;
+            let avgRounded = Math.round(avg * 10) / 10;
+            spot.avgRating = avgRounded;
             sum = 0;
         }
 
@@ -107,7 +108,9 @@ router.get('/:id', requireAuth, async (req, res, next) => {
             sum += review.stars;
         }
 
-        spot.avgStarRating = sum / reviews.length;
+        let avg = sum / reviews.length;
+        let avgRounded = Math.round(avg * 10) / 10;
+        spot.avgStarRating = avgRounded;
 
     }
 
