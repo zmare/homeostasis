@@ -10,6 +10,9 @@ router.get('/', async (req, res) => {
         include: [
             {
                 model: SpotImage
+            },
+            {
+                model: Review
             }
         ]
     })

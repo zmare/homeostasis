@@ -1,4 +1,9 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,25 +16,25 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Spots',
-        //   key: 'id'
-        // }
+        references: {
+          model: 'Spots',
+          key: 'id'
+        }
       },
       userId: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Users',
-        //   key: 'id'
-        // },
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
         allowNull: false
       },
       startDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false
       },
       endDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {
@@ -42,9 +47,10 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bookings');
+    options.tableName = "Bookings"
+    await queryInterface.dropTable(options);
   }
 };

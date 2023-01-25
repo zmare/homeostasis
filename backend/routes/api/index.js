@@ -47,35 +47,29 @@ router.get(
 
 
 router.get('/test/spot', async function (req, res) {
-    // let review = await Review.findAll({
-    //     where: {
-    //         id: 1
-    //     },
-    //     include: ReviewImage
-    // }
-    // )
+    let spots = await Spot.findAll(
+        {
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
+            include: SpotImage
+        }
+    )
 
-    let spotImages = await SpotImage.findAll({
-        where: {
-            spotId: 3
-        },
-        include: Spot
-    })
-
-    res.json(spotImages);
+    res.json({ spots })
 });
+
 router.get('/test/review', async function (req, res) {
-    let reviewImages = await ReviewImage.findAll({
-        where: {
-            reviewId: 1
-        },
-        include: Review
-    })
+    let reviews = await Review.findAll(
+        {
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
+            include: ReviewImage
+        }
+    )
 
-    let review = await reviewImages[0].getReview();
-    console.log(review)
-
-    res.json(reviewImages);
+    res.json({ reviews })
 });
 
 
