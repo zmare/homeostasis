@@ -1,4 +1,5 @@
 const express = require('express');
+const sequelize = require('sequelize');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { Spot, SpotImage, Review } = require('../../db/models');
 const { check } = require('express-validator');
@@ -12,29 +13,37 @@ router.get('/', async (req, res) => {
                 model: SpotImage
             },
             {
-                model: Review
+                model: Review,
+                attributes: {
+                    include: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]]
+                }
             }
         ]
     })
 
     let spotsList = [];
-
     spots.forEach(spot => {
         spotsList.push(spot.toJSON());
     })
 
     spotsList.forEach(spot => {
+        spot.Reviews.forEach(review => {
+            spot.avgRating = review.avgRating;
+        })
+        delete spot.Reviews;
+
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
-                spot.previewURL = image.url;
+                spot.previewImage = image.url;
             }
         })
 
         if (spot.preview === false) {
-            spot.previewURL = "no image found"
+            spot.previewImage = "no image found"
         }
 
         delete spot.SpotImages;
+
     })
 
     res.json({ spotsList });
