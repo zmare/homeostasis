@@ -61,7 +61,6 @@ router.get('/current', requireAuth, async (req, res) => {
 
         delete spot.Reviews;
 
-
     })
 
     res.json(spots);
