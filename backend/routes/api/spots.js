@@ -30,13 +30,30 @@ router.get('/', async (req, res) => {
             }
 
             if (image.preview === false) {
-                console.log(spot.id)
                 spot.previewImage = "no image found"
             }
 
         })
 
         delete spot.SpotImages;
+
+        let reviews = spot.Reviews
+
+        if (reviews.length) {
+            let sum = 0;
+            for (let review of reviews) {
+                sum += review.stars;
+            }
+            let avg = sum / reviews.length;
+            spot.avgRating = avg;
+            sum = 0;
+        }
+
+        if (!reviews.length) {
+            spot.avgRating = 'no reviews yet'
+        }
+
+        delete spot.Reviews;
 
     })
 
