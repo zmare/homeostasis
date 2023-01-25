@@ -13,6 +13,13 @@ module.exports = {
     options.tableName = 'Users';
 
     let users = seedUsers(10);
+    users.push({
+      firstName: 'Demo',
+      lastName: 'Lition',
+      email: 'demo@user.io',
+      username: 'Demo-lition',
+      hashedPassword: bcrypt.hashSync('password')
+    });
 
     return queryInterface.bulkInsert(options, users, {})
   },
