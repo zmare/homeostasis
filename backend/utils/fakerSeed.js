@@ -25,7 +25,7 @@ const seedSpots = (num) => {
 
     for (const i in spots) {
         spots[i] = {
-            ownerId: rNum(10),
+            ownerId: rNum(11),
             address: faker.address.streetAddress(),
             city: faker.address.cityName(),
             state: faker.address.state(),
@@ -61,7 +61,7 @@ const seedReviews = (num) => {
     for (const i in reviews) {
         reviews[i] = {
             spotId: rNum(15),
-            userId: rNum(10),
+            userId: rNum(11),
             review: faker.lorem.paragraph(rNum(3)),
             stars: rNum(5)
         }
@@ -90,7 +90,7 @@ const seedBookings = (num) => {
     for (const i in bookings) {
         bookings[i] = {
             spotId: rNum(15),
-            userId: rNum(10),
+            userId: rNum(11),
             startDate: faker.date.future(1),
             endDate: faker.date.future(1)
         }
