@@ -45,7 +45,8 @@ router.get('/', async (req, res) => {
                 sum += review.stars;
             }
             let avg = sum / reviews.length;
-            spot.avgRating = avg;
+            let avgRounded = Math.round(avg * 10) / 10
+            spot.avgRating = avgRounded;
             sum = 0;
         }
 
