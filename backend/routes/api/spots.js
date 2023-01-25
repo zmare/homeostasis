@@ -17,7 +17,27 @@ router.get('/', async (req, res) => {
         ]
     })
 
-    res.json({ spots });
+    let spotsList = [];
+
+    spots.forEach(spot => {
+        spotsList.push(spot.toJSON());
+    })
+
+    spotsList.forEach(spot => {
+        spot.SpotImages.forEach(image => {
+            if (image.preview === true) {
+                spot.previewURL = image.url;
+            }
+        })
+
+        if (spot.preview === false) {
+            spot.previewURL = "no image found"
+        }
+
+        delete spot.SpotImages;
+    })
+
+    res.json({ spotsList });
 })
 
 
