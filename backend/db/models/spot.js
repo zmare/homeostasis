@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty: true
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       notEmpty: true
     },
