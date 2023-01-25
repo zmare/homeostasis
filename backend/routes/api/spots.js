@@ -35,7 +35,6 @@ router.get('/current', requireAuth, async (req, res) => {
             }
 
             if (image.preview === false) {
-                console.log(spot.id)
                 spot.previewImage = "no image found"
             }
 
