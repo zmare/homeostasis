@@ -170,6 +170,32 @@ router.get('/', async (req, res) => {
 
     })
 
+
+    //Post requests
+    router.post('/', requireAuth, async (req, res, next) => {
+        // const { address, city, state, country, lat, lng, name, description } = req.body;
+
+        // console.log(address);
+
+        // const existingSpot = Spot.findOne({
+        //     where: {
+        //         address: address,
+        //         city: city,
+        //         state: state,
+        //         country: country,
+        //         lat: lat,
+        //         lng: lng
+        //     }
+        // })
+
+        // if (existingSpot) {
+        //     res.json("this place already exists");
+        // }
+
+        res.json('successfully hitting endpoint')
+    })
+
+
     res.json({ spots });
 })
 
