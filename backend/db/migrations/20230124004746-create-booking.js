@@ -11,25 +11,25 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Spots',
-        //   key: 'id'
-        // }
+        references: {
+          model: 'Spots',
+          key: 'id'
+        }
       },
       userId: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Users',
-        //   key: 'id'
-        // },
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
         allowNull: false
       },
       startDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false
       },
       endDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {
