@@ -11,7 +11,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
     let spotsList = await Spot.findAll({
         where: {
-            ownerId: 7
+            ownerId: userId
         },
         include: [
             {
