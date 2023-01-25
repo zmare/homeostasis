@@ -6,7 +6,9 @@
   "dependencies": {
     "bcryptjs": "^2.4.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
+  },
   "scripts": {
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
