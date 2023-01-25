@@ -6,6 +6,18 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+router.get('/current', requireAuth, async (req, res) => {
+    let userId = req.user.id;
+
+    let spots = await Spot.findAll({
+        where: {
+            ownerId: userId
+        }
+    })
+
+    res.json(spots);
+})
+
 router.get('/', async (req, res) => {
     let spotsList = await Spot.findAll({
         include: [
