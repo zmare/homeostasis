@@ -63,9 +63,6 @@ router.get('/test/review', async function (req, res) {
             attributes: {
                 exclude: ['createdAt', 'updatedAt']
             },
-            where: {
-                spotId: 1
-            },
             include: ReviewImage
         }
     )
