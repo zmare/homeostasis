@@ -72,18 +72,7 @@ router.get('/current', requireAuth, async (req, res) => {
 //POST Routes
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     //check if review exists
-    let reviewPromise = await Review.findByPk(req.params.reviewId, {
-        include: [
-            {
-                model: ReviewImage,
-                attributes: {
-                    include: [
-                        [sequelize.fn("COUNT", sequelize.col("reviewId")), "numOfImages"]
-                    ]
-                }
-            }
-        ]
-    });
+    let reviewPromise = await Review.findByPk(req.params.reviewId);
 
     if (!reviewPromise) {
         res.statusCode = 404;
@@ -106,12 +95,19 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
 
     // check number of images is valid
-    let numOfImages;
-    if ('numOfImage' in review) {
-        numOfImages = review.ReviewImages[0].numOfImages;
-    } else {
-        numOfImages = 0;
+    let reviewImagesPromise = await ReviewImage.findAll({
+        where: {
+            reviewId: req.params.reviewId
+        }
+    })
+
+    let reviewImagesArr = [];
+    for (let image of reviewImagesPromise) {
+        reviewImagesArr.push(image.toJSON());
     }
+
+    let numOfImages = reviewImagesArr.length;
+    console.log(numOfImages);
 
     if (numOfImages >= 10) {
         res.statusCode = 403;
