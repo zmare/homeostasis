@@ -212,6 +212,60 @@ router.get('/', async (req, res) => {
 })
 
 //POST routes
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const spotPromise = await Spot.findByPk(req.params.spotId);
+
+    if (!spotPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    const review = await Review.findOne({
+        where: {
+            userId: req.user.id,
+            spotId: req.params.spotId
+        }
+    })
+
+    if (review) {
+        res.statusCode = 403;
+        res.json({
+            message: "User already has a review for this spot",
+            statusCode: res.statusCode
+        })
+    } else {
+        const { review, stars } = req.body;
+
+        if (!review) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Review text is required"
+            });
+        } else if (!stars || Number.isInteger(stars) === false || stars < 1 || stars > 5) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Stars must be an integer from 1 to 5"
+            });
+        } else {
+            let newReview = await Review.create({
+                userId: req.user.id,
+                spotId: req.params.spotId,
+                review: review,
+                stars: stars
+            })
+
+            res.json(newReview);
+        }
+    }
+})
+
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     const spotPromise = await Spot.findByPk(req.params.spotId);
