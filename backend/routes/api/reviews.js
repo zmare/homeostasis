@@ -194,6 +194,42 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 });
 
 
+//DELETE Routes
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    //check if review exists
+    let reviewPromise = await Review.findByPk(req.params.reviewId);
+
+    if (!reviewPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Review couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    //authorization check
+    const review = reviewPromise.toJSON();
+    const owner = review.userId;
+
+    if (owner !== req.user.id) {
+        res.statusCode = 403;
+        res.json({
+            message: 'Forbidden',
+            statusCode: res.statusCode
+        })
+    } else {
+        await reviewPromise.destroy();
+
+        res.statusCode = 200;
+        res.json({
+            message: "Successfully deleted",
+            statusCode: res.statusCode
+        })
+    }
+
+})
+
+
 
 
 
