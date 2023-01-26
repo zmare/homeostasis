@@ -323,10 +323,105 @@ router.post('/', requireAuth, async (req, res, next) => {
         })
     }
 
-    // PUT routes
-    router.put('/:spotId', requireAuth, async (req, res) => {
+})
+
+
+// PUT routes
+router.put('/:spotId', requireAuth, async (req, res) => {
+
+    const spotPromise = await Spot.findByPk(req.params.spotId);
+
+    if (!spotPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    const spot = await spotPromise.toJSON();
+    const owner = spot.ownerId;
+
+    //authorization check
+    if (owner !== req.user.id) {
+        res.statusCode = 403;
+        res.json({
+            message: 'Forbidden',
+            statusCode: res.statusCode
+        })
+    } else {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+        if (!address) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Street address is required"
+            })
+        } else if (!city) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "City is required"
+            })
+        } else if (!state) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "State is required"
+            })
+        } else if (!country) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Country is required"
+            })
+        } else if (!lat || lat < -90 || lat > 90) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Latitude is not valid"
+            })
+        } else if (!lng || lng < -180 || lng > 180) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Longitude is not valid"
+            })
+        } else if (!name || name.length > 50) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Name is required and must be less than 50 characters"
+            })
+        } else if (!description) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Description is required"
+            })
+        } else if (!price) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Price per day is required"
+            })
+        } else {
+            ///turning in for the night  -  input logic for updating a spot here
+        }
+
+
         res.json('successfully hitting endpoint')
-    })
+    }
 
 })
 
