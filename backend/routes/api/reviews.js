@@ -141,6 +141,57 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
 })
 
+// PUT Routes
+router.put('/:reviewId', requireAuth, async (req, res) => {
+    //check if review exists
+    let reviewPromise = await Review.findByPk(req.params.reviewId);
+
+    if (!reviewPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Review couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    //authorization check
+    const review = reviewPromise.toJSON();
+    const owner = review.userId;
+
+    if (owner !== req.user.id) {
+        res.statusCode = 403;
+        res.json({
+            message: 'Forbidden',
+            statusCode: res.statusCode
+        })
+    } else {
+        const { review, stars } = req.body;
+
+        if (!review) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Review text is required"
+            });
+        } else if (!stars || Number.isInteger(stars) === false || stars < 1 || stars > 5) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: res.statusCode,
+                error: "Stars must be an integer from 1 to 5"
+            });
+        } else {
+            reviewPromise.update({
+                review: review,
+                stars: stars
+            });
+
+
+            res.json(reviewPromise);
+        }
+    }
+});
 
 
 
