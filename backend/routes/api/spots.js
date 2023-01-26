@@ -436,6 +436,42 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 
 })
 
+//DELETE Routes
+router.delete('/:spotId', requireAuth, async (req, res) => {
+
+    const spotPromise = await Spot.findByPk(req.params.spotId);
+
+    if (!spotPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    const spot = await spotPromise.toJSON();
+    const owner = spot.ownerId;
+
+    //authorization check
+    if (owner !== req.user.id) {
+        res.statusCode = 403;
+        res.json({
+            message: 'Forbidden',
+            statusCode: res.statusCode
+        })
+    } else {
+        await spotPromise.destroy();
+    }
+
+    res.statusCode = 200;
+    res.json({
+        message: "Successfully deleted",
+        statusCode: res.statusCode
+    })
+
+
+})
+
 
 
 
