@@ -416,11 +416,22 @@ router.put('/:spotId', requireAuth, async (req, res) => {
                 error: "Price per day is required"
             })
         } else {
-            ///turning in for the night  -  input logic for updating a spot here
+            const spot = await Spot.findByPk(req.params.spotId);
+
+            spot.update({
+                address: address,
+                city: city,
+                state: state,
+                country: country,
+                lat: lat,
+                lng: lng,
+                name: name,
+                description: description,
+                price: price
+            });
+
+            res.json(spot);
         }
-
-
-        res.json('successfully hitting endpoint')
     }
 
 })
