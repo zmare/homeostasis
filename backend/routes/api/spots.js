@@ -170,35 +170,113 @@ router.get('/', async (req, res) => {
 
     })
 
-
-    //Post requests
-    router.post('/', requireAuth, async (req, res, next) => {
-        // const { address, city, state, country, lat, lng, name, description } = req.body;
-
-        // console.log(address);
-
-        // const existingSpot = Spot.findOne({
-        //     where: {
-        //         address: address,
-        //         city: city,
-        //         state: state,
-        //         country: country,
-        //         lat: lat,
-        //         lng: lng
-        //     }
-        // })
-
-        // if (existingSpot) {
-        //     res.json("this place already exists");
-        // }
-
-        res.json('successfully hitting endpoint')
-    })
-
-
     res.json({ spots });
 })
 
+//Post requests
+router.post('/', requireAuth, async (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    if (!address) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Street address is required"
+        })
+    } else if (!city) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "City is required"
+        })
+    } else if (!state) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "State is required"
+        })
+    } else if (!country) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Country is required"
+        })
+    } else if (!lat || lat < -90 || lat > 90) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Latitude is not valid"
+        })
+    } else if (!lng || lng < -180 || lng > 180) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Longitude is not valid"
+        })
+    } else if (!name || name.length > 50) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Name is required and must be less than 50 characters"
+        })
+    } else if (!description) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Description is required"
+        })
+    } else if (!price) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: res.statusCode,
+            error: "Price per day is required"
+        })
+    } else {
+        const existingSpot = await Spot.findOne({
+            where: {
+                address: address,
+                city: city,
+                state: state,
+                country: country,
+                lat: lat,
+                lng: lng
+            }
+        })
+
+        if (!existingSpot) {
+            const newSpot = await Spot.create({
+                ownerId: req.user.id,
+                address: address,
+                city: city,
+                state: state,
+                country: country,
+                lat: lat,
+                lng: lng,
+                name: name,
+                description: description,
+                price: price
+            })
+            res.statusCode = 201;
+            res.json(newSpot)
+        }
+
+        res.json({
+            message: 'Spot already exists',
+        })
+    }
+
+
+
+})
 
 
 
