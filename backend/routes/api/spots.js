@@ -6,6 +6,8 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+
+// GET routes
 router.get('/current', requireAuth, async (req, res) => {
     let userId = req.user.id;
 
@@ -173,7 +175,54 @@ router.get('/', async (req, res) => {
     res.json({ spots });
 })
 
-//Post requests
+//POST routes
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+
+    const spotPromise = await Spot.findByPk(req.params.spotId);
+
+    if (!spotPromise) {
+        res.statusCode = 404;
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+    const spot = await spotPromise.toJSON();
+    const owner = spot.ownerId;
+
+    //authorization check
+    if (owner !== req.user.id) {
+        res.statusCode = 403;
+        res.json({
+            message: 'Forbidden',
+            statusCode: res.statusCode
+        })
+    } else {
+        //add an image
+        const { url, preview } = req.body;
+
+        let newImage = await SpotImage.create({
+            spotId: req.params.spotId,
+            url: url,
+            preview: preview
+        })
+
+        newImage = newImage.toJSON();
+
+        newImage = await SpotImage.findByPk(newImage.id, {
+            attributes: {
+                exclude: ['spotId', 'createdAt', 'updatedAt']
+            }
+
+        })
+
+        res.json(newImage)
+    }
+
+})
+
+
 router.post('/', requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
