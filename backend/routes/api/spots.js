@@ -323,7 +323,10 @@ router.post('/', requireAuth, async (req, res, next) => {
         })
     }
 
-
+    // PUT routes
+    router.put('/:spotId', requireAuth, async (req, res) => {
+        res.json('successfully hitting endpoint')
+    })
 
 })
 
