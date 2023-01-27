@@ -192,9 +192,10 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         console.log(compareToday - start);
 
         if (compareToday - start > 0) {
+            res.statusCode = 400;
             res.json({
                 "message": "Bookings that have been started cannot be deleted",
-                "statusCode": 403,
+                "statusCode": res.statusCode
             })
         } else {
             let bookingOwner = booking.userId;
@@ -211,9 +212,10 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
                     statusCode: 200
                 })
             } else {
+                res.statusCode = 403
                 res.json({
                     message: 'Forbidden',
-                    statusCode: 403
+                    statusCode: res.statusCode
                 })
             }
         }
