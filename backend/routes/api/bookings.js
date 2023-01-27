@@ -211,7 +211,10 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
                     statusCode: 200
                 })
             } else {
-                res.json('you cannot edit this spot')
+                res.json({
+                    message: 'Forbidden',
+                    statusCode: 403
+                })
             }
         }
     }
