@@ -153,11 +153,15 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                             "errors": 'End date conflicts with an existing booking'
                         })
                     };
-
-
-                    res.json('okay you can make a new booking')
-
                 }
+                booking = await Booking.findByPk(req.params.bookingId)
+
+                booking.update({
+                    startDate: req.body.startDate,
+                    endDate: req.body.endDate
+                })
+
+                res.json(booking)
 
             }
 
