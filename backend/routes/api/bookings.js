@@ -111,7 +111,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                     "statusCode": 400,
                     "errors": "endDate cannot be on or before startDate"
                 })
-            } else if (compareToday - userEndDate > 0) {
+            } else if (compareToday - booking.endDate > 0) {
                 res.json({
                     "message": "Past bookings cannot be modified",
                     "statusCode": 403,
