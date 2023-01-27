@@ -88,11 +88,14 @@ const seedBookings = (num) => {
     let bookings = new Array(num).fill('');
 
     for (const i in bookings) {
+        const startDate = new Date(faker.date.between('2023-02-01T00:00:00.000Z', '2023-03-01T00:00:00.000Z'));
+        const endDate = new Date(faker.date.between('2023-04-01T00:00:00.000Z', '2023-05-01T00:00:00.000Z'));
+
         bookings[i] = {
             spotId: rNum(15),
             userId: rNum(11),
-            startDate: faker.date.future(1),
-            endDate: faker.date.future(1)
+            startDate: startDate,
+            endDate: endDate,
         }
     }
 
