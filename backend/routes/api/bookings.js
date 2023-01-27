@@ -113,7 +113,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                     "statusCode": res.statusCode,
                     "errors": "endDate cannot be on or before startDate"
                 })
-            } else if (compareToday - userEndDate > 0) {
+            } else if (compareToday - booking.endDate > 0) {
                 res.statusCode = 403;
                 res.json({
                     "message": "Past bookings cannot be modified",
@@ -200,7 +200,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
             res.statusCode = 403;
             res.json({
                 "message": "Bookings that have been started cannot be deleted",
-                "statusCode": res.statusCode;
+                "statusCode": res.statusCode
             })
         } else {
             let bookingOwner = booking.userId;
