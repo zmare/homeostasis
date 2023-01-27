@@ -268,9 +268,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const owner = req.user.id;
 
     if (spotPromise.ownerId === owner) {
+        res.statusCode = 403;
         res.json({
             message: 'Forbidden',
-            statusCode: 403
+            statusCode: res.statusCode
         })
     } else {
         let bookings = await Booking.findAll({
@@ -310,6 +311,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             let endCheck = userEndDate - existingEnd;
 
             if (startCheck === 0) {
+                res.statusCode = 403;
                 res.json({
                     "message": "Sorry, this spot is already booked for the specified dates",
                     "statusCode": 403,
@@ -318,6 +320,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             };
 
             if (endCheck === 0) {
+                res.statusCode = 403;
                 res.json({
                     "message": "Sorry, this spot is already booked for the specified dates",
                     "statusCode": 403,
