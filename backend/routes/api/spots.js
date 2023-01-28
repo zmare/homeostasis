@@ -4,8 +4,9 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { QueryError } = require('sequelize');
 const router = express.Router();
-
+const { Op } = require('sequelize')
 
 // GET routes
 router.get('/current', requireAuth, async (req, res) => {
@@ -197,16 +198,166 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
 
 router.get('/', async (req, res) => {
-    let spotsList = await Spot.findAll({
-        include: [
-            {
-                model: SpotImage
-            },
-            {
-                model: Review,
-            }
-        ]
-    })
+
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let pagination = {};
+
+    if (!size || isNaN(size)) size = 1;
+    if (!page || isNaN(page)) page = 1;
+
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    let query = {
+        where: {},
+        include: [],
+        ...pagination
+    }
+    query.include.push({ model: SpotImage }, { model: Review });
+
+    if (page < 1 || page > 10) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: "Page must be greater than or equal to 1"
+        })
+    }
+
+    if (size < 1 || size > 20) {
+        res.statusCode = 400;
+        res.json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: "Size must be greater than or equal to 1"
+        })
+    }
+
+    // check for min and max latitude
+    if (minLat && maxLat) {
+        if (minLat < -90 || minLat > 90) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum latitude is invalid"
+            })
+        } else if (maxLat < -90 || maxLat > 90) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Maximum latitude is invalid"
+            })
+        } else {
+            query.where.lat = { [Op.between]: [minLat, maxLat] }
+        }
+
+    } else if (minLat) {
+        if (minLat < -90 || minLat > 90) {
+
+        } else {
+            query.where.lat = { [Op.gte]: minLat }
+        }
+    } else if (maxLat) {
+        if (maxLat < -90 || maxLat > 90) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum latitude is invalid"
+            })
+        } else {
+            query.where.lat = { [Op.lte]: maxLat }
+        }
+    }
+
+
+    //check for min and max longitude
+    if (minLng && maxLng) {
+        if (minLng < -180 || minLng > 180) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum latitude is invalid"
+            })
+        } else if (maxLng < -180 || maxLng > 180) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Maximum latitude is invalid"
+            })
+        } else {
+            query.where.lng = { [Op.between]: [minLng, maxLng] }
+        }
+
+    } else if (minLng) {
+        if (minLng < -180 || minLng > 180) {
+        } else {
+            query.where.lng = { [Op.gte]: minLng }
+        }
+    } else if (maxLng) {
+        if (maxLng < -90 || maxLng > 90) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum latitude is invalid"
+            })
+        } else {
+            query.where.lng = { [Op.lte]: maxLng }
+        }
+    }
+
+    //check for min and max price
+    if (minPrice && maxPrice) {
+        if (minPrice < 0) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum price must be greater than or equal to zero"
+            })
+        } else if (maxPrice < 0) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Maximum price must be greater than or equal to zero"
+            })
+        } else {
+            query.where.price = { [Op.between]: [minPrice, maxPrice] }
+        }
+
+    } else if (minPrice) {
+        if (minPrice < 0) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Minimum price must be greater than or equal to zero"
+            })
+        } else {
+            query.where.price = { [Op.gte]: minPrice }
+        }
+    } else if (maxPrice) {
+        if (maxPrice < 0) {
+            res.statusCode = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: "Maximum price must be greater than or equal to zero"
+            })
+        } else {
+            query.where.price = { [Op.lte]: maxPrice }
+        }
+    }
+
+    let spotsList = await Spot.findAll(query)
 
     let spots = [];
     spotsList.forEach(spot => {
@@ -246,9 +397,10 @@ router.get('/', async (req, res) => {
 
         delete spot.Reviews;
 
+
     })
 
-    res.json({ spots });
+    res.json({ spots, page, size });
 })
 
 //POST routes
