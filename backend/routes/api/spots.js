@@ -26,12 +26,12 @@ router.get('/current', requireAuth, async (req, res) => {
         ]
     })
 
-    let spots = [];
+    let Spots = [];
     spotsList.forEach(spot => {
-        spots.push(spot.toJSON());
+        Spots.push(spot.toJSON());
     })
 
-    spots.forEach(spot => {
+    Spots.forEach(spot => {
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
                 spot.previewImage = image.url;
@@ -66,7 +66,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
     })
 
-    res.json(spots);
+    res.json({ Spots });
 })
 
 router.get('/:spotId/reviews', async (req, res) => {
@@ -145,7 +145,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 })
 
 
-router.get('/:id', requireAuth, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     let spotPromise = await Spot.findByPk(req.params.id, {
         include: [
             {
@@ -359,12 +359,16 @@ router.get('/', async (req, res) => {
 
     let spotsList = await Spot.findAll(query)
 
-    let spots = [];
+    let Spots = [];
     spotsList.forEach(spot => {
-        spots.push(spot.toJSON());
+        Spots.push(spot.toJSON());
     })
 
-    spots.forEach(spot => {
+    Spots.forEach(spot => {
+        if (!spot.SpotImages.length) {
+            spot.previewImage = 'no image found';
+        }
+
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
                 spot.previewImage = image.url;
@@ -400,7 +404,7 @@ router.get('/', async (req, res) => {
 
     })
 
-    res.json({ spots, page, size });
+    res.json({ Spots, page, size });
 })
 
 //POST routes
