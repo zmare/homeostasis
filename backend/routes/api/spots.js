@@ -1,11 +1,10 @@
 const express = require('express');
-const sequelize = require('sequelize');
-const { requireAuth, requireAuthorization, doesSpotExist } = require('../../utils/auth');
+const { requireAuth, requireAuthorization, doesSpotExist, requireAuthBooking, doesReviewExist } = require('../../utils/auth');
 const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
-const { validateNewSpot, validateBooking } = require('../../utils/validation');
-const { QueryError } = require('sequelize');
+const { validateNewSpot, validateBooking, validateReview } = require('../../utils/validation');
 const router = express.Router();
 const { Op } = require('sequelize')
+
 
 // GET routes
 
@@ -386,7 +385,7 @@ router.get('/', async (req, res) => {
 })
 
 //POST routes
-router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthorization, validateBooking], async (req, res) => {
+router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthBooking, validateBooking], async (req, res) => {
 
     let bookings = await Booking.findAll({
         where: {
@@ -398,22 +397,6 @@ router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthorizati
     for (let booking of bookings) {
         Bookings.push(booking.toJSON());
     }
-
-    let { startDate, endDate } = req.body;
-    startDate = new Date(startDate.replace(/-/g, '\/')).toDateString();
-    userStartDate = new Date(startDate).getTime();
-
-    endDate = new Date(endDate.replace(/-/g, '\/')).toDateString();
-    userEndDate = new Date(endDate).getTime();
-
-    // if (userEndDate - userStartDate < 0) {
-    //     res.statusCode = 400;
-    //     res.json({
-    //         "message": "Validation error",
-    //         "statusCode": 400,
-    //         "errors": "endDate cannot be on or before startDate"
-    //     })
-    // }
 
     for (let booking of Bookings) {
         let existingStart = booking.startDate.toDateString();
@@ -454,49 +437,18 @@ router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthorizati
 
 })
 
-
-router.post('/:spotId/reviews', [requireAuth, doesSpotExist], async (req, res) => {
-    const review = await Review.findOne({
-        where: {
-            userId: req.user.id,
-            spotId: req.params.spotId
-        }
+// Route to create a new review for a spot
+router.post('/:spotId/reviews', [requireAuth, doesSpotExist, validateReview, doesReviewExist], async (req, res) => {
+    let newReview = await Review.create({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review: review,
+        stars: stars
     })
 
-    if (review) {
-        res.statusCode = 403;
-        res.json({
-            message: "User already has a review for this spot",
-            statusCode: res.statusCode
-        })
-    } else {
-        const { review, stars } = req.body;
+    res.json(newReview);
 
-        if (!review) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Review text is required"
-            });
-        } else if (!stars || Number.isInteger(stars) === false || stars < 1 || stars > 5) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Stars must be an integer from 1 to 5"
-            });
-        } else {
-            let newReview = await Review.create({
-                userId: req.user.id,
-                spotId: req.params.spotId,
-                review: review,
-                stars: stars
-            })
 
-            res.json(newReview);
-        }
-    }
 })
 
 // Route to create a new spot image based on spot id
@@ -569,149 +521,38 @@ router.post('/', [requireAuth, validateNewSpot], async (req, res, next) => {
 
 
 // PUT routes
-router.put('/:spotId', requireAuth, async (req, res) => {
+router.put('/:spotId', [requireAuth, doesSpotExist, requireAuthorization, validateNewSpot], async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
 
-    const spotPromise = await Spot.findByPk(req.params.spotId);
+    const spot = await Spot.findByPk(req.params.spotId);
 
-    if (!spotPromise) {
-        res.statusCode = 404;
-        res.json({
-            message: "Spot couldn't be found",
-            statusCode: res.statusCode
-        })
-    }
+    spot.update({
+        address: address,
+        city: city,
+        state: state,
+        country: country,
+        lat: lat,
+        lng: lng,
+        name: name,
+        description: description,
+        price: price
+    });
 
-    const spot = await spotPromise.toJSON();
-    const owner = spot.ownerId;
-
-    //authorization check
-    if (owner !== req.user.id) {
-        res.statusCode = 403;
-        res.json({
-            message: 'Forbidden',
-            statusCode: res.statusCode
-        })
-    } else {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body
-
-        if (!address) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Street address is required"
-            })
-        } else if (!city) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "City is required"
-            })
-        } else if (!state) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "State is required"
-            })
-        } else if (!country) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Country is required"
-            })
-        } else if (!lat || lat < -90 || lat > 90) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Latitude is not valid"
-            })
-        } else if (!lng || lng < -180 || lng > 180) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Longitude is not valid"
-            })
-        } else if (!name || name.length > 50) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Name is required and must be less than 50 characters"
-            })
-        } else if (!description) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Description is required"
-            })
-        } else if (!price) {
-            res.statusCode = 400;
-            res.json({
-                message: "Validation Error",
-                statusCode: res.statusCode,
-                error: "Price per day is required"
-            })
-        } else {
-            const spot = await Spot.findByPk(req.params.spotId);
-
-            spot.update({
-                address: address,
-                city: city,
-                state: state,
-                country: country,
-                lat: lat,
-                lng: lng,
-                name: name,
-                description: description,
-                price: price
-            });
-
-            res.json(spot);
-        }
-    }
+    res.json(spot);
 
 })
 
 //DELETE Routes
-router.delete('/:spotId', requireAuth, async (req, res) => {
+router.delete('/:spotId', [requireAuth, doesSpotExist, requireAuthorization], async (req, res) => {
 
     const spotPromise = await Spot.findByPk(req.params.spotId);
-
-    if (!spotPromise) {
-        res.statusCode = 404;
-        res.json({
-            message: "Spot couldn't be found",
-            statusCode: res.statusCode
-        })
-    }
-
-    const spot = await spotPromise.toJSON();
-    const owner = spot.ownerId;
-
-    //authorization check
-    if (owner !== req.user.id) {
-        res.statusCode = 403;
-        res.json({
-            message: 'Forbidden',
-            statusCode: res.statusCode
-        })
-    } else {
-        await spotPromise.destroy();
-    }
+    await spotPromise.destroy();
 
     res.statusCode = 200;
     res.json({
         message: "Successfully deleted",
         statusCode: res.statusCode
     })
-
-
 })
 
 

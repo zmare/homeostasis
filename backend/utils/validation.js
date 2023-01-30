@@ -27,15 +27,12 @@ const validateNewSpot = [
         .withMessage('Street address is required'),
     check('city', 'City is required')
         .exists({ checkFalsy: true })
-        .isAlpha()
         .withMessage('Please enter a valid city'),
     check('state', 'State is required')
         .exists({ checkFalsy: true })
-        .isAlpha()
         .withMessage('Please enter a valid State'),
     check('country', "Country is required")
         .exists({ checkFalsy: true })
-        .isAlpha()
         .withMessage('Please enter a valid Country'),
     check('lat', 'Latitude is required')
         .exists({ checkFalsy: true })
@@ -59,30 +56,43 @@ const validateNewSpot = [
     handleValidationErrors
 ];
 
-const today = new Date().toDateString();
-
 const validateBooking = [
     check('startDate')
         .exists({ checkFalsy: true })
         .withMessage('startDate is required')
-        .isDate()
-        .withMessage('Please enter a valid date')
-        .custom((value, { req }) => {
+        .custom((value, { req, next }) => {
             value = new Date(value.replace(/-/g, '\/')).toDateString();
             startDate = new Date(value).getTime();
 
             endDateVal = new Date(req.body.endDate.replace(/-/g, '\/')).toDateString();
             endDate = new Date(endDateVal).getTime();
 
+            console.log(endDate - startDate < 0);
+
             if (endDate - startDate < 0) {
                 throw new Error("endDate cannot be on or before startDate");
+            } else {
+                return value;
             }
+
         }),
     check('endDate')
-        .exists({ checkFalsy: true })
-        .withMessage('End date is required')
-
+        .exists()
+        .withMessage('endDate is required'),
+    handleValidationErrors
 ]
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars', 'Stars are required')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+]
+
 
 
 
@@ -92,5 +102,6 @@ const validateBooking = [
 module.exports = {
     handleValidationErrors,
     validateNewSpot,
-    validateBooking
+    validateBooking,
+    validateReview
 };
