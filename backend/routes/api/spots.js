@@ -387,6 +387,13 @@ router.get('/', async (req, res) => {
 //POST routes
 router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthBooking, validateBooking], async (req, res) => {
 
+    let { startDate, endDate } = req.body;
+    startDate = new Date(startDate.replace(/-/g, '\/')).toDateString();
+    let userStartDate = new Date(startDate).getTime();
+
+    endDate = new Date(endDate.replace(/-/g, '\/')).toDateString();
+    let userEndDate = new Date(endDate).getTime();
+
     let bookings = await Booking.findAll({
         where: {
             spotId: req.params.spotId
