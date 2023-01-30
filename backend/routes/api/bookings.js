@@ -1,9 +1,6 @@
 const express = require('express');
-const sequelize = require('sequelize');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth, doesBookingExist } = require('../../utils/auth');
+const { Spot, SpotImage, Booking } = require('../../db/models');
 const router = express.Router();
 
 //GET routes
@@ -55,17 +52,8 @@ router.get('/current', requireAuth, async (req, res) => {
 });
 
 //PUT Routes
-router.put('/:bookingId', requireAuth, async (req, res) => {
+router.put('/:bookingId', [requireAuth, doesBookingExist], async (req, res) => {
     let booking = await Booking.findByPk(req.params.bookingId);
-
-    if (!booking) {
-        res.statusCode = 404;
-        res.json({
-            message: "Booking couldn't be found",
-            statusCode: res.statusCode
-        })
-    }
-
     booking = booking.toJSON();
     const owner = booking.userId;
 
@@ -80,7 +68,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         let { startDate, endDate } = req.body;
 
         if (!startDate) {
-            res.statusCode = 40;
+            res.statusCode = 400;
             res.json({
                 "message": "Validation error",
                 "statusCode": res.statusCode,
