@@ -439,6 +439,8 @@ router.post('/:spotId/bookings', [requireAuth, doesSpotExist, requireAuthBooking
 
 // Route to create a new review for a spot
 router.post('/:spotId/reviews', [requireAuth, doesSpotExist, validateReview, doesReviewExist], async (req, res) => {
+    const { review, stars } = req.body
+
     let newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
