@@ -44,7 +44,7 @@ router.post(
         user = user.toJSON();
         user.token = token;
 
-        return res.json(user);
+        return res.json({ user });
     }
 );
 
