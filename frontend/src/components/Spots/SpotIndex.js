@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
 
 import { getSpots } from '../../store/spots';
-import SpotDetails from './SpotDetails';
+import SpotCard from './SpotCard';
 
-const AllSpots = () => {
+const SpotIndex = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,28 +22,21 @@ const AllSpots = () => {
                 {
                     spots.map(spot => (
                         <div>
-                            <ul>
-                                <li>{spot.city}, {spot.state}</li>
-                                <li>{spot.avgRating}</li>
-                                <li>${spot.price} night</li>
-                                <li>
-                                    <NavLink to={`/spot/${spot.id}`}> Click for details
-                                        <SpotDetails />
-                                    </NavLink>
-                                </li>
-                                <br></br>
+                            <NavLink to={`/spot/${spot.id}`}>
+                                <SpotCard spot={spot} />
+                            </NavLink>
 
-                            </ul>
+                            <br></br>
                         </div>
 
 
                     ))
                 }
-            </ul>
+            </ul >
 
 
-        </div>
+        </div >
     );
 }
 
-export default AllSpots;
+export default SpotIndex;
