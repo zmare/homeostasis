@@ -42,8 +42,8 @@ function ProfileButton({ user }) {
     return (
         <div className='dropdown'>
             <button onClick={openMenu} className='dropdown-btn'>
-                <i class="fa-sharp fa-solid fa-bars"></i>
-                <i class="fa-sharp fa-solid fa-user"></i>
+                <i className="fa-sharp fa-solid fa-bars"></i>
+                <i className="fa-sharp fa-solid fa-user"></i>
             </button>
             <div className='dropdown-content'>
                 <ul className={ulClassName} ref={ulRef}>
@@ -72,7 +72,7 @@ function ProfileButton({ user }) {
                     )}
                 </ul>
             </div>
-        </div>
+        </div >
     );
 }
 
