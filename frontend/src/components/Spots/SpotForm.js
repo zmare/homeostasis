@@ -7,7 +7,7 @@ import { csrfFetch } from '../../store/csrf';
 
 import './Spots.css'
 
-const SpotForm = () => {
+const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [country, setCountry] = useState('');
@@ -33,9 +33,10 @@ const SpotForm = () => {
         }
     }
 
+
     return (
         <form className='form_test' onSubmit={handleSubmit}>
-            <h2>Create a new Spot</h2>
+            <h2>{formType}</h2>
             <label>
                 Country
                 <input
