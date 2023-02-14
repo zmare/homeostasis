@@ -6,23 +6,30 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    const createNewSpot = () => {
 
+    const linkStyle = {
+        width: "100%",
+        height: '70px',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        fontSize: '20px',
+        color: "red"
     }
 
     return (
         <div className='header'>
-            <li>
-                <NavLink exact to="/">homeostasis</NavLink>
-            </li>
+            <div>
+                <NavLink exact to="/" style={linkStyle}>homeostasis</NavLink>
+            </div>
             {isLoaded && (
-                <li>
-                    <Link to="/spots/new">Create new spot</Link>
+                <div className='profile_menu_button'>
+                    <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create new spot</NavLink>
                     <ProfileButton user={sessionUser} />
-                </li>
+                </div>
 
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 
