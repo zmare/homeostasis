@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { getSpot } from '../../store/spots';
+import ReviewIndex from '../Reviews/ReviewIndex';
 
 const SpotDetail = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const SpotDetail = () => {
     if (!spot) return null;
 
     return (
-        <div> Test
+        <div>
             <ul>
                 <li>{spot.name}</li>
                 <li>
@@ -37,6 +38,10 @@ const SpotDetail = () => {
                 <li>Rating: {spot.avgStarRating}</li>
                 <li>{spot.numReviews} reviews</li>
             </ul>
+
+            <div>
+                <ReviewIndex spot={spot} />
+            </div>
         </div >
     );
 }

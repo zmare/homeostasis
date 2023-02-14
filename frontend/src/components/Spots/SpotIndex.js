@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
 
 import { getSpots } from '../../store/spots';
+import ReviewIndex from '../Reviews/ReviewIndex';
 import SpotCard from './SpotCard';
+
+
 
 const SpotIndex = () => {
     const dispatch = useDispatch();
@@ -30,8 +33,6 @@ const SpotIndex = () => {
                     ))
                 }
             </ul >
-
-
         </div >
     );
 }
