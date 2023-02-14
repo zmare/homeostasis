@@ -1,11 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const createNewSpot = () => {
+
+    }
 
     return (
         <div className='header'>
@@ -14,8 +17,10 @@ function Navigation({ isLoaded }) {
             </li>
             {isLoaded && (
                 <li>
+                    <Link to="/spots/new">Create new spot</Link>
                     <ProfileButton user={sessionUser} />
                 </li>
+
             )}
         </div>
     );
