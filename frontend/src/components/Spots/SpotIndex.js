@@ -22,14 +22,11 @@ const SpotIndex = () => {
                 {
                     spots.map(spot => (
                         <div>
-                            <NavLink to={`/spot/${spot.id}`}>
+                            <NavLink to={`/spots/${spot.id}`}>
                                 <SpotCard spot={spot} />
                             </NavLink>
-
                             <br></br>
                         </div>
-
-
                     ))
                 }
             </ul >
