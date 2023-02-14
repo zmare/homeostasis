@@ -27,7 +27,6 @@ const SpotDetail = () => {
                 <li>{spot.name}</li>
                 <li>
                     {spot.SpotImages.map(image =>
-                        //<p>{image.url}</p>
                         <img src={`${image.url}`}></img>
                     )}
                 </li>
