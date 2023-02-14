@@ -1,10 +1,10 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { getSpots } from '../../store/spots';
-import ReviewIndex from '../Reviews/ReviewIndex';
 import SpotCard from './SpotCard';
+import './Spots.css'
 
 
 
@@ -20,19 +20,12 @@ const SpotIndex = () => {
     spots = Object.values(spots);
 
     return (
-        <div>
-            <ul>
-                {
-                    spots.map(spot => (
-                        <div>
-                            <NavLink to={`/spots/${spot.id}`}>
-                                <SpotCard spot={spot} />
-                            </NavLink>
-                            <br></br>
-                        </div>
-                    ))
-                }
-            </ul >
+        <div className='spotContainer'>
+            {spots.map(spot => (
+                <NavLink to={`/spots/${spot.id}`} style={{ textDecoration: 'none', listStyle: 'none', fontColor: 'black' }}>
+                    <SpotCard spot={spot} />
+                </NavLink>
+            ))}
         </div >
     );
 }

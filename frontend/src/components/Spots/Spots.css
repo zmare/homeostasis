@@ -3,3 +3,32 @@
     flex-direction: column;
     align-items: center;
 }
+
+.spotContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.spot_card {
+    flex: 1 0 21%;
+    margin: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10pt;
+
+}
+
+.spot_image {
+    height: 250px;
+    width: 270px;
+    border-radius: 10px;
+
+}
+
+.spot_card_loc_rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 0px;
+}

@@ -1,17 +1,23 @@
+import "./Spots.css";
+
 const SpotCard = ({ spot }) => {
-
+    if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
+        spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
+    }
     return (
-        <>
-            <ul>
-                <img src={spot.previewImage}></img>
-                <li>{spot.city}, {spot.state}</li>
-                <li>{spot.avgRating}</li>
-                <li>${spot.price} night</li>
+        <div className='spot_card'>
+            <img src={spot.previewImage} className='spot_image'></img>
+            <div className='spot_card_loc_rating'>
+                {spot.city}, {spot.state}
+                <div>
+                    <i className='fa-solid fa-star' style={{ marginRight: "5px" }}></i>
+                    {spot.avgRating}
+                </div>
 
-            </ul>
+            </div>
+            <li><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</li>
 
-        </>
-
+        </div >
     );
 }
 

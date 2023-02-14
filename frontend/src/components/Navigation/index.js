@@ -19,15 +19,17 @@ function Navigation({ isLoaded }) {
     return (
         <div className='header'>
             <div>
+                <img src="https://companieslogo.com/img/orig/ABNB-4aaade0f.png" style={{ height: "20px", width: '20px', marginRight: '5px' }}></img>
                 <NavLink exact to="/" style={linkStyle}>homeostasis</NavLink>
             </div>
-            {isLoaded && (
-                <div className='profile_menu_button'>
-                    <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create new spot</NavLink>
-                    <ProfileButton user={sessionUser} />
-                </div>
+            {
+                isLoaded && (
+                    <div className='profile_menu_button'>
+                        <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create new spot</NavLink>
+                        <ProfileButton user={sessionUser} />
+                    </div>
 
-            )
+                )
             }
         </div >
     );
