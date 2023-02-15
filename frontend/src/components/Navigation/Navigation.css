@@ -52,3 +52,15 @@
     padding: 20px;
     margin: 0
 }
+
+.logout-btn {
+    background-color: darkgrey;
+    border: solid 1px black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+}

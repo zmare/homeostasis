@@ -9,6 +9,8 @@ import './Spots.css'
 
 const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
+
+    //COMMENT FROM DREW = UPDATE THIS TO BE KEY/VALUES IN THE SPOT OBJECT ABOVE
     const history = useHistory();
     const [country, setCountry] = useState('');
     const [address, setStreetAddress] = useState('');
