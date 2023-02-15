@@ -23,21 +23,23 @@ const SpotDetail = () => {
     if (!spot) return null;
 
     return (
-        <div>
-            <ul>
-                <li>{spot.name}</li>
-                <li>
-                    {spot.SpotImages.map(image =>
-                        <img src={`${image.url}`}></img>
-                    )}
-                </li>
-                <li>{spot.city}, {spot.state}, {spot.country}</li>
-                <li>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</li>
-                <li> {spot.description}</li>
-                <li>${spot.price} night</li>
-                <li>Rating: {spot.avgStarRating}</li>
-                <li>{spot.numReviews} reviews</li>
-            </ul>
+        <div style={{ padding: "2em", fontFamily: 'Manrope,sans serif' }}>
+            <h2 style={{ fontWeight: "bolder" }}>{spot.name}</h2>
+            <p style={{ fontWeight: 0 }}>{spot.city}, {spot.state}, {spot.country}</p>
+
+            <div>
+                {spot.SpotImages.map(image =>
+                    <img style={{ objectFit: 'cover', width: '25%', height: '205px', padding: '10px' }} src={`${image.url}`}></img>
+                )}
+            </div>
+
+            <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+            <p style={{ fontSize: '11pt', borderBottom: 'solid 2px lightgray' }}> {spot.description}</p>
+            <div>
+                <p style={{ fontSize: '11pt' }}><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</p>
+                <p style={{ fontSize: '11pt' }}>Rating: {spot.avgStarRating}</p>
+                <p style={{ fontSize: '11pt', borderBottom: 'solid 2px lightgray' }}>{spot.numReviews} reviews</p>
+            </div>
 
             <div>
                 <ReviewIndex spot={spot} />

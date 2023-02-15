@@ -1,17 +1,17 @@
 const ReviewCard = ({ reviews }) => {
 
     return (
-        <ul>
+        <div>
             {reviews.map(review => (
                 <div>
-                    <li>{review.User.firstName}</li>
-                    <li>{review.createdAt.split('T')[0]}</li>
-                    <li>{review.review}</li>
-                    <br></br>
+                    <p>{review.User.firstName}<br></br>
+                        {review.createdAt.split('T')[0]} <br></br>
+                        {review.review}
+                    </p>
                 </div>
             ))}
 
-        </ul>
+        </div>
 
     );
 }
