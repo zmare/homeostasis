@@ -12,7 +12,8 @@
 }
 
 .spot_card {
-    flex: 1 0 21%;
+    /* flex: 1 0 21%;
+    width: 25%; */
     margin: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10pt;

@@ -4,7 +4,13 @@ const CreateSpotForm = () => {
     const spot = {
         address: '',
         city: '',
-        state: ''
+        state: '',
+        country: '',
+        lat: '',
+        lng: '',
+        description: '',
+        name: '',
+        price: ''
     };
 
     return (

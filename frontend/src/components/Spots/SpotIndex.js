@@ -22,7 +22,7 @@ const SpotIndex = () => {
     return (
         <div className='spotContainer'>
             {spots.map(spot => (
-                <NavLink to={`/spots/${spot.id}`} style={{ textDecoration: 'none', listStyle: 'none', fontColor: 'black' }}>
+                <NavLink key={spot.id} to={`/spots/${spot.id}`} style={{ textDecoration: 'none', listStyle: 'none', fontColor: 'black' }}>
                     <SpotCard spot={spot} />
                 </NavLink>
             ))}

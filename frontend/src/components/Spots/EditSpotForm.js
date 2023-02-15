@@ -1,19 +1,24 @@
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import SpotForm from './SpotForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getSpots } from '../../store/spots';
+import SpotFormUpdate from './SpotFormUpdate';
 
 const EditSpotForm = () => {
-    //const spots = useSelector(state => state.spots.allSpots);
+    const dispatch = useDispatch();
     const { spotId } = useParams();
-    // const spot = spots[spotId];
 
-    const spot = '';
-    console.log(spotId);
-    //console.log(spots);
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
 
+    const spots = useSelector(state => state.spots.allSpots);
+    if (!spots) return null;
+
+    const spot = spots[spotId];
 
     return (
-        <SpotForm spot={spot} formType="Edit Your Spot" />
+        <SpotFormUpdate spot={spot} formType="Edit Your Spot" />
     );
 }
 

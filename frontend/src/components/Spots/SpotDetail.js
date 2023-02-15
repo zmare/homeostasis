@@ -29,7 +29,7 @@ const SpotDetail = () => {
 
             <div>
                 {spot.SpotImages.map(image =>
-                    <img style={{ objectFit: 'cover', width: '25%', height: '205px', padding: '10px' }} src={`${image.url}`}></img>
+                    <img key={image.id} style={{ objectFit: 'cover', width: '25%', height: '205px', padding: '10px' }} src={`${image.url}`}></img>
                 )}
             </div>
 
