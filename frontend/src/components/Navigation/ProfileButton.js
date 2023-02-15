@@ -41,7 +41,7 @@ function ProfileButton({ user }) {
 
     return (
         <div className='dropdown'>
-            <button onClick={openMenu} className='dropdown-btn'>
+            <button onClick={openMenu} className='profile-menu-btn'>
                 <i className="fa-sharp fa-solid fa-bars"></i>
                 <i className="fa-sharp fa-solid fa-user fa-fw"></i>
             </button>
@@ -49,16 +49,15 @@ function ProfileButton({ user }) {
                 <ul className={ulClassName} ref={ulRef}>
                     {user ? (
                         <>
-                            <li>{user.username}</li>
-                            <li>{user.firstName} {user.lastName}</li>
-                            <li>{user.email}</li>
-                            <li>
-                                <button onClick={logout}>Log Out</button>
-                            </li>
+                            {user.username} <br></br>
+                            {user.firstName} {user.lastName} <br></br>
+                            {user.email}
+                            <button onClick={logout}>Log Out</button>
+
                         </>
                     ) : (
 
-                        <div>
+                        <div style={{ listStyle: 'none' }}>
 
                             <OpenModalMenuItem
                                 itemText="Log In"

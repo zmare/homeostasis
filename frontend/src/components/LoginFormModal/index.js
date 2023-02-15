@@ -26,32 +26,34 @@ function LoginFormModal() {
 
     return (
         <div>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit} className='test'>
+            <h1 className='login-header'>Log In</h1>
+            <form onSubmit={handleSubmit} className='login-container'>
                 <ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                <label>
-                    Username or Email
+                <label className='login-username'>
                     <input
+                        placeholder="Username or Email"
+                        className="input-field"
                         type="text"
                         value={credential}
                         onChange={(e) => setCredential(e.target.value)}
                         required
                     />
                 </label>
-                <label>
-                    Password
+                <label className="login-password">
                     <input
+                        placeholder="Password"
+                        className="input-field"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </label>
-                <button type="submit">Log In</button>
+                <button className="login-button" type="submit">Log In</button>
             </form>
         </div>
     );

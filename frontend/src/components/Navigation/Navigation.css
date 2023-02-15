@@ -21,7 +21,7 @@
     margin-left: 10px;
 }
 
-.dropdown-btn {
+.profile-menu-btn {
     background-color: white;
     border: solid 1px darkgray;
     color: black;
@@ -33,17 +33,22 @@
 }
 
 .dropdown-content {
+    background-color: #f1f1f1;
     position: absolute;
     list-style: none;
-    background-color: #f1f1f1;
     min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     right: 20px;
     z-index: 1;
 }
 
-.profile_menu_button {
+.header-right {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.profile-dropdown {
+    padding: 20px;
+    margin: 0
 }

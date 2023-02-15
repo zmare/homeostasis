@@ -24,8 +24,8 @@ function Navigation({ isLoaded }) {
             </div>
             {
                 isLoaded && (
-                    <div className='profile_menu_button'>
-                        <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create new spot</NavLink>
+                    <div className='header-right'>
+                        {sessionUser ? <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create new spot</NavLink> : null}
                         <ProfileButton user={sessionUser} />
                     </div>
 
