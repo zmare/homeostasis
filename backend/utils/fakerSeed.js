@@ -25,7 +25,7 @@ const seedSpots = (num) => {
 
     for (const i in spots) {
         spots[i] = {
-            ownerId: rNum(11),
+            ownerId: rNum(4),
             address: faker.address.streetAddress(),
             city: faker.address.cityName(),
             state: faker.address.state(),
@@ -46,7 +46,7 @@ const seedSpotImages = (num) => {
 
     for (const i in spotImages) {
         spotImages[i] = {
-            spotId: rNum(15),
+            spotId: rNum(10),
             url: faker.image.city(640, 480, true),
             preview: faker.datatype.boolean()
         }
@@ -60,8 +60,8 @@ const seedReviews = (num) => {
 
     for (const i in reviews) {
         reviews[i] = {
-            spotId: rNum(15),
-            userId: rNum(11),
+            spotId: rNum(10),
+            userId: rNum(4),
             review: faker.lorem.paragraph(rNum(3)),
             stars: rNum(5)
         }
@@ -75,7 +75,7 @@ const seedReviewImages = (num) => {
 
     for (const i in reviewImages) {
         reviewImages[i] = {
-            reviewId: rNum(15),
+            reviewId: rNum(10),
             url: faker.image.abstract(640, 480, true)
         }
     }
@@ -92,8 +92,8 @@ const seedBookings = (num) => {
         const endDate = new Date(faker.date.between('2023-04-01T00:00:00.000Z', '2023-05-01T00:00:00.000Z'));
 
         bookings[i] = {
-            spotId: rNum(15),
-            userId: rNum(11),
+            spotId: rNum(10),
+            userId: rNum(4),
             startDate: startDate,
             endDate: endDate,
         }
