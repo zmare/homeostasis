@@ -1,11 +1,23 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Redirect, useHistory } from "react-router-dom";
 import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
 const ManageSpotCard = ({ spot }) => {
+    const history = useHistory();
+
     if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
         spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
     }
+
+    const handleClick = () => {
+        console.log('hi')
+        return < Redirect to={`/spots/${spot.id}/edit`} />
+    }
+
+    const handleDelete = () => {
+        history.push('/spots/current');
+    }
+
 
     return (
         <div className='spot_card'>
@@ -28,9 +40,9 @@ const ManageSpotCard = ({ spot }) => {
                     <Link to={`/spots/${spot.id}/edit`}>
                         <button type='button'>Update</button>
                     </Link>
-                    <Link to='/spots/current'>
+                    <span>
                         <DeleteSpot spot={spot} />
-                    </Link>
+                    </span>
 
                 </div>
 

@@ -50,8 +50,7 @@ function ProfileButton({ user }) {
                 <ul className={ulClassName} ref={ulRef}>
                     {user ? (
                         <>
-                            {user.username} <br></br>
-                            {user.firstName} {user.lastName} <br></br>
+                            Hello {user.firstName}! <br></br>
                             {user.email} <br></br>
                             <NavLink to={`/spots/current`}>Manage Spots</NavLink>
                             <button className='logout-btn' onClick={logout}>Log Out</button>

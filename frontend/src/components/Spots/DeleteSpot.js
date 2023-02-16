@@ -7,9 +7,12 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from 'react-router-dom'
 import OpenModalButton from "../OpenModalButton";
+import { getSpotsUser } from "../../store/spots";
 
 
 const DeleteSpot = ({ spot }) => {
+    const dispatch = useDispatch();
+
     return (
         <div>
             <OpenModalButton

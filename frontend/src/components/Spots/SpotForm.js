@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams, useHistory } from 'react-router-dom';
-import { addSpot } from '../../store/spots';
+import { addSpot, getSpots } from '../../store/spots';
 import { restoreUser } from '../../store/session';
 import { csrfFetch } from '../../store/csrf';
 
@@ -11,6 +11,10 @@ const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [newSpot, setNewSpot] = useState({});
+
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
 
     const handleUpdate = async (e) => {
         if (e.target.type === 'number') {

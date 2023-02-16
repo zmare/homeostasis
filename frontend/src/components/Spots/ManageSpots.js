@@ -1,5 +1,5 @@
 import ManageSpotCard from "./ManageSpotCard";
-import { getSpots } from "../../store/spots";
+import { getSpots, getSpotsUser } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -9,16 +9,13 @@ const ManageSpots = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getSpots())
+        dispatch(getSpotsUser())
     }, [dispatch])
 
-    let allSpots = useSelector(state => state.spots.allSpots);
-    const userId = useSelector(state => state.session.user.id);
-    if (!allSpots) return null;
-    if (!userId) return null;
+    let spots = useSelector(state => state.spots.current);
+    if (!spots) return;
 
-    allSpots = Object.values(allSpots);
-    const mySpots = allSpots.filter((spot) => spot.ownerId === userId);
+    spots = Object.values(spots);
 
     return (
         <div >
@@ -28,10 +25,10 @@ const ManageSpots = () => {
             </Link>
 
             <div className='spotContainer'>
-                {mySpots.map((spot) => (
-                    <NavLink key={spot.id} to={`/spots/${spot.id}`}>
-                        <ManageSpotCard spot={spot} />
-                    </NavLink>
+                {spots.map((spot) => (
+
+                    <ManageSpotCard spot={spot} />
+
                 ))}
             </div>
         </div>
