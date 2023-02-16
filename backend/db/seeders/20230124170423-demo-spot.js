@@ -12,7 +12,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     options.tableName = 'Spots';
 
-    let spots = seedSpots(15);
+    let spots = seedSpots(10);
 
     return queryInterface.bulkInsert(options, spots, {})
   },

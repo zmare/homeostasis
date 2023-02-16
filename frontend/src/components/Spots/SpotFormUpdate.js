@@ -1,20 +1,18 @@
 import { useState, useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route, useParams, useHistory } from 'react-router-dom';
-import { addSpot, getSpots } from '../../store/spots';
-import { restoreUser } from '../../store/session';
-import { csrfFetch } from '../../store/csrf';
+import { useParams, useHistory } from 'react-router-dom';
+import { editSpot } from '../../store/spots';
+
+
 
 import './Spots.css'
 
 const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [newSpot, setNewSpot] = useState({});
+    const { spotId } = useParams();
 
-    useEffect(() => {
-        dispatch(getSpots())
-    }, [dispatch])
+    const [newSpot, setNewSpot] = useState({});
 
     const handleUpdate = async (e) => {
         if (e.target.type === 'number') {
@@ -27,11 +25,17 @@ const SpotForm = ({ spot, formType }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let createdSpot = await dispatch(addSpot(newSpot));
+        let updatedSpot = await dispatch(editSpot(spotId, newSpot));
 
-        if (createdSpot) {
-            history.push(`/spots/${createdSpot.id}`)
+        if (updatedSpot) {
+            history.push(`/spots/${updatedSpot.id}`)
         }
+    }
+
+    const defineValue = (name) => {
+        if (newSpot[name]) {
+            return newSpot[name];
+        } else return spot.name;
     }
 
     return (
@@ -40,92 +44,92 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 Country
                 <input
-                    placeholder='Country'
+                    placeholder={spot.country}
                     type="text"
                     name="country"
                     onChange={handleUpdate}
-                    value={newSpot["country"]}
+                    value={newSpot.country}
                 />
             </label>
             <label>
                 Street Address
                 <input
-                    placeholder='Address'
+                    placeholder={spot.address}
                     type="text"
                     name="address"
                     onChange={handleUpdate}
-                    value={newSpot["address"]}
+                    value={defineValue('address')}
 
                 />
             </label>
             <label>
                 City
                 <input
-                    placeholder="City"
+                    placeholder={spot.city}
                     type="text"
                     name="city"
                     onChange={handleUpdate}
-                    value={newSpot["city"]}
+                    value={defineValue('city')}
                 />
             </label>
             <label>
                 State
                 <input
-                    placeholder="State"
+                    placeholder={spot.state}
                     type="text"
                     name="state"
                     onChange={handleUpdate}
-                    value={newSpot["state"]}
-                />
-            </label>
-            <label>
-                Latitude
-                <input
-                    placeholder="Latitude"
-                    type="text"
-                    name="lat"
-                    onChange={handleUpdate}
-                    value={newSpot["lat"]}
+                    value={defineValue('state')}
                 />
             </label>
             <label>
                 Longitude
                 <input
-                    placeholder="Longitude"
+                    placeholder={spot.lng}
                     type="text"
                     name="lng"
                     onChange={handleUpdate}
-                    value={newSpot["lng"]}
+                    value={defineValue('lng')}
+                />
+            </label>
+            <label>
+                Latitude
+                <input
+                    placeholder={spot.lat}
+                    type="text"
+                    name="lat"
+                    onChange={handleUpdate}
+                    value={defineValue('lat')}
                 />
             </label>
             <label>
                 Name
                 <input
-                    placeholder="Name"
+                    placeholder={spot.name}
                     type="text"
                     name="name"
                     onChange={handleUpdate}
-                    value={newSpot['name']}
+                    value={defineValue('name')}
                 />
             </label>
             <label>
                 Description
                 <textarea
-                    placeholder="Description"
+                    placeholder={spot.description}
                     type="text"
                     name="description"
                     onChange={handleUpdate}
-                    value={newSpot['description']}
+                    value={defineValue('description')}
                 />
             </label>
             <label>
                 Price
                 <input
-                    placeholder="Price"
+                    placeholder={spot.price}
                     type="text"
                     name="price"
                     onChange={handleUpdate}
-                    value={newSpot["price"]}
+                    value={defineValue('price')}
                 />
             </label>
 

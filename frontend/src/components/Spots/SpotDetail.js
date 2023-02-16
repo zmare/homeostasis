@@ -29,17 +29,27 @@ const SpotDetail = () => {
 
             <div>
                 {spot.SpotImages.map(image =>
-                    <img style={{ objectFit: 'cover', width: '25%', height: '205px', padding: '10px' }} src={`${image.url}`}></img>
+                    <img key={image.id} style={{ objectFit: 'cover', width: '25%', height: '205px', padding: '10px' }} src={`${image.url}`}></img>
                 )}
             </div>
 
             <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-            <p style={{ fontSize: '11pt', borderBottom: 'solid 2px lightgray' }}> {spot.description}</p>
-            <div>
-                <p style={{ fontSize: '11pt' }}><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</p>
-                <p style={{ fontSize: '11pt' }}>Rating: {spot.avgStarRating}</p>
-                <p style={{ fontSize: '11pt', borderBottom: 'solid 2px lightgray' }}>{spot.numReviews} reviews</p>
-            </div>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between', borderBottom: 'solid 2px lightgray', paddingBottom: '50px' }}>
+                <p style={{ width: "75%", fontSize: '11pt', }}> {spot.description}</p>
+                <div style={{
+                    border: '2px solid black', padding: "20px", width: '250px', textAlign: 'center', borderRadius: '1em'
+                }}>
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
+                        <p style={{ fontSize: '11pt' }}><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</p>
+                        <p style={{ fontSize: '11pt' }}>
+                            <i className='fa-solid fa-star'></i>
+                            {spot.avgStarRating}</p>
+                        <p>{spot.numReviews} reviews</p>
+                    </div>
+                    <button> Reserve</button>
+                </div>
+            </div >
+
 
             <div>
                 <ReviewIndex spot={spot} />
