@@ -1,20 +1,23 @@
+import DeleteReviewModal from "../DeleteReviewModal";
+import OpenModalButton from "../OpenModalButton";
+
 const ReviewCard = ({ reviews }) => {
 
     return (
         <div>
-
             {reviews.map(review => (
-                <div>
+                <div key={review.id}>
                     <p>{review.User.firstName}<br></br>
                         {review.createdAt.split('T')[0]} <br></br>
                         {review.review}
                     </p>
-                    <button>Delete Review</button>
+                    <OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={<DeleteReviewModal review={review} />}
+                    />
                 </div>
             ))}
-
         </div>
-
     );
 }
 

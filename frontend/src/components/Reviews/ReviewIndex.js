@@ -25,7 +25,7 @@ const ReviewIndex = ({ spot }) => {
             <p style={{ fontSize: '11pt', }}>{spot.numReviews} reviews</p>
             <OpenModalButton
                 buttonText="Post Review"
-                modalComponent={<ReviewSpotModal />}
+                modalComponent={<ReviewSpotModal spot={spot} />}
             />
             <div>
                 <ReviewCard reviews={reviews} />

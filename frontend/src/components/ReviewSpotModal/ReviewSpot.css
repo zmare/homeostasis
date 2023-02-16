@@ -1,0 +1,14 @@
+.star-rating>button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.fill {
+    color: #000;
+}
+
+.no-fill {
+    color: #ccc;
+}

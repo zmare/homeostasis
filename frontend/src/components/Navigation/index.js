@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -16,10 +16,14 @@ function Navigation({ isLoaded }) {
         color: "red"
     }
 
+
+
     return (
         <div className='header'>
             <div>
-                <img src="https://companieslogo.com/img/orig/ABNB-4aaade0f.png" style={{ height: "20px", width: '20px', marginRight: '5px' }}></img>
+                <NavLink to="/">
+                    <img src="https://companieslogo.com/img/orig/ABNB-4aaade0f.png" style={{ height: "20px", width: '20px', marginRight: '5px' }}></img>
+                </NavLink>
                 <NavLink exact to="/" style={linkStyle}>homeostasis</NavLink>
             </div>
             {
