@@ -12,7 +12,7 @@ const SpotForm = ({ spot, formType }) => {
     const history = useHistory();
     const { spotId } = useParams();
 
-    const [newSpot, setNewSpot] = useState({});
+    const [newSpot, setNewSpot] = useState({ ...spot });
 
     const handleUpdate = async (e) => {
         if (e.target.type === 'number') {

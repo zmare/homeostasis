@@ -12,7 +12,6 @@ const DeleteSpotModal = ({ spot }) => {
 
     const handleDelete = () => {
         dispatch(deleteSpot(spot.id))
-            .then(setOnModalClose(() => { window.location.reload(); }))
             .then(closeModal);
     }
 

@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import { csrfFetch } from "./csrf";
 
 const LOAD_REVIEWS = 'reviews/load';
@@ -35,7 +36,7 @@ export const getReviewsCurrent = () => async (dispatch) => {
     return null;
 }
 
-export const addReview = (spotId, review) => async (dispatch) => {
+export const addReview = (spotId, user, review) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -44,6 +45,7 @@ export const addReview = (spotId, review) => async (dispatch) => {
 
     if (response.ok) {
         const review = await response.json();
+        review.User = user;
         dispatch(createReview(spotId, review));
     }
 }
@@ -76,13 +78,16 @@ const reviewReducer = (state = initialState, action) => {
         }
         case ADD_REVIEW: {
             const newState = { ...state };
-            newState.spot[action.review.id] = action.review;
-            return newState;
+            const spot = { ...state.spot };
+            const User = {}
+            spot[action.review.id] = action.review;
+            return { ...newState, spot };
         }
         case DELETE_REVIEW: {
             const newState = { ...state };
-            delete newState[action.reviewId];
-            return newState;
+            const spot = { ...state.spot };
+            delete spot[action.reviewId];
+            return { ...newState, spot };
         }
         default:
             return state;

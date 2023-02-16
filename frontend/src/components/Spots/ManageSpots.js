@@ -27,7 +27,7 @@ const ManageSpots = () => {
             <div className='spotContainer'>
                 {spots.map((spot) => (
 
-                    <ManageSpotCard spot={spot} />
+                    <ManageSpotCard key={spot.id} spot={spot} />
 
                 ))}
             </div>

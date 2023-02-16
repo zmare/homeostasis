@@ -1,11 +1,14 @@
 import './ReviewSpot.css';
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addReview } from '../../store/reviews';
 
 const ReviewSpotModal = ({ spot }) => {
     const dispatch = useDispatch();
+    let user = useSelector(state => state.session.user);
+    delete user.email;
+    delete user.username;
 
     const { closeModal } = useModal();
     let array = new Array(5).fill('');
@@ -19,7 +22,7 @@ const ReviewSpotModal = ({ spot }) => {
 
         const newReview = { review, stars };
 
-        dispatch(addReview(spot.id, newReview));
+        dispatch(addReview(spot.id, user, newReview));
         closeModal();
     }
 
