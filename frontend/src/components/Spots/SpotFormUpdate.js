@@ -11,7 +11,6 @@ const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { spotId } = useParams();
-    console.log(spotId);
 
     const [newSpot, setNewSpot] = useState({});
 

@@ -1,14 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
+import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
 const ManageSpotCard = ({ spot }) => {
     if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
         spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
-    }
-
-    const handleUpdate = (e) => {
-        e.previewDefault();
-
     }
 
     return (
@@ -32,8 +28,10 @@ const ManageSpotCard = ({ spot }) => {
                     <Link to={`/spots/${spot.id}/edit`}>
                         <button type='button'>Update</button>
                     </Link>
+                    <Link to='/spots/current'>
+                        <DeleteSpot spot={spot} />
+                    </Link>
 
-                    <button>Delete</button>
                 </div>
 
             </div>
