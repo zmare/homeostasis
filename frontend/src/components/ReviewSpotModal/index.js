@@ -60,6 +60,7 @@ const ReviewSpotModal = ({ spot }) => {
                 </div>
                 <button
                     type='submit'
+                    disabled={review.length < 10}
                     onClick={handleSubmit}>Submit Your Review</button>
             </form>
         </div>

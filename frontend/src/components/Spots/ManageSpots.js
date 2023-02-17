@@ -24,7 +24,7 @@ const ManageSpots = () => {
                 <button>Create a New Spot</button>
             </Link>
 
-            <div className='spotContainer'>
+            <div className='spot_container'>
                 {spots.map((spot) => (
 
                     <ManageSpotCard key={spot.id} spot={spot} />

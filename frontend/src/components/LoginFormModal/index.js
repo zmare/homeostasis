@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -10,7 +9,6 @@ function LoginFormModal() {
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const [buttonState, setButtonState] = useState(true)
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
@@ -41,10 +39,7 @@ function LoginFormModal() {
                         className="input-field"
                         type="text"
                         value={credential}
-                        onChange={(e) => {
-                            setCredential(e.target.value);
-                            setButtonState(false);
-                        }}
+                        onChange={(e) => { setCredential(e.target.value) }}
                         required
                     />
                 </label>
@@ -54,7 +49,7 @@ function LoginFormModal() {
                         className="input-field"
                         type="password"
                         value={password}
-                        onChange={(e) => { setPassword(e.target.value); setButtonState(false) }}
+                        onChange={(e) => { setPassword(e.target.value) }}
                         required
                     />
                 </label>

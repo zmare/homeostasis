@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 /* mapped Navlinks that is generating each card component */
@@ -156,8 +156,50 @@
 
 /* ************************************************************ */
 
-.form_test {
+.form_parent_container {
+    font-family: 'Manrope', sans-serif;
+    padding: 1em 20em;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.form_parent_container p {
+    font-size: 11pt;
+}
+
+.form_parent_container input,
+textarea {
+    background: #E8F0FE;
+    font-family: 'Manrope', sans-serif;
+    border: 2px solid darkgray;
+    width: 100%;
+    font-size: 10pt;
+}
+
+.form_parent_container div {
+    padding-bottom: 1em;
+}
+
+.form_parent_container label {
+    font-size: 10pt;
+}
+
+.form_parent_container button {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input:invalid,
+textarea:invalid {
+    border: 2px solid red;
+}
+
+input:invalid:required {
+    background-image: linear-gradient(to right, pink, pink);
 }
