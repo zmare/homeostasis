@@ -1,0 +1,29 @@
+/*  */
+.review_rating_num {
+    display: flex;
+    flex-direction: row;
+}
+
+.review_rating_num p {
+    padding-right: .5em;
+}
+
+.review_rating_num>p {
+    font-size: 18pt;
+}
+
+.middle_dot {
+    padding-left: 2.5em;
+    ;
+}
+
+.reviews_parent_container>button {
+    background-color: darkgray;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+}

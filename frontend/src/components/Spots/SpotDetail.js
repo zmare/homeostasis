@@ -20,7 +20,7 @@ const SpotDetail = () => {
         }
     });
     if (!spot) return null;
-
+    if (!spot.avgStarRating) spot.avgStarRating = 'New';
     const images = spot.SpotImages.slice(0, 5);
 
     return (
@@ -34,7 +34,6 @@ const SpotDetail = () => {
                 {images.slice(1).map((image, index) =>
                     <img key={image.id} id={`spot_detail_img_${index + 2}`} className='spot_detail_images' src={`${image.url}`}></img>
                 )}
-
             </div>
 
             <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
@@ -43,17 +42,27 @@ const SpotDetail = () => {
                 <div className='spot_detail_callout_container'>
                     <div className='spot_detail_callout_price_review_container'>
                         <p id='price' style={{ fontSize: '11pt' }}><span style={{ fontWeight: "bold", fontSize: "15pt" }}>${spot.price}</span> night</p>
-                        <p>
-                            <i className='fa-solid fa-star fa-fw'></i>
-                            {spot.avgStarRating}</p>
-                        <p>{spot.numReviews} reviews</p>
+                        {spot.avgStarRating === "New" ? (
+                            <p>
+                                <i className='fa-solid fa-star fa-fw'></i>
+                                New
+                            </p>
+                        ) : (
+                            <>
+                                <p>
+                                    <i className='fa-solid fa-star fa-fw middle_dot'></i>
+                                    {spot.avgStarRating}</p>
+                                <p>·</p>
+                                <p>{spot.numReviews} {spot.numReviews === 1 ? 'review' : 'reviews'}</p>
+                            </>
+                        )}
+
                     </div>
                     <button onClick={() => window.alert('Feature coming soon..')} className='reserve_btn' type='button'> Reserve</button>
                 </div>
             </div >
 
-
-            <div>
+            <div className="reviews_parent_container">
                 <ReviewIndex spot={spot} />
             </div>
         </div >

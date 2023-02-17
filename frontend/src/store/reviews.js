@@ -69,25 +69,39 @@ const reviewReducer = (state = initialState, action) => {
         case LOAD_REVIEWS: {
             const spot = {};
             action.reviews.Reviews.forEach(review => {
+                let newDate = new Date(review.createdAt);
+                newDate = newDate.getTime();
+                review.createdAtMiliseconds = newDate;
+            })
+
+            let orderedList = Object.values(action.reviews.Reviews);
+            orderedList = orderedList.sort((r1, r2) => (r1.createdAtMiliseconds < r2.createdAtMiliseconds) ? 1 : (r1.createdAtMiliseconds > r2.createdAtMiliseconds) ? -1 : 0);
+
+            action.reviews.Reviews.forEach(review => {
                 spot[review.id] = review
             })
+
             return {
                 ...state,
-                spot
+                spot,
+                orderedList
             }
         }
         case ADD_REVIEW: {
             const newState = { ...state };
             const spot = { ...state.spot };
-            const User = {}
+            const orderedList = [...state.orderedList];
             spot[action.review.id] = action.review;
-            return { ...newState, spot };
+            orderedList.unshift(action.review);
+            return { ...newState, spot, orderedList };
         }
         case DELETE_REVIEW: {
             const newState = { ...state };
             const spot = { ...state.spot };
+            const orderedList = [...state.orderedList];
             delete spot[action.reviewId];
-            return { ...newState, spot };
+            delete orderedList[0];
+            return { ...newState, spot, orderedList };
         }
         default:
             return state;
