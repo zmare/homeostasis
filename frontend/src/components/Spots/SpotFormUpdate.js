@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getSpots, editSpot } from '../../store/spots';
@@ -42,12 +42,6 @@ const SpotForm = ({ spot, formType }) => {
                 if (data && data.errors) setErrors(data.errors)
             })
 
-    }
-
-    const defineValue = (name) => {
-        if (newSpot[name]) {
-            return newSpot[name];
-        } else return spot.name;
     }
 
     return (

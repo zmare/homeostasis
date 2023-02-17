@@ -1,4 +1,3 @@
-import { useReducer } from "react";
 import { csrfFetch } from "./csrf";
 
 const LOAD_REVIEWS = 'reviews/spot/load';
@@ -111,18 +110,22 @@ const reviewReducer = (state = initialState, action) => {
         case ADD_REVIEW: {
             const newState = { ...state };
             const spot = { ...state.spot };
+            const user = { ...state.user };
             const orderedList = [...state.orderedList];
             spot[action.review.id] = action.review;
+            user[action.review.id] = action.review;
             orderedList.unshift(action.review);
-            return { ...newState, spot, orderedList };
+            return { ...newState, spot, user, orderedList };
         }
         case DELETE_REVIEW: {
             const newState = { ...state };
             const spot = { ...state.spot };
+            const user = { ...state.user };
             const orderedList = [...state.orderedList];
             delete spot[action.reviewId];
-            delete orderedList[0];
-            return { ...newState, spot, orderedList };
+            delete user[action.reviewId];
+            orderedList.shift();
+            return { ...newState, spot, user, orderedList };
         }
         default:
             return state;

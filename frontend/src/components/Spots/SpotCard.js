@@ -9,7 +9,7 @@ const SpotCard = ({ spot }) => {
 
     return (
         <div className='spot_card'>
-            <img src={spot.previewImage} className='spot_card_image'></img>
+            <img src={spot.previewImage} alt='preview' className='spot_card_image'></img>
             <div className='spot_card_name_rating'>
                 <span className='spot_card_name'>{spot.name.substring(0, 100)}</span>
                 <div>

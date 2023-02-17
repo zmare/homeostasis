@@ -66,7 +66,7 @@ const ReviewIndex = ({ spot }) => {
             ) : ''}
 
             <div>
-                <ReviewCard reviews={reviews} />
+                <ReviewCard spot={spot} reviews={reviews} />
             </div>
         </>
 

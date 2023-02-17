@@ -1,8 +1,8 @@
 import ManageSpotCard from "./ManageSpotCard";
-import { getSpots, getSpotsUser } from "../../store/spots";
+import { getSpotsUser } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Spots.css"
 
 const ManageSpots = () => {
