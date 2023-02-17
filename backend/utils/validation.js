@@ -30,18 +30,32 @@ const validateNewSpot = [
         .withMessage('Please enter a valid city'),
     check('state', 'State is required')
         .exists({ checkFalsy: true })
-        .withMessage('Please enter a valid State'),
+        .withMessage('Please enter a valid state'),
     check('country', "Country is required")
         .exists({ checkFalsy: true })
-        .withMessage('Please enter a valid Country'),
-    check('lat', 'Latitude is required')
-        .exists()
-        .isFloat({ min: -90, max: 90 })
-        .withMessage('Latitude is not valid'),
+        .withMessage('Please enter a valid country'),
+    check('lat')
+        // .exists()
+        // .isFloat({ min: -90, max: 90 })
+        // .withMessage('Latitude is not valid')
+        .custom((value, { req, res }) => {
+            if (value === "" || (value >= -90 && value <= 90)) {
+                return true;
+            } else {
+                throw new Error('Latitude must be between -90 and 90')
+            }
+        }),
     check('lng', 'Longitude is required')
-        .exists()
-        .isFloat({ min: -180, max: 180 })
-        .withMessage('Longitude is not valid'),
+        // .exists()
+        // .isFloat({ min: -180, max: 180 })
+        // .withMessage('Longitude is not valid')
+        .custom((value, { req, res }) => {
+            if (value === "" || (value >= -90 && value <= 90)) {
+                return true;
+            } else {
+                throw new Error('Latitude must be between -90 and 90')
+            }
+        }),
     check('name', 'Name is required')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
@@ -66,8 +80,6 @@ const validateBooking = [
 
             endDateVal = new Date(req.body.endDate.replace(/-/g, '\/')).toDateString();
             endDate = new Date(endDateVal).getTime();
-
-            console.log(endDate - startDate < 0);
 
             if (endDate - startDate < 0) {
                 throw new Error("endDate cannot be on or before startDate");
