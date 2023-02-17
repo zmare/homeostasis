@@ -195,11 +195,11 @@ textarea {
     cursor: pointer;
 }
 
-input:invalid,
+.form_parent_container input:invalid,
 textarea:invalid {
     border: 2px solid red;
 }
 
-input:invalid:required {
+.form_parent_container input:invalid:required {
     background-image: linear-gradient(to right, pink, pink);
 }

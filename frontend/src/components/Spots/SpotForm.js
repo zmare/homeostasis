@@ -182,9 +182,10 @@ const SpotForm = ({ spot, formType }) => {
                 >
                 </input>
                 <br></br><br></br>
-                {newArray.slice(1).map((arr) => (
+                {newArray.slice(1).map((arr, index) => (
                     <>
                         <input
+                            key={index}
                             placeholder='Image URL'>
                         </input>
                         <br></br>

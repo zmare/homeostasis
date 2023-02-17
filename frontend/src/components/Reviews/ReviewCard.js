@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import DeleteReviewModal from "../DeleteReviewModal";
 import OpenModalButton from "../OpenModalButton";
 
 const ReviewCard = ({ spot, reviews }) => {
+    const user = useSelector(state => state.session.user);
 
     if (!reviews.length) return;
 
@@ -14,17 +16,18 @@ const ReviewCard = ({ spot, reviews }) => {
     });
 
     return (
-        <div>
+        <div className='review_card_container'>
             {reviews.map(review => (
                 <div key={review.id}>
                     <p>{review.User.firstName}<br></br>
                         <span style={{ color: "darkgray", fontSize: '10pt' }}>{review.month} {review.year}</span>  <br></br>
                         {review.review}
                     </p>
-                    <OpenModalButton
+                    {(user !== null && user.id === review.User.id) ? (<OpenModalButton
                         buttonText="Delete"
                         modalComponent={<DeleteReviewModal review={review} />}
-                    />
+                    />) : ''}
+
                 </div>
             ))}
         </div>

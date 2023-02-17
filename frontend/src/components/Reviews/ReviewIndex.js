@@ -71,9 +71,8 @@ const ReviewIndex = ({ spot }) => {
             </div>
         </>
 
-    );
+    )
 
 }
-
 
 export default ReviewIndex;
