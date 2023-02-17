@@ -22,10 +22,10 @@ const ManageSpotCard = ({ spot }) => {
     return (
         <div className='spot_card'>
             <div>
-                <img src={spot.previewImage} className='spot_image'></img>
+                <img src={spot.previewImage} className='spot_card_image'></img>
             </div>
 
-            <div className='spot_card_loc_rating'>
+            <div className='spot_card_name_rating'>
                 {spot.city}, {spot.state}
                 <div>
                     <i className='fa-solid fa-star' style={{ marginRight: "5px" }}></i>

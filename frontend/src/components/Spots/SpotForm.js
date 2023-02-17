@@ -8,6 +8,7 @@ const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [newSpot, setNewSpot] = useState(spot);
+    const [errors, setErrors] = useState([]);
     const newArray = new Array(5).fill('')
 
     useEffect(() => {
@@ -24,30 +25,37 @@ const SpotForm = ({ spot, formType }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors([]);
+        try {
+            let createdSpot = await dispatch(addSpot(newSpot));
+            if (createdSpot) {
+                history.push(`/spots/${createdSpot.id}`)
+            }
+        } catch (error) {
 
-        let createdSpot = await dispatch(addSpot(newSpot));
-
-        if (createdSpot) {
-            history.push(`/spots/${createdSpot.id}`)
         }
+
+
+        return dispatch(addSpot(newSpot))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            })
+
     }
 
     return (
-        <form className='form_test' onSubmit={handleSubmit}>
+        <form className='form_parent_container' onSubmit={handleSubmit}>
             <h2>{formType}</h2>
+            <ul style={{ color: 'red' }}>
+                {errors.map((error, idx) => (
+                    <li key={idx}>{error}</li>
+                ))}
+            </ul>
             <div style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }}>
                 <h3>Where's your place located?</h3>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
-                <label>
-                    Country
-                    <input
-                        placeholder='Country'
-                        type="text"
-                        name="country"
-                        onChange={handleUpdate}
-                        value={newSpot["country"]}
-                    />
-                </label>
+
                 <label>
                     Street Address
                     <input
@@ -77,6 +85,16 @@ const SpotForm = ({ spot, formType }) => {
                         name="state"
                         onChange={handleUpdate}
                         value={newSpot["state"]}
+                    />
+                </label>
+                <label>
+                    Country
+                    <input
+                        placeholder='Country'
+                        type="text"
+                        name="country"
+                        onChange={handleUpdate}
+                        value={newSpot["country"]}
                     />
                 </label>
                 <label>
@@ -149,7 +167,7 @@ const SpotForm = ({ spot, formType }) => {
                 </label>
             </div>
 
-            <div>
+            <div style={{ borderBottom: '1px solid black' }}>
                 <h3>Liven your spot up with photos</h3>
                 <p>Submit a link to atleast one photo to publish your spot</p>
                 {newArray.map((arr) => (
@@ -157,6 +175,7 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             placeholder='image url'>
                         </input>
+                        <br></br>
                         <br></br>
                     </>
                 ))}
