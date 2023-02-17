@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -51,13 +51,12 @@ function ProfileButton({ user }) {
             <div className='dropdown-content'>
                 <ul className={ulClassName} ref={ulRef}>
                     {user ? (
-                        <>
+                        <div>
                             Hello {user.firstName}! <br></br>
                             {user.email} <br></br>
                             <NavLink to={`/spots/current`}>Manage Spots</NavLink>
                             <button className='logout-btn' onClick={logout}>Log Out</button>
-
-                        </>
+                        </div>
                     ) : (
 
                         <div style={{ listStyle: 'none' }}>

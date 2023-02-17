@@ -15,8 +15,6 @@ const ReviewCard = ({ spot, reviews }) => {
         review.year = review.createdAt.split(' ')[3];
     });
 
-
-
     return (
         <div className='review_card_container'>
             {reviews.map(review => (

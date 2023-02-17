@@ -6,9 +6,49 @@
 }
 
 .fill {
-    color: #000;
+    color: #FF5A5F;
 }
 
 .no-fill {
     color: #ccc;
+}
+
+.form-parent-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 20px 20px;
+    font-family: 'Manrope', sans-serif;
+    padding: 0 20px;
+}
+
+.review_spot_stars {
+    padding-top: 1em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    ;
+}
+
+.review-submit-button {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+}
+
+.review-submit-disabled {
+    background-color: lightgrey;
+    border: solid 1px darkgray;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%
 }
