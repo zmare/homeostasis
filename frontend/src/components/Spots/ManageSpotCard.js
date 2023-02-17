@@ -1,22 +1,28 @@
-import { NavLink, Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
 const ManageSpotCard = ({ spot }) => {
-    const history = useHistory();
-
+    // const history = useHistory();
+    // const user = useSelector(state => state.session.user)
     if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
         spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
     }
+    // console.log(spot);
+    // console.log(user);
 
-    const handleClick = () => {
-        console.log('hi')
-        return < Redirect to={`/spots/${spot.id}/edit`} />
-    }
 
-    const handleDelete = () => {
-        history.push('/spots/current');
-    }
+    // const handleClick = () => {
+    //     console.log('hi')
+    //     if (user === null || user.id !== spot.ownerId) {
+    //         return <Redirect to="/" />;
+    //     }
+    // }
+
+    // const handleDelete = () => {
+    //     history.push('/spots/current');
+    // }
 
 
     return (

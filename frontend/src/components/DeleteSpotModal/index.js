@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteSpot, getSpotsUser } from "../../store/spots";
+import { deleteSpot } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 
 
 const DeleteSpotModal = ({ spot }) => {
     const dispatch = useDispatch();
-    const { closeModal, setOnModalClose } = useModal();
+    const { closeModal } = useModal();
 
 
 

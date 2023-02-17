@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { addSpot, getSpots } from '../../store/spots';
 import './Spots.css'
@@ -185,7 +185,7 @@ const SpotForm = ({ spot, formType }) => {
                 {newArray.slice(1).map((arr) => (
                     <>
                         <input
-                            placeholder='image url'>
+                            placeholder='Image URL'>
                         </input>
                         <br></br>
                         <br></br>

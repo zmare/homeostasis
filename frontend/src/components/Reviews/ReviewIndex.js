@@ -12,7 +12,7 @@ const ReviewIndex = ({ spot }) => {
     useEffect(() => {
         dispatch(getReviews(spot.id));
         dispatch(getReviewsCurrent());
-    }, [dispatch])
+    }, [dispatch, spot.id])
 
     let reviews = useSelector(state => (state.reviews.orderedList));
     let myReviews = useSelector(state => (state.reviews.user));
