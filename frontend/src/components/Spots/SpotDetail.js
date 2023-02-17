@@ -7,10 +7,11 @@ import ReviewIndex from '../Reviews/ReviewIndex';
 const SpotDetail = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
+    const testingReview = useSelector(state => state.reviews);
 
     useEffect(() => {
         dispatch(getSpot(spotId));
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, testingReview]);
 
     const spot = useSelector(state => {
         if (state.spots.singleSpot === undefined) {

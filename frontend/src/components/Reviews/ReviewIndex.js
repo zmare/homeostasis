@@ -28,7 +28,8 @@ const ReviewIndex = ({ spot }) => {
     let hasReview = false;
 
     for (let review of myReviews) {
-        if (review.spotId === spot.id) hasReview = true;
+        let spotId = parseInt(review.spotId);
+        if (spotId === spot.id) hasReview = true;
     }
 
     return (

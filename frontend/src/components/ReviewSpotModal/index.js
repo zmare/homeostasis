@@ -19,9 +19,7 @@ const ReviewSpotModal = ({ spot }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const newReview = { review, stars };
-
         dispatch(addReview(spot.id, user, newReview));
         closeModal();
     }
