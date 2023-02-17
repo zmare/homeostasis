@@ -165,6 +165,7 @@ router.get('/:spotId', doesSpotExist, async (req, res, next) => {
 
         let avg = sum / reviews.length;
         let avgRounded = Math.round(avg * 10) / 10;
+        avgRounded = avgRounded.toFixed(1);
         spot.avgStarRating = avgRounded;
 
     }
@@ -362,12 +363,18 @@ router.get('/', async (req, res) => {
         let reviews = spot.Reviews
 
         if (reviews.length) {
+            var myformat = new Intl.NumberFormat('en-US', {
+                minimumIntegerDigits: 1,
+                minimumFractionDigits: 1
+            });
+
             let sum = 0;
             for (let review of reviews) {
                 sum += review.stars;
             }
             let avg = sum / reviews.length;
             let avgRounded = Math.round(avg * 10) / 10
+            avgRounded = avgRounded.toFixed(1);
             spot.avgRating = avgRounded;
             sum = 0;
         }
