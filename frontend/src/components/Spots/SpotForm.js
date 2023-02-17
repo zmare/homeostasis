@@ -32,14 +32,13 @@ const SpotForm = ({ spot, formType }) => {
                 history.push(`/spots/${createdSpot.id}`)
             }
         } catch (error) {
-
+            window.scrollTo(0, 0);
         }
-
 
         return dispatch(addSpot(newSpot))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setErrors(data.errors)
             })
 
     }
@@ -64,7 +63,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="address"
                         onChange={handleUpdate}
                         value={newSpot["address"]}
-
+                        required
                     />
                 </label>
                 <label>
@@ -75,6 +74,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="city"
                         onChange={handleUpdate}
                         value={newSpot["city"]}
+                        required
                     />
                 </label>
                 <label>
@@ -85,6 +85,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="state"
                         onChange={handleUpdate}
                         value={newSpot["state"]}
+                        required
                     />
                 </label>
                 <label>
@@ -95,6 +96,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="country"
                         onChange={handleUpdate}
                         value={newSpot["country"]}
+                        required
                     />
                 </label>
                 <label>
@@ -131,6 +133,8 @@ const SpotForm = ({ spot, formType }) => {
                         name="description"
                         onChange={handleUpdate}
                         value={newSpot['description']}
+                        minLength='30'
+                        required
                     />
                 </label>
             </div>
@@ -147,6 +151,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="name"
                         onChange={handleUpdate}
                         value={newSpot['name']}
+                        required
                     />
                 </label>
             </div>
@@ -163,6 +168,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="price"
                         onChange={handleUpdate}
                         value={newSpot["price"]}
+                        required
                     />
                 </label>
             </div>
@@ -170,7 +176,13 @@ const SpotForm = ({ spot, formType }) => {
             <div style={{ borderBottom: '1px solid black' }}>
                 <h3>Liven your spot up with photos</h3>
                 <p>Submit a link to atleast one photo to publish your spot</p>
-                {newArray.map((arr) => (
+                <input
+                    placeholder='Preview Image URL'
+                    required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?'
+                >
+                </input>
+                <br></br><br></br>
+                {newArray.slice(1).map((arr) => (
                     <>
                         <input
                             placeholder='image url'>

@@ -44,7 +44,7 @@ const ReviewIndex = ({ spot }) => {
 
             </div>
 
-            {user !== null && spot.avgStarRating === 'New' && (user !== ownerId) ? (
+            {user !== null && spot.avgStarRating === 'New' && (user.id !== ownerId) ? (
                 <OpenModalButton
                     className="test"
                     buttonText="Be the first to post a review!"
@@ -52,7 +52,7 @@ const ReviewIndex = ({ spot }) => {
                 />
             ) : (user !== null && user.id !== ownerId) ? (
                 <OpenModalButton
-                    buttonText="Post Review"
+                    buttonText="Post Your Review"
                     modalComponent={<ReviewSpotModal spot={spot} />}
                 />
             ) : ''}
