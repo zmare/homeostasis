@@ -31,16 +31,11 @@ const SpotForm = ({ spot, formType }) => {
             if (createdSpot) {
                 history.push(`/spots/${createdSpot.id}`)
             }
-        } catch (error) {
+        } catch (response) {
             window.scrollTo(0, 0);
+            const data = await response.json();
+            if (data && data.errors) setErrors(data.errors)
         }
-
-        return dispatch(addSpot(newSpot))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            })
-
     }
 
     return (
@@ -177,15 +172,15 @@ const SpotForm = ({ spot, formType }) => {
                 <h3>Liven your spot up with photos</h3>
                 <p>Submit a link to atleast one photo to publish your spot</p>
                 <input
-                    placeholder='Preview Image URL'
-                    required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?'
+                    placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
+                    required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|jpeg|png))(?:\?([^#]*))?(?:#(.*))?'
                 >
                 </input>
                 <br></br><br></br>
                 {newArray.slice(1).map((arr, index) => (
                     <>
                         <input
-                            key={index}
+                            key={index + 1}
                             placeholder='Image URL'>
                         </input>
                         <br></br>

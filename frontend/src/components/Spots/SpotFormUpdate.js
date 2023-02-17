@@ -32,15 +32,11 @@ const SpotForm = ({ spot, formType }) => {
             if (updatedSpot) {
                 history.push(`/spots/${updatedSpot.id}`)
             }
-        } catch (error) {
+        } catch (response) {
             window.scrollTo(0, 0);
+            const data = await response.json();
+            if (data && data.errors) setErrors(data.errors)
         }
-
-        return dispatch(editSpot(spotId, newSpot))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            })
 
     }
 
@@ -164,7 +160,7 @@ const SpotForm = ({ spot, formType }) => {
                 <p>Competitive pricing can help your listing stand out and rank higher
                     in search results.</p>
                 <label>
-                    Price
+                    $
                     <input
                         placeholder="Price per night (USD)"
                         type="text"
@@ -179,7 +175,7 @@ const SpotForm = ({ spot, formType }) => {
                 <h3>Liven your spot up with photos</h3>
                 <p>Submit a link to atleast one photo to publish your spot</p>
                 <input
-                    placeholder='Preview Image URL'
+                    placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
                     onChange={handleUpdate}
                     value={newSpot.previewImage}
                     required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?'
