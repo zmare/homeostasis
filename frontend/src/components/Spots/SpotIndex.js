@@ -23,6 +23,8 @@ const SpotIndex = () => {
                     <SpotCard spot={spot} />
                 </NavLink>
             ))}
+
+
         </div>
     );
 }

@@ -3,10 +3,34 @@
 
 /* Parent container div */
 .spot_container {
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 2%; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 75%;
+    margin: auto;
+    padding-top: 1em;
+
+}
+
+.spot_container a {
+
+    width: 25%;
+    box-sizing: border-box;
+}
+
+.spot_container_test {
+    padding: 20px 50px 0px 50px;
+    padding-right: 50px;
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    column-gap: 15px;
 }
 
 /* mapped Navlinks that is generating each card component */
