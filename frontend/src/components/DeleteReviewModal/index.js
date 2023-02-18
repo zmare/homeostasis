@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteReview } from "../../store/reviews";
 import { useModal } from "../../context/Modal";
-
+import './DeleteReview.css'
 
 const DeleteReviewModal = ({ review }) => {
     const dispatch = useDispatch();
@@ -18,16 +18,20 @@ const DeleteReviewModal = ({ review }) => {
     }
 
     return (
-        <div>
+        <div className="form-parent-container">
             <div>
                 <h1 >Confirm Delete</h1>
             </div>
             <div>
-                <p>Are you sure you want to remove this spot from the listings?</p>
+                <p>Are you sure you want to remove this review from the listing?</p>
             </div>
-            <div>
-                <button onClick={handleDelete}>Yes</button>
-                <button onClick={handleNo}>No</button>
+            <div className='yes_no_btns'>
+                <span><button className='yes-btn' onClick={handleDelete}>Yes</button>
+                </span>
+                <span>
+                    <button className='no-btn' onClick={handleNo}>No</button>
+                </span>
+
             </div>
         </div>
 

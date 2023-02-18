@@ -1,0 +1,34 @@
+.yes_no_btns {
+    display: flex;
+    flex-direction: column;
+}
+
+.yes_no_btns>span {
+    padding: 10px;
+}
+
+.yes-btn {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.no-btn {
+    background-color: darkgray;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+}

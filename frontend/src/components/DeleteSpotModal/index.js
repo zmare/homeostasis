@@ -20,16 +20,20 @@ const DeleteSpotModal = ({ spot }) => {
     }
 
     return (
-        <div>
+        <div className="form-parent-container">
             <div>
                 <h1 >Confirm Delete</h1>
             </div>
             <div>
                 <p>Are you sure you want to remove this spot from the listings?</p>
             </div>
-            <div>
-                <button onClick={handleDelete}>Yes</button>
-                <button onClick={handleNo}>No</button>
+            <div className='yes_no_btns'>
+                <span>
+                    <button className='yes-btn' onClick={handleDelete}>Yes</button>
+                </span>
+                <span>
+                    <button className='no-btn' onClick={handleNo}>No</button>
+                </span>
             </div>
         </div>
 

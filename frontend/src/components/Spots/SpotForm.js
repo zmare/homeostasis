@@ -174,18 +174,20 @@ const SpotForm = ({ spot, formType }) => {
                 <input
                     placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
                     required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|jpeg|png))(?:\?([^#]*))?(?:#(.*))?'
+                    onChange={handleUpdate}
+                    name='previewImage'
+                    value={newSpot['previewImage']}
                 >
                 </input>
                 <br></br><br></br>
                 {newArray.slice(1).map((arr, index) => (
-                    <>
+                    <div key={index + 1}>
                         <input
-                            key={index + 1}
                             placeholder='Image URL'>
                         </input>
                         <br></br>
                         <br></br>
-                    </>
+                    </div>
                 ))}
             </div>
 

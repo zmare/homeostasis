@@ -183,14 +183,16 @@ const SpotForm = ({ spot, formType }) => {
                 </input>
                 <br></br><br></br>
                 {newArray.slice(1).map((arr, index) => (
-                    <>
+                    <div key={index + 1}>
                         <input
-                            key={index + 1}
-                            placeholder='Image URL'>
+                            placeholder='Image URL'
+                            onChange={handleUpdate}
+                            name='previewImage'
+                            value={newSpot['previewImage']}>
                         </input>
                         <br></br>
                         <br></br>
-                    </>
+                    </div>
                 ))}
             </div>
 

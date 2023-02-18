@@ -42,8 +42,8 @@
 }
 
 .review-submit-disabled {
-    background-color: lightgrey;
-    border: solid 1px darkgray;
+    background-color: darkgray;
+    border: solid 1px black;
     color: white;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
     padding: 5px 10px;
