@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
 const ManageSpotCard = ({ spot }) => {
+    const history = useHistory();
+
     if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
         spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
     }
@@ -22,13 +24,13 @@ const ManageSpotCard = ({ spot }) => {
 
             </div>
 
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
+            <div style={{ display: "flex" }}>
                 <div><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</div>
                 <div>
                     <Link to={`/spots/${spot.id}/edit`}>
-                        <button type='button'>Update</button>
+                        <button className="create_new_spot_btn" type='button'>Update</button>
                     </Link>
-                    <span>
+                    <span onClick={() => { history.push('/spots/current') }}>
                         <DeleteSpot spot={spot} />
                     </span>
 
