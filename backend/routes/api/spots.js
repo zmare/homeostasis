@@ -33,13 +33,13 @@ router.get('/current', requireAuth, async (req, res) => {
 
     Spots.forEach(spot => {
         spot.SpotImages.forEach(image => {
+            console.log(image);
             if (image.preview === true) {
                 spot.previewImage = image.url;
             }
-
-            if (image.preview === false) {
-                spot.previewImage = "no image found"
-            }
+            // if (image.preview === false) {
+            //     spot.previewImage = "no image found"
+            // }
 
         })
 
@@ -165,6 +165,7 @@ router.get('/:spotId', doesSpotExist, async (req, res, next) => {
 
         let avg = sum / reviews.length;
         let avgRounded = Math.round(avg * 10) / 10;
+        avgRounded = avgRounded.toFixed(1);
         spot.avgStarRating = avgRounded;
 
     }
@@ -351,9 +352,9 @@ router.get('/', async (req, res) => {
                 spot.previewImage = image.url;
             }
 
-            if (image.preview === false) {
-                spot.previewImage = "no image found"
-            }
+            // if (image.preview === false) {
+            //     spot.previewImage = "no image found"
+            // }
 
         })
 
@@ -362,12 +363,18 @@ router.get('/', async (req, res) => {
         let reviews = spot.Reviews
 
         if (reviews.length) {
+            var myformat = new Intl.NumberFormat('en-US', {
+                minimumIntegerDigits: 1,
+                minimumFractionDigits: 1
+            });
+
             let sum = 0;
             for (let review of reviews) {
                 sum += review.stars;
             }
             let avg = sum / reviews.length;
             let avgRounded = Math.round(avg * 10) / 10
+            avgRounded = avgRounded.toFixed(1);
             spot.avgRating = avgRounded;
             sum = 0;
         }
@@ -516,7 +523,7 @@ router.post('/', [requireAuth, validateNewSpot], async (req, res, next) => {
             lng: lng,
             name: name,
             description: description,
-            price: price
+            price: price,
         })
         res.statusCode = 201;
         res.json(newSpot)

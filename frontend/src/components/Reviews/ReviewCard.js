@@ -1,20 +1,36 @@
-const ReviewCard = ({ reviews }) => {
+import { useSelector } from "react-redux";
+import DeleteReviewModal from "../DeleteReviewModal";
+import OpenModalButton from "../OpenModalButton";
+
+const ReviewCard = ({ spot, reviews }) => {
+    const user = useSelector(state => state.session.user);
+
+    if (!reviews.length) return;
+
+    reviews.forEach(review => {
+        let newDate = new Date(review.createdAt);
+        newDate = newDate.toDateString();
+        review.createdAt = newDate;
+        review.month = review.createdAt.split(' ')[1];
+        review.year = review.createdAt.split(' ')[3];
+    });
 
     return (
-        <div>
-
+        <div className='review_card_container'>
             {reviews.map(review => (
-                <div>
+                <div key={review.id}>
                     <p>{review.User.firstName}<br></br>
-                        {review.createdAt.split('T')[0]} <br></br>
+                        <span style={{ color: "darkgray", fontSize: '10pt' }}>{review.month} {review.year}</span>  <br></br>
                         {review.review}
                     </p>
-                    <button>Delete Review</button>
+                    {(user !== null && user.id === review.User.id) ? (<OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={<DeleteReviewModal review={review} />}
+                    />) : ''}
+
                 </div>
             ))}
-
         </div>
-
     );
 }
 

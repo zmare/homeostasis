@@ -1,48 +1,43 @@
-import { NavLink, Link, Redirect, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
 const ManageSpotCard = ({ spot }) => {
-    const history = useHistory();
 
-    if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
-        spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
-    }
-
-    const handleClick = () => {
-        console.log('hi')
-        return < Redirect to={`/spots/${spot.id}/edit`} />
-    }
-
-    const handleDelete = () => {
-        history.push('/spots/current');
-    }
+    // if (!spot.previewImage || spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
+    //     spot.previewImage = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png'
+    // }
 
 
     return (
         <div className='spot_card'>
-            <div>
-                <img src={spot.previewImage} className='spot_image'></img>
-            </div>
+            <Link to={`/spots/${spot.id}`}>
+                <img src={spot.previewImage} alt='preview' className='spot_card_image'></img>
+            </Link>
 
-            <div className='spot_card_loc_rating'>
+            <Link id={`spot-card-${spot.id}`} className='spot_card_name_rating spot_card_link' to={`/spots/${spot.id}`}>
                 {spot.city}, {spot.state}
                 <div>
                     <i className='fa-solid fa-star' style={{ marginRight: "5px" }}></i>
                     {spot.avgRating}
                 </div>
+            </Link>
 
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
-                <div><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</div>
-                <div>
+            <div style={{ display: "flex", justifyContent: 'space-between' }}>
+                <Link className='spot_card_link' style={{ width: '50%' }} to={`/spots/${spot.id}/edit`}><span style={{ fontWeight: "bold" }}>${spot.price}</span> night</Link>
+                <div style={{
+                    display: 'flex', flexDirection: 'row', width: '50%', justifyContent: 'space-between'
+                }}>
                     <Link to={`/spots/${spot.id}/edit`}>
-                        <button type='button'>Update</button>
+                        <button className="create_new_spot_btn" type='button'>Update</button>
                     </Link>
-                    <span>
-                        <DeleteSpot spot={spot} />
-                    </span>
+
+                    <Link to={`/spots/current`}>
+                        <div><DeleteSpot spot={spot} /></div>
+                    </Link>
+                    {/* <DeleteSpot spot={spot} /> */}
+
+
 
                 </div>
 

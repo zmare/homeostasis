@@ -39,7 +39,7 @@ function LoginFormModal() {
                         className="input-field"
                         type="text"
                         value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
+                        onChange={(e) => { setCredential(e.target.value) }}
                         required
                     />
                 </label>
@@ -49,11 +49,14 @@ function LoginFormModal() {
                         className="input-field"
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => { setPassword(e.target.value) }}
                         required
                     />
                 </label>
-                <button className="login-button" type="submit">Log In</button>
+                <span>
+                    <button disabled={!credential || !password} className={!credential || !password ? "disabled-btn" : "login-button"} type="submit">Log In</button>
+                </span>
+                <button onClick={() => { setCredential('demo@user.io'); setPassword('password'); }} type="submit" className='demo-user-btn'>Log In Demo User</button>
             </form>
         </div>
     );

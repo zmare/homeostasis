@@ -1,20 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from '../OpenModalButton';
+import React from "react";
 import DeleteSpotModal from "../DeleteSpotModal"
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
-import { NavLink } from 'react-router-dom'
 import OpenModalButton from "../OpenModalButton";
-import { getSpotsUser } from "../../store/spots";
-
 
 const DeleteSpot = ({ spot }) => {
-    const dispatch = useDispatch();
-
     return (
-        <div>
+        <div className='delete-btn'>
             <OpenModalButton
                 buttonText="Delete"
                 modalComponent={<DeleteSpotModal spot={spot} />}

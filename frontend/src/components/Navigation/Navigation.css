@@ -30,16 +30,19 @@
     text-align: center;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .dropdown-content {
     background-color: #f1f1f1;
     position: absolute;
     list-style: none;
-    min-width: 100px;
+    min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     right: 20px;
     z-index: 1;
+    font-size: 11pt;
+
 }
 
 .header-right {
@@ -61,6 +64,25 @@
     border-radius: 18px;
     text-align: center;
     font-size: 12px;
-    margin-left: 20px;
     margin-top: 5px;
+}
+
+.manage-spots-btn {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.manage-spots-btn:hover {
+    font-weight: bold;
+}
+
+.login-signup>li:hover {
+    font-weight: bold;
 }

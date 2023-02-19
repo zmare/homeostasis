@@ -48,7 +48,7 @@ const seedSpotImages = (num) => {
         spotImages[i] = {
             spotId: rNum(10),
             url: faker.image.city(640, 480, true),
-            preview: faker.datatype.boolean()
+            preview: true
         }
     }
 

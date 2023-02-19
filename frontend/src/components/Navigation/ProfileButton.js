@@ -4,10 +4,11 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -36,6 +37,7 @@ function ProfileButton({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
+        history.push('/');
     };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -49,16 +51,15 @@ function ProfileButton({ user }) {
             <div className='dropdown-content'>
                 <ul className={ulClassName} ref={ulRef}>
                     {user ? (
-                        <>
+                        <div style={{ display: "flex", flexDirection: 'column' }}>
                             Hello {user.firstName}! <br></br>
                             {user.email} <br></br>
-                            <NavLink to={`/spots/current`}>Manage Spots</NavLink>
+                            <NavLink className='manage-spots-btn' to={`/spots/current`}>Manage Spots</NavLink>
                             <button className='logout-btn' onClick={logout}>Log Out</button>
-
-                        </>
+                        </div>
                     ) : (
 
-                        <div style={{ listStyle: 'none' }}>
+                        <div style={{ listStyle: 'none', cursor: 'pointer', textAlign: "center" }} className='login-signup'>
 
                             <OpenModalMenuItem
                                 itemText="Log In"

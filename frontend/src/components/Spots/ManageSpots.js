@@ -1,8 +1,8 @@
 import ManageSpotCard from "./ManageSpotCard";
-import { getSpots, getSpotsUser } from "../../store/spots";
+import { getSpotsUser } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Spots.css"
 
 const ManageSpots = () => {
@@ -18,20 +18,22 @@ const ManageSpots = () => {
     spots = Object.values(spots);
 
     return (
-        <div >
+        <div style={{ fontFamily: "'Manrope', sans-serif", padding: '1em 4em' }}>
             <h2>Manage Your Spots</h2>
             <Link to='/spots/new'>
-                <button>Create a New Spot</button>
+                <button className='create_new_spot_btn'>Create a New Spot</button>
             </Link>
 
-            <div className='spotContainer'>
+            <div className='spot_container_manage'>
                 {spots.map((spot) => (
+                    // <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
+                    //     <ManageSpotCard key={spot.id} spot={spot} />
+                    // </NavLink>
 
-                    <ManageSpotCard spot={spot} />
-
+                    <ManageSpotCard key={spot.id} spot={spot} />
                 ))}
             </div>
-        </div>
+        </div >
     );
 }
 

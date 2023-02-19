@@ -1,36 +1,320 @@
-.form_test {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* ************************************************************ */
+/* CSS for parent container of all Spot Cards */
 
-.spotContainer {
-    display: flex;
-    flex-direction: row;
+/* Parent container div */
+.spot_container {
+    /* display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 2%; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 75%;
+    margin: center;
+    padding: 1em 4em;
+
 }
 
+.spot_container_manage {
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 2%; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 75%;
+    padding-top: 1em;
+
+}
+
+.spot_container a {
+    width: 25%;
+    box-sizing: border-box;
+}
+
+.spot_container_test {
+    padding: 20px 50px 0px 50px;
+    padding-right: 50px;
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    column-gap: 15px;
+}
+
+/* mapped Navlinks that is generating each card component */
+.spot_card_link {
+    text-decoration: none;
+    color: black;
+}
+
+/* ************************************************************ */
+
+
+
+/* ************************************************************ */
+/* CSS for my SpotCard.js */
+
+/* Container for each mapped card. Contains image, name, rating, as children */
 .spot_card {
-    /* flex: 1 0 21%;
-    width: 25%; */
+    height: 25em;
+    width: 270px;
     margin: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10pt;
-
+    font-family: 'Manrope', sans-serif;
+    font-size: 11pt;
 }
 
-.spot_image {
+/* image styling for preview image in card */
+.spot_card_image {
     object-fit: cover;
     height: 250px;
     width: 270px;
     border-radius: 10px;
-
 }
 
-.spot_card_loc_rating {
+/*  Div that holds name and reviews inside a card  */
+.spot_card_name_rating {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 5px 0px;
+}
+
+/* Span for word wrappin the spot name in card  */
+.spot_card_name {
+    width: 80%;
+    overflow-wrap: break-word
+}
+
+/* Div for star icon and rating in card */
+.spot_card_star_rating {
+    margin-right: 5px
+}
+
+/* Span for bolding the price */
+.spot_card_price {
+    font-weight: bolder;
+}
+
+/* ************************************************************ */
+
+
+
+
+
+/* ************************************************************ */
+/* CSS for Spot Details page  */
+
+/* Parent container div  */
+.spot_detail_container {
+    padding: 2em;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Header - Spot Name */
+.spot_detail_header {
+    font-weight: bolder;
+}
+
+/* spot images generated parent container*/
+.spot_detail_images_container {
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 412px; */
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, 205px);
+    grid-gap: 10px;
+}
+
+/* first image - needs to be larger */
+#spot_detail_img_1 {
+    /* flex: 0 0 100%; */
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#spot_detail_img_2 {
+    /* flex: 0 0 100%; */
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+#spot_detail_img_3 {
+    /* flex: 0 0 100%; */
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+#spot_detail_img_4 {
+    /* flex: 0 0 100%; */
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    width: 100%;
+    object-fit: cover;
+}
+
+#spot_detail_img_5 {
+    /* flex: 0 0 100%; */
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* remaining images */
+.spot_detail_images {
+    object-fit: cover;
+    width: 25%;
+    height: 205px;
+    /* flex-wrap: wrap;
+    flex: 0 0 25%;
+    width: 25%; */
+}
+
+.spot_detail_desc_callout_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px lightgray;
+    padding-bottom: 50px
+}
+
+.spot_detail_desc {
+    width: 75%;
+    font-size: 11pt;
+    padding: 5px;
+}
+
+.spot_detail_callout_container {
+    border: 2px solid black;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    border-radius: 1em;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+.spot_detail_callout_price_review_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.reserve_btn {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create_new_spot_btn {
+    background-color: darkgray;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+
+}
+
+.delete-btn button {
+    background-color: darkgray;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+
+/* ************************************************************ */
+
+.form_parent_container {
+    font-family: 'Manrope', sans-serif;
+    padding: 1em 20em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_parent_container p {
+    font-size: 11pt;
+}
+
+.form_parent_container input,
+textarea {
+    background: #E8F0FE;
+    font-family: 'Manrope', sans-serif;
+    border: 2px solid darkgray;
+    width: 100%;
+    font-size: 10pt;
+}
+
+.form_parent_container div {
+    padding-bottom: 1em;
+}
+
+.form_parent_container label {
+    font-size: 10pt;
+}
+
+.form_parent_container button {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form_parent_container input:invalid,
+textarea:invalid {
+    border: 2px solid red;
+}
+
+.form_parent_container input:invalid:required {
+    background-image: linear-gradient(to right, pink, pink);
+}
+
+.errors {
+    color: red;
 }

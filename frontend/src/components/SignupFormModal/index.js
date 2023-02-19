@@ -29,6 +29,7 @@ function SignupFormModal() {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
+
     return (
         <>
             <h1 className="signup-header">Sign Up</h1>
@@ -53,6 +54,7 @@ function SignupFormModal() {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        minLength='4'
                         required
                     />
                 </label>
@@ -96,7 +98,12 @@ function SignupFormModal() {
                         required
                     />
                 </label>
-                <button className="signup-button" type="submit">Sign Up</button>
+                <button
+                    disabled={!email || !username || (username.length < 4) || !firstName || !lastName || !password || (password.length < 6) || !confirmPassword || (confirmPassword !== password)}
+                    className={!email || !username || (username.length < 4) || !firstName || !lastName || !password || (password.length < 6) || !confirmPassword || (confirmPassword !== password) ? 'disabled' : "signup-button"}
+                    type="submit">
+                    Sign Up
+                </button>
             </form>
         </>
     );

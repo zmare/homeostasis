@@ -6,6 +6,12 @@
     padding: 0 20px;
 }
 
+.login-container>span {
+    display: flex;
+    justify-content: center;
+    padding: 20px
+}
+
 .login-header {
     font-family: 'Manrope', sans-serif;
     text-align: center;
@@ -19,6 +25,7 @@
 }
 
 .login-button {
+    display: block;
     background-color: #FF5A5F;
     border: solid 1px black;
     color: white;
@@ -27,6 +34,20 @@
     border-radius: 18px;
     text-align: center;
     font-size: 16px;
+    width: 100%
+}
+
+.disabled-btn {
+    background-color: lightgray;
+    display: block;
+    border: solid 1px darkgrey;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%
 }
 
 .input-field {
@@ -39,4 +60,15 @@
     border-radius: 20px;
     height: 15em;
     width: 20em;
+}
+
+.demo-user-btn {
+    background-color: #FF5A5F;
+    border: solid 1px black;
+    color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    padding: 2px 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
 }
