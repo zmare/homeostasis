@@ -51,15 +51,15 @@ function ProfileButton({ user }) {
             <div className='dropdown-content'>
                 <ul className={ulClassName} ref={ulRef}>
                     {user ? (
-                        <div>
+                        <div style={{ display: "flex", flexDirection: 'column' }}>
                             Hello {user.firstName}! <br></br>
                             {user.email} <br></br>
-                            <NavLink to={`/spots/current`}>Manage Spots</NavLink>
+                            <NavLink className='manage-spots-btn' to={`/spots/current`}>Manage Spots</NavLink>
                             <button className='logout-btn' onClick={logout}>Log Out</button>
                         </div>
                     ) : (
 
-                        <div style={{ listStyle: 'none' }}>
+                        <div style={{ listStyle: 'none', cursor: 'pointer', textAlign: "center" }} className='login-signup'>
 
                             <OpenModalMenuItem
                                 itemText="Log In"
