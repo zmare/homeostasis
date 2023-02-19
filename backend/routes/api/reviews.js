@@ -57,9 +57,10 @@ router.get('/current', requireAuth, async (req, res) => {
 
             if (image.preview === true) {
                 spot.previewImage = image.url;
-            } else {
-                spot.previewImage = 'no image found'
             }
+            // } else {
+            //     spot.previewImage = 'no image found'
+            // }
         }
 
         review.Spot = spot;
