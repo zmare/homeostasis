@@ -6,6 +6,15 @@
     padding: 0 20px;
 }
 
+/* .signup-container>span {
+    display: flex;
+    justify-content: center;
+    padding: 20px
+} */
+.signup-container label {
+    padding: 5px;
+}
+
 .signup-header {
     font-family: 'Manrope', sans-serif;
     text-align: center;
@@ -26,6 +35,7 @@
     border-radius: 18px;
     text-align: center;
     font-size: 16px;
+    width: 100%;
 }
 
 .disabled {
@@ -37,6 +47,7 @@
     border-radius: 18px;
     text-align: center;
     font-size: 16px;
+    width: 100%
 }
 
 .input-field {
@@ -47,6 +58,6 @@
 
 #modal-content {
     border-radius: 20px;
-    height: 20em;
+    height: 25em;
     width: 20em;
 }

@@ -33,13 +33,13 @@ router.get('/current', requireAuth, async (req, res) => {
 
     Spots.forEach(spot => {
         spot.SpotImages.forEach(image => {
+            console.log(image);
             if (image.preview === true) {
                 spot.previewImage = image.url;
             }
-
-            if (image.preview === false) {
-                spot.previewImage = "no image found"
-            }
+            // if (image.preview === false) {
+            //     spot.previewImage = "no image found"
+            // }
 
         })
 
@@ -352,9 +352,9 @@ router.get('/', async (req, res) => {
                 spot.previewImage = image.url;
             }
 
-            if (image.preview === false) {
-                spot.previewImage = "no image found"
-            }
+            // if (image.preview === false) {
+            //     spot.previewImage = "no image found"
+            // }
 
         })
 
@@ -523,7 +523,7 @@ router.post('/', [requireAuth, validateNewSpot], async (req, res, next) => {
             lng: lng,
             name: name,
             description: description,
-            price: price
+            price: price,
         })
         res.statusCode = 201;
         res.json(newSpot)

@@ -4,7 +4,7 @@ import OpenModalButton from "../OpenModalButton";
 
 const DeleteSpot = ({ spot }) => {
     return (
-        <div>
+        <div className='delete-btn'>
             <OpenModalButton
                 buttonText="Delete"
                 modalComponent={<DeleteSpotModal spot={spot} />}

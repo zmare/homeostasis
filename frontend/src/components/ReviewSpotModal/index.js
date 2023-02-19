@@ -6,9 +6,8 @@ import { addReview } from '../../store/reviews';
 
 const ReviewSpotModal = ({ spot }) => {
     const dispatch = useDispatch();
+    const [errors, setErrors] = useState([])
     let user = useSelector(state => state.session.user);
-    delete user.email;
-    delete user.username;
 
     const { closeModal } = useModal();
     let array = new Array(5).fill('');
@@ -17,26 +16,37 @@ const ReviewSpotModal = ({ spot }) => {
     const [review, setReview] = useState('');
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setErrors([]);
         const newReview = { review, stars };
+        try {
+            await dispatch(addReview(spot.id, user, newReview));
+            closeModal();
+        }
+        catch (response) {
+            const data = await response.json();
+            if (data && data.errors) setErrors(data.errors);
+        }
 
-        dispatch(addReview(spot.id, user, newReview));
-        closeModal();
     }
 
     return (
-        <div>
-            <h2>How was your stay?</h2>
+        <div className='form-parent-container'>
             <form>
-                <textarea
+                <h2>How was your stay?</h2>
+                <ul style={{ color: 'red', fontSize: '11pt' }}>
+                    {errors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                </ul>
+                <textarea rows='5' cols='5'
                     placeholder="Leave review here..."
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 >
                 </textarea>
-                <div>
+                <div className='review_spot_stars'>
                     <div className='star-rating'>
                         {array.map((rating, index) => {
                             index += 1;
@@ -58,12 +68,12 @@ const ReviewSpotModal = ({ spot }) => {
                         })} stars
                     </div>
                 </div>
-                <button
+                <button className={review.length < 10 ? 'review-submit-disabled' : 'review-submit-button'}
                     type='submit'
                     disabled={review.length < 10}
                     onClick={handleSubmit}>Submit Your Review</button>
             </form>
-        </div>
+        </div >
     );
 }
 

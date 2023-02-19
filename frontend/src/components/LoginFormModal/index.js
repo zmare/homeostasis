@@ -53,8 +53,10 @@ function LoginFormModal() {
                         required
                     />
                 </label>
-                <button disabled={!credential || !password} className={!credential || !password ? "disabled-btn" : "login-button"} type="submit">Log In</button>
-                <button onClick={() => { setCredential('demo@user.io'); setPassword('password'); }} type="submit">Log In Demo User</button>
+                <span>
+                    <button disabled={!credential || !password} className={!credential || !password ? "disabled-btn" : "login-button"} type="submit">Log In</button>
+                </span>
+                <button onClick={() => { setCredential('demo@user.io'); setPassword('password'); }} type="submit" className='demo-user-btn'>Log In Demo User</button>
             </form>
         </div>
     );
