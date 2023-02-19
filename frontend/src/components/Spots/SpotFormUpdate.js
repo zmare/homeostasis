@@ -217,6 +217,7 @@ const SpotForm = ({ spot, formType }) => {
                         name="price"
                         onChange={handleUpdate}
                         value={newSpot.price}
+                        style={{ display: 'inline-block', width: '95%' }}
                     />
                     <span className='errors'>{formErrors.price}</span><br></br>
                 </label>
