@@ -80,8 +80,11 @@ const SpotForm = ({ spot, formType }) => {
         try {
             let createdSpot = await dispatch(addSpot(newSpot));
             let mySpotImages = Object.values(spotImages);
+            mySpotImages.unshift(newSpot.previewImage);
+            console.log(mySpotImages);
+
             if (createdSpot) {
-                await dispatch(addSpotImages(createdSpot.id, newSpot.previewImage, mySpotImages));
+                await dispatch(addSpotImages(createdSpot.id, mySpotImages));
                 history.push(`/spots/${createdSpot.id}`)
             }
 

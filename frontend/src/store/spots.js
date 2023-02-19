@@ -26,9 +26,9 @@ const createSpot = spot => ({
     spot
 })
 
-const createSpotImage = spotImage => ({
+const createSpotImages = spotImages => ({
     type: ADD_SPOT_IMAGE,
-    spotImage
+    spotImages
 })
 
 const updateSpot = spot => ({
@@ -83,48 +83,55 @@ export const addSpot = (spot) => async (dispatch) => {
     }
 }
 
-export const addSpotImages = (spotId, previewImage, spotImages) => async (dispatch) => {
-    console.log(spotImages);
+export const addSpotImages = (spotId, spotImages) => async (dispatch) => {
 
-    let image = {
-        url: previewImage,
-        preview: true
-    }
+    // let image = {
+    //     url: previewImage,
+    //     preview: true
+    // }
 
-    let response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(image)
-    })
+    // let response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    //     method: 'POST',
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(image)
+    // })
 
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(createSpotImage(data));
-    }
-
-    // const returnedResponse = await Promise.all(
-    //     spotImages.map(async (imageURL) => {
-    //         let image = {
-    //             url: imageURL,
-    //             preview: false
-    //         }
-
-    //         let response = await csrfFetch(`/api/spots/${spotId}/images`, {
-    //             method: 'POST',
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify(image)
-    //         })
-
-    //         if (response.ok) {
-    //             return await response.json();
-    //         }
-
-    //     })
-    // )
-
-    // for (let data of returnedResponse) {
+    // if (response.ok) {
+    //     const data = await response.json();
     //     dispatch(createSpotImage(data));
     // }
+
+    const returnedResponse = await Promise.all(
+        spotImages.map(async (imageURL, index) => {
+            let image;
+
+            if (index === 0) {
+                image = {
+                    url: imageURL,
+                    preview: true
+                }
+            } else {
+                image = {
+                    url: imageURL,
+                    preview: false
+                }
+            }
+
+            let response = await csrfFetch(`/api/spots/${spotId}/images`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(image)
+            })
+
+            if (response.ok) {
+                return await response.json();
+            }
+
+        })
+    )
+
+    await dispatch(createSpotImages(returnedResponse));
+
 }
 
 export const editSpot = (id, spot) => async (dispatch) => {

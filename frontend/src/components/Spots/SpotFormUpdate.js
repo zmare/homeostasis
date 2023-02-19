@@ -74,7 +74,7 @@ const SpotForm = ({ spot, formType }) => {
     const handleSubmit = async (e) => {
         console.log(newSpot);
         e.preventDefault();
-        let isValid = validateForm();
+        validateForm();
         setErrors([]);
         try {
             let updatedSpot = await dispatch(editSpot(spotId, newSpot));

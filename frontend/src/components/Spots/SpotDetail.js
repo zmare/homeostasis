@@ -24,9 +24,9 @@ const SpotDetail = () => {
     if (!spot.avgStarRating) spot.avgStarRating = 'New';
 
     //THIS LINE IS HARD CODED TO SHOW AN IMAGE BECAUSE ADD IMAGE IS NOT SETUP!!
-    if (!spot.SpotImages.length) {
-        spot.SpotImages[0] = { url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png" }
-    }
+    // if (!spot.SpotImages.length) {
+    //     spot.SpotImages[0] = { url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png" }
+    // }
     const images = spot.SpotImages.slice(0, 5);
 
     return (
@@ -35,7 +35,7 @@ const SpotDetail = () => {
             <p >{spot.city}, {spot.state}, {spot.country}</p>
             {spot.SpotImages.length ? (
                 <div className='spot_detail_images_container'>
-                    <img id='spot_detail_img_1' src={images[0].url} alt='preview'></img>
+                    <img id='spot_detail_img_1' className='spot_detail_images' src={images[0].url} alt='preview'></img>
 
                     {images.slice(1).map((image, index) =>
                         <img key={image.id} id={`spot_detail_img_${index + 2}`} className='spot_detail_images' src={`${image.url}`} alt='preview'></img>
