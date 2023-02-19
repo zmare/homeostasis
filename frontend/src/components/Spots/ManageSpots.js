@@ -24,11 +24,13 @@ const ManageSpots = () => {
                 <button className='create_new_spot_btn'>Create a New Spot</button>
             </Link>
 
-            <div className='spot_container'>
+            <div className='spot_container_manage'>
                 {spots.map((spot) => (
-                    <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
-                        <ManageSpotCard key={spot.id} spot={spot} />
-                    </NavLink>
+                    // <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
+                    //     <ManageSpotCard key={spot.id} spot={spot} />
+                    // </NavLink>
+
+                    <ManageSpotCard key={spot.id} spot={spot} />
                 ))}
             </div>
         </div >

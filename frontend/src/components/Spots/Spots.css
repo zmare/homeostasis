@@ -14,13 +14,28 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     width: 75%;
-    margin: auto;
+    margin: center;
+    padding: 1em 4em;
+
+}
+
+.spot_container_manage {
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 2%; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 75%;
     padding-top: 1em;
 
 }
 
 .spot_container a {
-
     width: 25%;
     box-sizing: border-box;
 }
@@ -187,7 +202,7 @@
 
 }
 
-.zTest button {
+.delete-btn button {
     background-color: darkgray;
     border: solid 1px black;
     color: white;
@@ -247,4 +262,8 @@ textarea:invalid {
 
 .form_parent_container input:invalid:required {
     background-image: linear-gradient(to right, pink, pink);
+}
+
+.errors {
+    color: red;
 }
