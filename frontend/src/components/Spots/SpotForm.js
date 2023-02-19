@@ -97,7 +97,17 @@ const SpotForm = ({ spot, formType }) => {
             <div style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }}>
                 <h3>Where's your place located?</h3>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
-
+                <label>
+                    Country
+                    <input
+                        placeholder='Country'
+                        type="text"
+                        name="country"
+                        onChange={handleUpdate}
+                        value={newSpot["country"]}
+                    />
+                    <span className='errors'>{formErrors.country}</span><br></br>
+                </label>
                 <label>
                     Street Address
                     <input
@@ -133,17 +143,6 @@ const SpotForm = ({ spot, formType }) => {
                     <span className='errors'>{formErrors.state}</span><br></br>
                 </label>
                 <label>
-                    Country
-                    <input
-                        placeholder='Country'
-                        type="text"
-                        name="country"
-                        onChange={handleUpdate}
-                        value={newSpot["country"]}
-                    />
-                    <span className='errors'>{formErrors.country}</span><br></br>
-                </label>
-                <label>
                     Latitude
                     <input
                         placeholder="Latitude"
@@ -172,7 +171,7 @@ const SpotForm = ({ spot, formType }) => {
 
                 <label>
                     <textarea
-                        placeholder="Please write at least 30 characters"
+                        placeholder="Description"
                         type="text"
                         name="description"
                         onChange={handleUpdate}
@@ -204,8 +203,8 @@ const SpotForm = ({ spot, formType }) => {
                 <h3>Set a base price for your spot</h3>
                 <p>Competitive pricing can help your listing stand out and rank higher
                     in search results.</p>
-                <label>
-                    $ <input
+                <label> $
+                    <input
                         placeholder="Price per night (USD)"
                         type="text"
                         name="price"
@@ -224,12 +223,9 @@ const SpotForm = ({ spot, formType }) => {
 
                     <input
                         placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
-                        // required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|jpeg|png))(?:\?([^#]*))?(?:#(.*))?'
-                        title="please enter a valid URL"
                         onChange={handleUpdate}
                         name='previewImage'
                         value={newSpot['previewImage']}
-
                     >
                     </input>
                     <span className='errors'>{formErrors.previewImage}</span><br></br>
