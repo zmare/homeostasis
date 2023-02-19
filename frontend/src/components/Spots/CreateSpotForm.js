@@ -11,7 +11,7 @@ const CreateSpotForm = () => {
         description: '',
         name: '',
         price: '',
-        previewImage: ''
+        previewImage: '',
     };
 
     return (

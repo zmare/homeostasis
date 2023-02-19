@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addSpot, getSpots } from '../../store/spots';
+import { addSpot, addSpotImages, getSpots } from '../../store/spots';
 import './Spots.css'
 
 const SpotForm = ({ spot, formType }) => {
@@ -11,15 +11,21 @@ const SpotForm = ({ spot, formType }) => {
     const [errors, setErrors] = useState([]);
     const [formErrors, setFormErrors] = useState({});
     const newArray = new Array(5).fill('')
+    const [spotImages, setSpotImages] = useState({});
 
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
 
     const handleUpdate = async (e) => {
+
         if (e.target.type === 'number') {
             setNewSpot({ ...newSpot, [e.target.name]: +e.target.value })
-        } else {
+        }
+        else if (e.target.placeholder === 'Image URL') {
+            setSpotImages({ ...spotImages, [e.target.name]: e.target.value })
+        }
+        else {
             setNewSpot({ ...newSpot, [e.target.name]: e.target.value })
         }
     }
@@ -63,28 +69,28 @@ const SpotForm = ({ spot, formType }) => {
 
         setFormErrors({ ...err });
 
-        return true;
+        return Object.keys(err).length < 1;
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        let isValid = validateForm();
+        validateForm();
 
         setErrors([]);
         try {
             let createdSpot = await dispatch(addSpot(newSpot));
+            let mySpotImages = Object.values(spotImages);
             if (createdSpot) {
+                await dispatch(addSpotImages(createdSpot.id, newSpot.previewImage, mySpotImages));
                 history.push(`/spots/${createdSpot.id}`)
             }
+
         } catch (response) {
             window.scrollTo(0, 0);
             const data = await response.json();
             if (data && data.errors) setErrors(data.errors)
         }
     }
-
-
 
     return (
         <form className='form_parent_container' onSubmit={handleSubmit}>
@@ -142,26 +148,26 @@ const SpotForm = ({ spot, formType }) => {
                     />
                     <span className='errors'>{formErrors.state}</span><br></br>
                 </label>
-                <label>
+                {/* <label>
                     Latitude
                     <input
                         placeholder="Latitude"
-                        type="text"
+                        type="number"
                         name="lat"
                         onChange={handleUpdate}
                         value={newSpot["lat"]}
                     />
-                </label>
-                <label>
+                </label> */}
+                {/* <label>
                     Longitude
                     <input
                         placeholder="Longitude"
-                        type="text"
+                        type="number"
                         name="lng"
                         onChange={handleUpdate}
                         value={newSpot["lng"]}
                     />
-                </label>
+                </label> */}
             </div>
 
             <div style={{ borderBottom: '1px solid black' }}>
@@ -220,7 +226,6 @@ const SpotForm = ({ spot, formType }) => {
                 <h3>Liven your spot up with photos</h3>
                 <p>Submit a link to atleast one photo to publish your spot</p>
                 <label>
-
                     <input
                         placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
                         onChange={handleUpdate}
@@ -234,7 +239,11 @@ const SpotForm = ({ spot, formType }) => {
                 {newArray.slice(1).map((arr, index) => (
                     <div key={index + 1}>
                         <input
-                            placeholder='Image URL'>
+                            placeholder='Image URL'
+                            onChange={handleUpdate}
+                            name={`SpotImages${index + 1}`}
+                        // value={spotImages[index]}
+                        >
                         </input>
                         <br></br>
                         <br></br>

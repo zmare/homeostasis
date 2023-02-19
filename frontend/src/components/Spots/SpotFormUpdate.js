@@ -12,6 +12,7 @@ const SpotForm = ({ spot, formType }) => {
     const [formErrors, setFormErrors] = useState({});
     const newArray = new Array(5).fill('')
     const { spotId } = useParams();
+    const [spotImages, setSpotImages] = useState({})
 
     useEffect(() => {
         dispatch(getSpots())
@@ -20,7 +21,10 @@ const SpotForm = ({ spot, formType }) => {
     const handleUpdate = async (e) => {
         if (e.target.type === 'number') {
             setNewSpot({ ...newSpot, [e.target.name]: +e.target.value })
-        } else {
+        } else if (e.target.placeholder === 'Image URL') {
+            setSpotImages({ ...spotImages, [e.target.name]: e.target.value })
+        }
+        else {
             setNewSpot({ ...newSpot, [e.target.name]: e.target.value })
         }
     }
@@ -68,6 +72,7 @@ const SpotForm = ({ spot, formType }) => {
     }
 
     const handleSubmit = async (e) => {
+        console.log(newSpot);
         e.preventDefault();
         let isValid = validateForm();
         setErrors([]);
@@ -141,7 +146,7 @@ const SpotForm = ({ spot, formType }) => {
                     <span className='errors'>{formErrors.state}</span><br></br>
                 </label>
 
-                <label>
+                {/* <label>
                     Latitude
                     <input
                         placeholder="Latitude"
@@ -160,7 +165,7 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={handleUpdate}
                         value={newSpot.lng}
                     />
-                </label>
+                </label> */}
             </div>
 
 
@@ -224,6 +229,7 @@ const SpotForm = ({ spot, formType }) => {
                     <input
                         placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
                         onChange={handleUpdate}
+                        name='previewImage'
                         value={newSpot.previewImage}
                     >
                     </input>
@@ -235,8 +241,9 @@ const SpotForm = ({ spot, formType }) => {
                         <input
                             placeholder='Image URL'
                             onChange={handleUpdate}
-                            name='previewImage'
-                            value={newSpot['previewImage']}>
+                            name={`SpotImages${index + 1}`}
+                        // value={newSpot['previewImage']}
+                        >
                         </input>
                         <br></br>
                         <br></br>

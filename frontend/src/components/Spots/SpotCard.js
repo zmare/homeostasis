@@ -1,9 +1,9 @@
 import "./Spots.css";
 
 const SpotCard = ({ spot }) => {
-    if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
-        spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
-    }
+    // if (spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
+    //     spot.previewImage = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/No_Preview_image_2.png'
+    // }
 
     if (spot.avgRating === 'no reviews yet') spot.avgRating = 'New';
 

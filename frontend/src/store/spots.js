@@ -3,6 +3,7 @@ const LOAD_SPOTS = 'spots/load';
 const LOAD_SPOTS_USER = 'spots/user'
 const GET_SPOT = 'spots/spot'
 const ADD_SPOT = 'spots/create'
+const ADD_SPOT_IMAGE = 'spots/images/create'
 const UPDATE_SPOT = 'spots/spot/update'
 const REMOVE_SPOT = 'spots/spot/remove'
 
@@ -23,6 +24,11 @@ const loadSpotsUser = spots => ({
 const createSpot = spot => ({
     type: ADD_SPOT,
     spot
+})
+
+const createSpotImage = spotImage => ({
+    type: ADD_SPOT_IMAGE,
+    spotImage
 })
 
 const updateSpot = spot => ({
@@ -75,6 +81,50 @@ export const addSpot = (spot) => async (dispatch) => {
         dispatch(createSpot(data));
         return data;
     }
+}
+
+export const addSpotImages = (spotId, previewImage, spotImages) => async (dispatch) => {
+    console.log(spotImages);
+
+    let image = {
+        url: previewImage,
+        preview: true
+    }
+
+    let response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(image)
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(createSpotImage(data));
+    }
+
+    // const returnedResponse = await Promise.all(
+    //     spotImages.map(async (imageURL) => {
+    //         let image = {
+    //             url: imageURL,
+    //             preview: false
+    //         }
+
+    //         let response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    //             method: 'POST',
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify(image)
+    //         })
+
+    //         if (response.ok) {
+    //             return await response.json();
+    //         }
+
+    //     })
+    // )
+
+    // for (let data of returnedResponse) {
+    //     dispatch(createSpotImage(data));
+    // }
 }
 
 export const editSpot = (id, spot) => async (dispatch) => {
@@ -132,6 +182,10 @@ const spotReducer = (state = initialState, action) => {
         case ADD_SPOT: {
             const newState = { ...state };
             newState.allSpots[action.spot.id] = action.spot;
+            return newState;
+        }
+        case ADD_SPOT_IMAGE: {
+            const newState = { ...state };
             return newState;
         }
         case UPDATE_SPOT: {

@@ -5,9 +5,9 @@ import "./Spots.css";
 const ManageSpotCard = ({ spot }) => {
     const history = useHistory();
 
-    if (!spot.previewImage || spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
-        spot.previewImage = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png'
-    }
+    // if (!spot.previewImage || spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
+    //     spot.previewImage = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png'
+    // }
 
 
     return (
