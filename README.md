@@ -1,4 +1,28 @@
-# AirBnB Clone
+# AirBnB Clone - Homeostasis
+
+Welcome! This application is a clone of the AirBnB site called Homeostasis.
+
+Features included in this application are the ability to login in, sign up a new user, create, manage, and delete a new spot, and create and delete reviews left for a spot by a user.
+
+![website-image](website_img.png)
+
+[website-image]: ../assets/website_img.png
+
+### Technologies used in the creation of this App
+- Express
+- Sequelize
+- React JS
+- CSS
+
+## Instructions to start Application
+- You can navigate to https://homeostasis.onrender.com/ to see the live application!!
+- In order to start a local version for yourself:
+  1. Download a local version of this repositoryt
+   2. cd into the 'backend' folder
+  3. 'npm start' in your terminal
+  4. cd into the 'frontend' directory
+  5. 'npm start' in your terminal
+  6. You should see your browser open with the website!
 
 ## Database Schema Design
 
