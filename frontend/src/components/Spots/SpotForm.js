@@ -81,14 +81,8 @@ const SpotForm = ({ spot, formType }) => {
             let createdSpot = await dispatch(addSpot(newSpot));
             let mySpotImages;
 
-            if (spotImages.length) {
-                mySpotImages = Object.values(spotImages);
-                mySpotImages.unshift(newSpot.previewImage);
-            } else {
-                mySpotImages = [newSpot.previewImage];
-            }
-
-            console.log(mySpotImages);
+            mySpotImages = Object.values(spotImages);
+            mySpotImages.unshift(newSpot.previewImage);
 
             if (createdSpot) {
                 await dispatch(addSpotImages(createdSpot.id, mySpotImages));
