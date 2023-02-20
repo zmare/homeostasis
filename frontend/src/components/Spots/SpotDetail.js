@@ -9,6 +9,7 @@ const SpotDetail = () => {
     const { spotId } = useParams();
     const testingReview = useSelector(state => state.reviews);
 
+
     useEffect(() => {
         dispatch(getSpot(spotId));
     }, [dispatch, spotId, testingReview]);
@@ -20,6 +21,7 @@ const SpotDetail = () => {
             return state.spots.singleSpot[spotId]
         }
     });
+
     if (!spot) return null;
     if (!spot.avgStarRating) spot.avgStarRating = 'New';
 

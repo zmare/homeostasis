@@ -8,28 +8,43 @@ import './ReviewsIndex.css';
 
 const ReviewIndex = ({ spot }) => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getReviews(spot.id));
-        dispatch(getReviewsCurrent());
-    }, [dispatch, spot.id])
+
+        if (user !== null) {
+            dispatch(getReviewsCurrent());
+        }
+
+    }, [dispatch, spot.id, user])
 
     let reviews = useSelector(state => (state.reviews.orderedList));
-    let myReviews = useSelector(state => (state.reviews.user));
-    const user = useSelector(state => state.session.user);
+    let myReviews = useSelector(state => {
+        if ((state.reviews.user === null)) {
+            return;
+        } else {
+            return state.reviews.user
+        }
+    });
+
     const ownerId = spot.Owner.id;
 
     if (!reviews) return null;
-    if (!myReviews) return null;
+    //if (!myReviews) return null;
     if (!spot.avgStarRating) spot.avgStarRating = 'New';
 
     reviews = Object.values(reviews);
-    myReviews = Object.values(myReviews);
+    //myReviews = Object.values(myReviews);
     let hasReview = false;
 
-    for (let review of myReviews) {
-        let spotId = parseInt(review.spotId);
-        if (spotId === spot.id) hasReview = true;
+    if (myReviews) {
+        myReviews = Object.values(myReviews);
+
+        for (let review of myReviews) {
+            let spotId = parseInt(review.spotId);
+            if (spotId === spot.id) hasReview = true;
+        }
     }
 
     return (
@@ -65,6 +80,8 @@ const ReviewIndex = ({ spot }) => {
                     modalComponent={<ReviewSpotModal spot={spot} />}
                 />
             ) : ''}
+
+
 
             <div>
                 <ReviewCard spot={spot} reviews={reviews} />
