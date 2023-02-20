@@ -54,13 +54,13 @@ const SpotDetail = () => {
                                 New
                             </p>
                         ) : (
-                            <>
+                            <div style={{ display: "flex", flexDirection: 'row', gap: '3px' }}>
                                 <p>
                                     <i className='fa-solid fa-star fa-fw middle_dot'></i>
                                     {spot.avgStarRating}</p>
                                 <p>·</p>
                                 <p>{spot.numReviews} {spot.numReviews === 1 ? 'review' : 'reviews'}</p>
-                            </>
+                            </div>
                         )}
 
                     </div>
