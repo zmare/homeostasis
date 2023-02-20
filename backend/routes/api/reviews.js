@@ -108,7 +108,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
 
     let numOfImages = reviewImagesArr.length;
-    console.log(numOfImages);
 
     if (numOfImages >= 10) {
         res.statusCode = 403;
