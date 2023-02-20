@@ -98,6 +98,19 @@ const validateReview = [
     handleValidationErrors
 ]
 
+const validateSpotImage = [
+    check('url')
+        .exists()
+        .withMessage('Image URL is required')
+        .custom((value, { req, res }) => {
+            if (value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png')) {
+                return true;
+            } else {
+                throw new Error('Image URL must end in .jpg, .jpeg. or .png')
+            }
+        }),
+    handleValidationErrors
+]
 
 
 
@@ -108,5 +121,6 @@ module.exports = {
     handleValidationErrors,
     validateNewSpot,
     validateBooking,
-    validateReview
+    validateReview,
+    validateSpotImage
 };
