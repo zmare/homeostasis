@@ -54,7 +54,7 @@ function LoginFormModal() {
                     />
                 </label>
                 <span>
-                    <button disabled={!credential || !password} className={!credential || !password ? "disabled-btn" : "login-button"} type="submit">Log In</button>
+                    <button disabled={!credential || !password || (password.length < 6) || (credential.length < 4)} className={!credential || !password || (password.length < 6) || (credential.length < 4) ? "disabled-btn" : "login-button"} type="submit">Log In</button>
                 </span>
                 <button onClick={() => { setCredential('demo@user.io'); setPassword('password'); }} type="submit" className='demo-user-btn'>Log In Demo User</button>
             </form>

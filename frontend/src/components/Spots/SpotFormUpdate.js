@@ -213,7 +213,8 @@ const SpotForm = ({ spot, formType }) => {
                     $
                     <input
                         placeholder="Price per night (USD)"
-                        type="text"
+                        type="number"
+                        step=".01"
                         name="price"
                         onChange={handleUpdate}
                         value={newSpot.price}
