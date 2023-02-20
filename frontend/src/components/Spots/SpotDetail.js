@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { getReviewsCurrent } from '../../store/reviews';
 import { getSpot } from '../../store/spots';
 import ReviewIndex from '../Reviews/ReviewIndex';
 
@@ -8,6 +9,7 @@ const SpotDetail = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const testingReview = useSelector(state => state.reviews);
+
 
     useEffect(() => {
         dispatch(getSpot(spotId));
@@ -20,6 +22,7 @@ const SpotDetail = () => {
             return state.spots.singleSpot[spotId]
         }
     });
+
     if (!spot) return null;
     if (!spot.avgStarRating) spot.avgStarRating = 'New';
 
