@@ -100,7 +100,7 @@ const validateReview = [
 
 const validateSpotImage = [
     check('url')
-        .exists()
+        .exists({ checkFalsy: true })
         .withMessage('Image URL is required')
         .custom((value, { req, res }) => {
             if (value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png')) {

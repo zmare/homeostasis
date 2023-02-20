@@ -79,9 +79,16 @@ const SpotForm = ({ spot, formType }) => {
         setErrors([]);
         try {
             let createdSpot = await dispatch(addSpot(newSpot));
-            let mySpotImages = Object.values(spotImages);
-            mySpotImages.unshift(newSpot.previewImage);
-            console.log(newSpot);
+            let mySpotImages;
+
+            if (spotImages.length) {
+                mySpotImages = Object.values(spotImages);
+                mySpotImages.unshift(newSpot.previewImage);
+            } else {
+                mySpotImages = [newSpot.previewImage];
+            }
+
+            console.log(mySpotImages);
 
             if (createdSpot) {
                 await dispatch(addSpotImages(createdSpot.id, mySpotImages));
@@ -236,6 +243,7 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={handleUpdate}
                         name='previewImage'
                         value={newSpot['previewImage']}
+                        required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?'
                     >
                     </input>
                     <span className='errors'>{formErrors.previewImage}</span><br></br>
