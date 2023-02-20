@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getSpots, editSpot } from '../../store/spots';
 import './Spots.css'
 
-const SpotForm = ({ spot, formType }) => {
+const SpotFormUpdate = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [newSpot, setNewSpot] = useState({ ...spot });
@@ -16,7 +16,7 @@ const SpotForm = ({ spot, formType }) => {
 
     useEffect(() => {
         dispatch(getSpots())
-    }, [dispatch])
+    }, [dispatch],)
 
     const handleUpdate = async (e) => {
         if (e.target.type === 'number') {
@@ -72,7 +72,6 @@ const SpotForm = ({ spot, formType }) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log(newSpot);
         e.preventDefault();
         validateForm();
         setErrors([]);
@@ -233,6 +232,7 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={handleUpdate}
                         name='previewImage'
                         value={newSpot.previewImage}
+                        required pattern='(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?'
                     >
                     </input>
                     <span className='errors'>{formErrors.previewImage}</span><br></br>
@@ -244,6 +244,7 @@ const SpotForm = ({ spot, formType }) => {
                             placeholder='Image URL'
                             onChange={handleUpdate}
                             name={`SpotImages${index + 1}`}
+
                         // value={newSpot['previewImage']}
                         >
                         </input>
@@ -259,4 +260,4 @@ const SpotForm = ({ spot, formType }) => {
     )
 }
 
-export default SpotForm;
+export default SpotFormUpdate;

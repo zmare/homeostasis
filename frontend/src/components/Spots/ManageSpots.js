@@ -1,5 +1,5 @@
 import ManageSpotCard from "./ManageSpotCard";
-import { getSpotsUser } from "../../store/spots";
+import { getSpots, getSpotsUser } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ const ManageSpots = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(getSpots())
         dispatch(getSpotsUser())
     }, [dispatch])
 

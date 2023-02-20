@@ -33,7 +33,6 @@ router.get('/current', requireAuth, async (req, res) => {
 
     Spots.forEach(spot => {
         spot.SpotImages.forEach(image => {
-            console.log(image);
             if (image.preview === true) {
                 spot.previewImage = image.url;
             }

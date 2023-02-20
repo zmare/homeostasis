@@ -182,8 +182,6 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         let today = new Date().toDateString();
         compareToday = new Date(today).getTime();
 
-        console.log(compareToday - start);
-
         if (compareToday - start > 0) {
             res.statusCode = 403;
             res.json({
