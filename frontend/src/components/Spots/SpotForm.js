@@ -81,7 +81,7 @@ const SpotForm = ({ spot, formType }) => {
             let createdSpot = await dispatch(addSpot(newSpot));
             let mySpotImages = Object.values(spotImages);
             mySpotImages.unshift(newSpot.previewImage);
-            console.log(mySpotImages);
+            console.log(newSpot);
 
             if (createdSpot) {
                 await dispatch(addSpotImages(createdSpot.id, mySpotImages));
@@ -215,7 +215,8 @@ const SpotForm = ({ spot, formType }) => {
                 <label> $
                     <input
                         placeholder="Price per night (USD)"
-                        type="text"
+                        type="number"
+                        step='.01'
                         name="price"
                         onChange={handleUpdate}
                         value={newSpot["price"]}

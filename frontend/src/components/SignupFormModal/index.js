@@ -39,6 +39,26 @@ function SignupFormModal() {
                 </ul>
                 <label>
                     <input
+                        placeholder="First Name"
+                        className="input-field"
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <input
+                        placeholder="Last Name"
+                        className="input-field"
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <input
                         placeholder="Email"
                         className="input-field"
                         type="text"
@@ -55,26 +75,6 @@ function SignupFormModal() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         minLength='4'
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        placeholder="First Name"
-                        className="input-field"
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        placeholder="Last Name"
-                        className="input-field"
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
                         required
                     />
                 </label>
