@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getReviewsCurrent } from '../../store/reviews';
 import { getSpot } from '../../store/spots';
 import ReviewIndex from '../Reviews/ReviewIndex';
 
