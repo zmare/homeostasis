@@ -311,9 +311,9 @@ textarea:invalid {
     border: 2px solid red;
 }
 
-.form_parent_container input:invalid:required {
+/* .form_parent_container input:invalid:required {
     background-image: linear-gradient(to right, pink, pink);
-}
+} */
 
 .errors {
     color: red;
