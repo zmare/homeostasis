@@ -65,6 +65,7 @@
     text-align: center;
     font-size: 12px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .manage-spots-btn {
@@ -85,4 +86,8 @@
 
 .login-signup>li:hover {
     font-weight: bold;
+}
+
+.login-signup {
+    cursor: pointer;
 }
