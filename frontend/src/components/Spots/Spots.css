@@ -1,31 +1,24 @@
 /* ************************************************************ */
 /* CSS for parent container of all Spot Cards */
 
+.spot_container_parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 /* Parent container div */
 .spot_container {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0 0 2%; */
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    width: 75%;
-    margin: center;
-    padding: 1em 4em;
+
 
 }
 
 .spot_container_manage {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0 0 2%; */
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 10px;
@@ -113,7 +106,7 @@
 
 /* Parent container div  */
 .spot_detail_container {
-    padding: 2em;
+    margin: 10px 60px;
     font-family: 'Manrope', sans-serif;
 }
 

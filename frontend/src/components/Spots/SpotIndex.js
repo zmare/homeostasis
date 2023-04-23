@@ -17,15 +17,22 @@ const SpotIndex = () => {
     spots = Object.values(spots);
 
     return (
-        <div className='spot_container'>
-            {spots.map(spot => (
-                <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
-                    <SpotCard spot={spot} />
-                </NavLink>
-            ))}
+        <>
+            <div className="spot_container_parent">
+                <div className='spot_container'>
+                    {spots.map(spot => (
+                        <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
+                            <SpotCard spot={spot} />
+                        </NavLink>
+                    ))}
+                </div>
+            </div>
+            <div>
+                <p>footer</p>
+            </div>
+        </>
 
 
-        </div>
     );
 }
 
