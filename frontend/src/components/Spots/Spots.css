@@ -5,17 +5,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+
+
 }
 
 /* Parent container div */
 .spot_container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-
-
+    margin-top: 50px;
+    margin-right: 20px;
 }
 
 .spot_container_manage {

@@ -13,7 +13,8 @@
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "mapbox-gl": "^2.14.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +29,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not ie 11"
     ],
     "development": [
       "last 1 chrome version",
