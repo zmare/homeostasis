@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import DeleteReviewModal from "../DeleteReviewModal";
+import EditReviewModal from "../EditReviewModal";
 import OpenModalButton from "../OpenModalButton";
 
 const ReviewCard = ({ spot, reviews }) => {
@@ -23,10 +24,28 @@ const ReviewCard = ({ spot, reviews }) => {
                         <span style={{ color: "darkgray", fontSize: '10pt' }}>{review.month} {review.year}</span>  <br></br>
                         {review.review}
                     </p>
-                    {(user !== null && user.id === review.User.id) ? (<OpenModalButton
-                        buttonText="Delete"
-                        modalComponent={<DeleteReviewModal review={review} />}
-                    />) : ''}
+                    {(user !== null && user.id === review.User.id)
+                        ?
+                        (
+                            <>
+                                <span style={{ marginRight: '10px' }}>
+                                    <OpenModalButton
+                                        buttonText="Edit"
+                                        modalComponent={<EditReviewModal review={review} />}
+                                    />
+                                </span>
+
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeleteReviewModal review={review} />}
+                                />
+
+
+
+                            </>
+                        )
+                        :
+                        ''}
 
                 </div>
             ))}

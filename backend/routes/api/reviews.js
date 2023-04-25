@@ -187,7 +187,6 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
                 stars: stars
             });
 
-
             res.json(reviewPromise);
         }
     }
