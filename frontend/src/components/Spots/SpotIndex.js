@@ -29,15 +29,43 @@ const SpotIndex = () => {
                     ))}
                 </div>
                 {/* </div> */}
-                <div style={{ marginTop: '40px', display: 'inline-block', right: '50px' }}>
+                {/* <div style={{ marginTop: '40px', display: 'inline-block', right: '50px' }}>
                     <MapBox />
-                </div>
+                </div> */}
             </div>
 
-            <div>
-                <p>footer</p>
+            <div className="page-footer-container">
+                <div className='page-footer-column'>
+                    <span className='column-header'>Tech Stack - Frontend</span>
+                    <div id='column-1'>
+                        <li>Javascript</li>
+                        <li>React</li>
+                        <li>Redux</li>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                    </div>
+                </div>
+
+                <div className='page-footer-column'>
+                    <span className='column-header'>Tech Stack - Backend</span>
+                    <div id='column-2'>
+                        <li>Express</li>
+                        <li>Sequelize</li>
+                        <li>SQLite3</li>
+                    </div>
+                </div>
+
+                <div className='page-footer-column'>
+                    <span className='column-header'>Connect</span>
+                    <div id='column-3'>
+                        <a className="link" id='link-1' href='https://www.linkedin.com/in/zaineb-marediya/' target="_blank"><i id='connect' className="fa-brands fa-linkedin"></i></a>
+                        <a className='link' href="https://github.com/zmare" target="_blank"><i id='connect' className="fa-brands fa-github"></i></a>
+                        <a className='link' href="https://zmare.github.io/" target="_blank"><i id='connect' className="fa-solid fa-circle-user"></i></a>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </div >
 
 
     );

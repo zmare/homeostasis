@@ -12,7 +12,7 @@
 /* Parent container div */
 .spot_container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     margin-top: 50px;
@@ -113,7 +113,7 @@
 
 /* Header - Spot Name */
 .spot_detail_header {
-    font-weight: bolder;
+    font-weight: 400;
 }
 
 /* spot images generated parent container*/
@@ -311,4 +311,66 @@ textarea:invalid {
 
 .errors {
     color: red;
+}
+
+.spot_card_price_heart {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.page-footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #FF5A5F;
+    width: 100vw;
+    max-width: 100%;
+    padding-bottom: 32px;
+    padding-top: 32px;
+    font-size: 16px;
+    font-family: 'Manrope', sans-serif;
+    margin: 0;
+
+}
+
+.page-footer-column {
+    margin: 30px 40px;
+    list-style: none;
+
+}
+
+.column-header {
+    font-weight: bolder;
+    line-height: 1.15;
+    margin: 12px 0;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#column-1,
+#column-2,
+#column-3 {
+    margin-top: 12px
+}
+
+#connect {
+    font-size: 30px;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
+
+/* #column-3 {
+    display: flex;
+    flex-direction: column;
+} */
+
+#link-1 i {
+    padding-left: 0px;
 }

@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
     const linkStyle = {
         width: "100%",
         height: '70px',
-        fontWeight: 'bold',
+        fontWeight: 400,
         textDecoration: 'none',
         fontSize: '20px',
         color: "red"
