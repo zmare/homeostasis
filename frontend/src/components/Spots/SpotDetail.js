@@ -44,7 +44,7 @@ const SpotDetail = () => {
                     )}
                 </div>
             ) : ''}
-            <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+            <h2 style={{ fontWeight: '400' }}>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
             <div className='spot_detail_desc_callout_container'>
                 <p className='spot_detail_desc'> {spot.description}</p>
                 <div className='spot_detail_callout_container'>

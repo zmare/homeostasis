@@ -7,6 +7,12 @@ const SpotCard = ({ spot }) => {
 
     if (spot.avgRating === 'no reviews yet') spot.avgRating = 'New';
 
+    const handleLike = (e) => {
+        e.preventDefault();
+
+        window.alert("hi");
+
+    }
     return (
         <div className='spot_card'>
             <img src={spot.previewImage} alt='preview' className='spot_card_image'></img>
@@ -17,7 +23,11 @@ const SpotCard = ({ spot }) => {
                     {spot.avgRating}
                 </div>
             </div>
-            <span className='spot_card_price'>${spot.price}</span> night
+            <div className='spot_card_price_heart'>
+                <span><span className='spot_card_price'>${spot.price}</span> night</span>
+                <button onClick={handleLike}><i className="fa-regular fa-heart"></i></button>
+
+            </div>
         </div >
     );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './index.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
     const linkStyle = {
         width: "100%",
         height: '70px',
-        fontWeight: 'bold',
+        fontWeight: 400,
         textDecoration: 'none',
         fontSize: '20px',
         color: "red"
@@ -19,9 +19,9 @@ function Navigation({ isLoaded }) {
     return (
         <div className='header'>
             <div>
-                <NavLink to="/">
-                    <img src="https://companieslogo.com/img/orig/ABNB-4aaade0f.png" alt='logo' style={{ height: "20px", width: '20px', marginRight: '5px' }}></img>
-                </NavLink>
+                {/* <NavLink to="/">
+                    <img src="https://www.clipartmax.com/png/full/48-488255_home-home-logo-png.png" alt='logo' style={{ height: "20px", width: '20px', marginRight: '5px' }}></img>
+                </NavLink> */}
                 <NavLink exact to="/" style={linkStyle}>homeostasis</NavLink>
             </div>
             {

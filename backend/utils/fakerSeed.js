@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcryptjs');
+const { spotImages } = require('../utils/spot_image_data')
 
 //simple random number generator
 const rNum = (num) => Math.floor(Math.random() * Math.floor(num) + 1)
@@ -20,39 +21,39 @@ const seedUsers = (num) => {
     return users;
 }
 
-const seedSpots = (num) => {
-    let spots = new Array(num).fill('');
+// const seedSpots = (num) => {
+//     // let spots = new Array(num).fill('');
 
-    for (const i in spots) {
-        spots[i] = {
-            ownerId: rNum(4),
-            address: faker.address.streetAddress(),
-            city: faker.address.cityName(),
-            state: faker.address.state(),
-            country: 'United States of America',
-            lat: faker.address.latitude(90, -90, 7),
-            lng: faker.address.longitude(180, -180, 7),
-            name: faker.lorem.sentence(),
-            description: faker.lorem.paragraph(rNum(10)),
-            price: faker.commerce.price(100, 500)
-        }
-    }
+//     for (const i in spots) {
+//         spots[i] = {
+//             ownerId: rNum(4),
+//             address: faker.address.streetAddress(),
+//             city: faker.address.cityName(),
+//             state: faker.address.state(),
+//             country: 'United States of America',
+//             lat: faker.address.latitude(90, -90, 7),
+//             lng: faker.address.longitude(180, -180, 7),
+//             name: faker.lorem.sentence(),
+//             description: faker.lorem.paragraph(rNum(10)),
+//             price: faker.commerce.price(100, 500)
+//         }
+//     }
 
-    return spots;
-}
+//     return spots;
+// }
 
 const seedSpotImages = (num) => {
-    let spotImages = new Array(num).fill('');
+    let mySpotImages = new Array(num).fill('');
 
-    for (const i in spotImages) {
-        spotImages[i] = {
-            spotId: rNum(10),
-            url: faker.image.city(640, 480, true),
+    for (const i in mySpotImages) {
+        mySpotImages[i] = {
+            spotId: rNum(20),
+            url: spotImages[rNum(119)],
             preview: true
         }
     }
 
-    return spotImages;
+    return mySpotImages;
 }
 
 const seedReviews = (num) => {
@@ -60,7 +61,7 @@ const seedReviews = (num) => {
 
     for (const i in reviews) {
         reviews[i] = {
-            spotId: rNum(10),
+            spotId: rNum(20),
             userId: rNum(4),
             review: faker.lorem.paragraph(rNum(3)),
             stars: rNum(5)
@@ -92,7 +93,7 @@ const seedBookings = (num) => {
         const endDate = new Date(faker.date.between('2023-04-01T00:00:00.000Z', '2023-05-01T00:00:00.000Z'));
 
         bookings[i] = {
-            spotId: rNum(10),
+            spotId: rNum(20),
             userId: rNum(4),
             startDate: startDate,
             endDate: endDate,
@@ -104,7 +105,7 @@ const seedBookings = (num) => {
 
 module.exports = {
     seedUsers,
-    seedSpots,
+    //seedSpots,
     seedSpotImages,
     seedReviews,
     seedReviewImages,
