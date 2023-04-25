@@ -7,12 +7,14 @@ import "./MapBox.css"
 mapboxgl.accessToken = 'pk.eyJ1Ijoiem1hcmUiLCJhIjoiY2xndHRvYXRpMjZmbDN0bHUxZ3lzZWZrYiJ9.NM7sD1vPmMv4I3UffYSq6g';
 
 
-const MapBox = () => {
+const MapBox = (spot) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
+    const [lng, setLng] = useState(spot.spot.lng);
+    const [lat, setLat] = useState(spot.spot.lat);
     const [zoom, setZoom] = useState(9);
+
+
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -35,9 +37,9 @@ const MapBox = () => {
 
     return (
         <div>
-            {/* <div className="sidebar-mapbox">
+            <div className="sidebar-mapbox">
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div> */}
+            </div>
             <div ref={mapContainer} className="map-container" />
         </div>
     );

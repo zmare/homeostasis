@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSpot } from '../../store/spots';
 import ReviewIndex from '../Reviews/ReviewIndex';
+import MapBox from '../MapBox';
 
 const SpotDetail = () => {
     const dispatch = useDispatch();
@@ -72,6 +73,13 @@ const SpotDetail = () => {
 
             <div className="reviews_parent_container">
                 <ReviewIndex spot={spot} />
+            </div>
+
+            <div className='map-box'>
+                <div>
+                    <h2 style={{ fontWeight: '400' }}>Where you'll be staying!</h2>
+                    <MapBox spot={spot} />
+                </div>
             </div>
         </div >
     );
