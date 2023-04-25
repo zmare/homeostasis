@@ -61,7 +61,7 @@ const seedReviews = (num) => {
 
     for (const i in reviews) {
         reviews[i] = {
-            spotId: rNum(10),
+            spotId: rNum(20),
             userId: rNum(4),
             review: faker.lorem.paragraph(rNum(3)),
             stars: rNum(5)
@@ -93,7 +93,7 @@ const seedBookings = (num) => {
         const endDate = new Date(faker.date.between('2023-04-01T00:00:00.000Z', '2023-05-01T00:00:00.000Z'));
 
         bookings[i] = {
-            spotId: rNum(10),
+            spotId: rNum(20),
             userId: rNum(4),
             startDate: startDate,
             endDate: endDate,
