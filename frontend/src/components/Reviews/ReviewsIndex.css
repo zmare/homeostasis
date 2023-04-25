@@ -40,5 +40,13 @@
 }
 
 .reviews_parent_container {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: solid 2px lightgray;
+}
+
+.map-box {
+    display: flex;
+    justify-content: center;
     margin-bottom: 80px;
 }

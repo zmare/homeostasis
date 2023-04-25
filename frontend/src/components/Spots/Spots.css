@@ -374,3 +374,10 @@ textarea:invalid {
 #link-1 i {
     padding-left: 0px;
 }
+
+.show-like {
+    border: none;
+    background-color: transparent;
+    color: #FF5A5F;
+    font-size: 18px;
+}
