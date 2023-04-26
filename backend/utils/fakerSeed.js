@@ -103,11 +103,25 @@ const seedBookings = (num) => {
     return bookings;
 }
 
+const seedFavorites = (num) => {
+    let favorites = new Array(num).fill('');
+
+    for (const i in favorites) {
+        favorites[i] = {
+            userId: 1,
+            spotId: rNum(20)
+        }
+    }
+
+    return favorites;
+}
+
 module.exports = {
     seedUsers,
     //seedSpots,
     seedSpotImages,
     seedReviews,
     seedReviewImages,
-    seedBookings
+    seedBookings,
+    seedFavorites
 }
