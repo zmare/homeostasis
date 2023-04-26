@@ -152,7 +152,7 @@ const SpotForm = ({ spot, formType }) => {
                     />
                     <span className='errors'>{formErrors.state}</span><br></br>
                 </label>
-                {/* <label>
+                <label>
                     Latitude
                     <input
                         placeholder="Latitude"
@@ -161,8 +161,8 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={handleUpdate}
                         value={newSpot["lat"]}
                     />
-                </label> */}
-                {/* <label>
+                </label>
+                <label>
                     Longitude
                     <input
                         placeholder="Longitude"
@@ -171,7 +171,7 @@ const SpotForm = ({ spot, formType }) => {
                         onChange={handleUpdate}
                         value={newSpot["lng"]}
                     />
-                </label> */}
+                </label>
             </div>
 
             <div style={{ borderBottom: '1px solid black' }}>

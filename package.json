@@ -22,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zmare/API_project.git"
+    "url": "git+https://github.com/zmare/homeostasis.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zmare/API_project/issues"
+    "url": "https://github.com/zmare/homeostasis/issues"
   },
-  "homepage": "https://github.com/zmare/API_project#readme"
+  "homepage": "https://github.com/zmare/homeostasis#readme"
 }
