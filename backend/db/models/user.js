@@ -62,6 +62,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(
         models.Booking, { foreignKey: 'userId', onDelete: 'cascade', hooks: true }
       )
+
+      User.belongsToMany(
+        models.Spot, { through: "Favorites", foreignKey: 'userId' }
+      )
     }
   };
   User.init(
