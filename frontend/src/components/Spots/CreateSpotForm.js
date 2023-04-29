@@ -1,4 +1,5 @@
 import SpotForm from './SpotForm';
+import SignupForm from './SpotFormFormik';
 
 const CreateSpotForm = () => {
     const spot = {
@@ -6,8 +7,6 @@ const CreateSpotForm = () => {
         city: '',
         state: '',
         country: '',
-        lat: 0,
-        lng: 0,
         description: '',
         name: '',
         price: '',
@@ -15,7 +14,8 @@ const CreateSpotForm = () => {
     };
 
     return (
-        <SpotForm spot={spot} formType="Create Your Spot" />
+        //<SpotForm spot={spot} formType="Create Your Spot" />
+        <SignupForm spot={spot} formType="Create Your Spot" />
     );
 }
 
