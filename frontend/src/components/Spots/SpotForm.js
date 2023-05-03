@@ -8,6 +8,8 @@ const SpotForm = ({ spot, formType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [newSpot, setNewSpot] = useState(spot);
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [errors, setErrors] = useState([]);
     const [formErrors, setFormErrors] = useState({});
     const newArray = new Array(5).fill('')
@@ -75,8 +77,13 @@ const SpotForm = ({ spot, formType }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         validateForm();
-
         setErrors([]);
+
+        newSpot['lat'] = +lat;
+        newSpot['lng'] = +lng;
+
+        console.log(newSpot);
+
         try {
             let createdSpot = await dispatch(addSpot(newSpot));
             let mySpotImages;
@@ -156,20 +163,20 @@ const SpotForm = ({ spot, formType }) => {
                     Latitude
                     <input
                         placeholder="Latitude"
-                        type="number"
+                        type="text"
                         name="lat"
-                        onChange={handleUpdate}
-                        value={newSpot["lat"]}
+                        onChange={(e) => setLat(e.target.value)}
+                        value={lat}
                     />
                 </label>
                 <label>
                     Longitude
                     <input
                         placeholder="Longitude"
-                        type="number"
+                        type="text"
                         name="lng"
-                        onChange={handleUpdate}
-                        value={newSpot["lng"]}
+                        onChange={(e) => setLng(e.target.value)}
+                        value={lng}
                     />
                 </label>
             </div>

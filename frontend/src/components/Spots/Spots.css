@@ -272,8 +272,7 @@
     font-size: 11pt;
 }
 
-.form_parent_container input,
-textarea {
+.text-input {
     background: #E8F0FE;
     font-family: 'Manrope', sans-serif;
     border: 2px solid darkgray;
@@ -380,4 +379,14 @@ textarea:invalid {
     background-color: transparent;
     color: #FF5A5F;
     font-size: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

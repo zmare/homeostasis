@@ -1,6 +1,6 @@
 const express = require('express');
 const { requireAuth, requireAuthorization, doesSpotExist, requireAuthBooking, doesReviewExist } = require('../../utils/auth');
-const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
+const { Spot, SpotImage, Review, ReviewImage, User, Booking, Favorite } = require('../../db/models');
 const { validateNewSpot, validateBooking, validateReview, validateSpotImage } = require('../../utils/validation');
 const router = express.Router();
 const { Op } = require('sequelize')
@@ -21,7 +21,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 model: SpotImage
             },
             {
-                model: Review,
+                model: Review
             }
         ]
     })
@@ -65,6 +65,32 @@ router.get('/current', requireAuth, async (req, res) => {
     })
 
     res.json({ Spots });
+})
+
+router.get('/favorites', requireAuth, async (req, res) => {
+    let userId = req.user.id;
+
+    let favorites = await Favorite.findAll({
+        where: {
+            userId: userId
+        },
+        include: [
+            {
+                model: Spot,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+
+                }
+            }
+        ]
+    })
+
+    let Favorites = [];
+    for (let favorite of favorites) {
+        Favorites.push(favorite.toJSON());
+    };
+
+    res.json(Favorites);
 })
 
 // Route to find all reviews for a spot
@@ -445,6 +471,8 @@ router.get('/', async (req, res) => {
 
 //     res.json({ Spots });
 // })
+
+
 
 
 

@@ -108,7 +108,7 @@ const seedFavorites = (num) => {
 
     for (const i in favorites) {
         favorites[i] = {
-            userId: 1,
+            userId: 4,
             spotId: rNum(20)
         }
     }
