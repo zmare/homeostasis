@@ -14,6 +14,10 @@ const SpotCard = ({ spot }) => {
         e.preventDefault();
         setLike(!like);
 
+        //if (like){
+        // add like
+        // } else remove like
+
     }
     return (
         <div className='spot_card'>
