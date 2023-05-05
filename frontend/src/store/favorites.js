@@ -9,10 +9,11 @@ const loadFavorites = favorites => ({
     favorites
 });
 
-const createFavorite = (spotId => ({
+const createFavorite = (spotId, favorite) => ({
     type: ADD_FAVORITE,
-    spotId: spotId
-}))
+    spotId: spotId,
+    favorite
+})
 
 const removeFavorite = (spotId => ({
     type: DELETE_FAVORITE,
@@ -20,96 +21,65 @@ const removeFavorite = (spotId => ({
 }))
 
 export const getFavoritesCurrent = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    const response = await csrfFetch(`/api/favorites/current`);
 
     if (response.ok) {
-        const reviews = await response.json();
-        dispatch(loadReviews(reviews));
+        const favorites = await response.json();
+        dispatch(loadFavorites(favorites));
     }
 }
 
 export const addFavorite = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    const response = await csrfFetch(`/api/favorites/${spotId}`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(review)
+        body: ""
     })
 
     if (response.ok) {
-        const review = await response.json();
-        review.User = user;
-        dispatch(createReview(spotId, review));
+        const favorite = await response.json();
+        dispatch(createFavorite(spotId, favorite));
     }
 }
 
 export const deleteFavorite = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews/${id}`, {
+    const response = await csrfFetch(`/api/favorites/${spotId}`, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" }
     })
 
     if (response.ok) {
-        dispatch(removeReview(id));
+        dispatch(removeFavorite(spotId));
     }
 }
-
 
 const initialState = {};
 
 const favoritesReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_FAVORITES: {
-            const spot = {};
-            action.reviews.Reviews.forEach(review => {
-                let newDate = new Date(review.createdAt);
-                newDate = newDate.getTime();
-                review.createdAtMiliseconds = newDate;
-            })
-
-            let orderedList = Object.values(action.reviews.Reviews);
-            orderedList = orderedList.sort((r1, r2) => (r1.createdAtMiliseconds < r2.createdAtMiliseconds) ? 1 : (r1.createdAtMiliseconds > r2.createdAtMiliseconds) ? -1 : 0);
-
-            action.reviews.Reviews.forEach(review => {
-                spot[review.id] = review
-            })
-
-            return {
-                ...state,
-                spot,
-                orderedList
-            }
-        }
-        case LOAD_REVIEWS_CURRENT: {
-            const user = {};
-            action.reviews.Reviews.forEach(review => {
-                user[review.id] = review
+            const allFavorites = {};
+            action.favorites.forEach(favorite => {
+                allFavorites[favorite.id] = favorite
             })
             return {
                 ...state,
-                user
+                allFavorites
             }
 
         }
         case ADD_FAVORITE: {
             const newState = { ...state };
-            const spot = { ...state.spot };
-            const user = { ...state.user };
-            const orderedList = [...state.orderedList];
-            spot[action.review.id] = action.review;
-            user[action.review.id] = action.review;
-            orderedList.unshift(action.review);
-            return { ...newState, spot, user, orderedList };
+            const allFavorites = { ...state.allFavorites };
+            allFavorites[action.favorite.id] = action.favorite;
+            return { ...newState, allFavorites };
         }
 
         case DELETE_FAVORITE: {
             const newState = { ...state };
-            const spot = { ...state.spot };
-            const user = { ...state.user };
-            const orderedList = [...state.orderedList];
-            delete spot[action.reviewId];
-            delete user[action.reviewId];
-            orderedList.shift();
-            return { ...newState, spot, user, orderedList };
+            const allFavorites = { ...state.allFavorites }
+            delete allFavorites[action.favorite.id];
+            return { ...newState, allFavorites };
         }
         default:
             return state;

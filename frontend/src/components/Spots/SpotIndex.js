@@ -1,29 +1,49 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getFavoritesCurrent } from '../../store/favorites';
 import { getSpots } from '../../store/spots';
 import SpotCard from './SpotCard';
 import './Spots.css'
 
 const SpotIndex = () => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getSpots())
-    }, [dispatch])
+        if (user) {
+            dispatch(getFavoritesCurrent())
+        }
+
+    }, [dispatch, user])
 
     let spots = useSelector(state => state.spots.allSpots)
+    let favorites = useSelector(state => state.favorites.allFavorites)
     if (!spots) return null;
     spots = Object.values(spots);
+
+    const isFavorite = (spot) => {
+        if (favorites) {
+            favorites = Object.values(favorites);
+
+            for (let favorite of favorites) {
+                if (favorite.Spot.id === spot.id) return true
+            }
+
+            return false;
+        }
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <div className='spot_container'>
                     {spots.map(spot => (
-                        <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={spot.id} to={`/spots/${spot.id}`}>
-                            <SpotCard spot={spot} />
+                        <NavLink id={`spot-card-${spot.id}`} className='spot_card_link' key={`spotcard - ${spot.id}`} to={`/spots/${spot.id}`}>
+                            <SpotCard spot={spot} isFavorite={isFavorite(spot)} />
                         </NavLink>
+
                     ))}
                 </div>
             </div>
