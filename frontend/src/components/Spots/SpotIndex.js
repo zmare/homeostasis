@@ -21,7 +21,7 @@ const SpotIndex = () => {
     let favorites = useSelector(state => state.favorites.allFavorites)
     let spots = useSelector(state => state.spots.allSpots)
 
-    if (!spots || !favorites) return null;
+    if (!spots) return null;
     spots = Object.values(spots);
 
     const isFavorite = (spot) => {
