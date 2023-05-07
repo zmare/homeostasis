@@ -379,6 +379,7 @@ textarea:invalid {
     background-color: transparent;
     color: #FF5A5F;
     font-size: 18px;
+    cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,

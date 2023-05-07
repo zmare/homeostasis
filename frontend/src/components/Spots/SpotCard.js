@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite, deleteFavorite } from '../../store/favorites';
+import { addFavorite, deleteFavorite, getFavoritesCurrent } from '../../store/favorites';
 import "./Spots.css";
 
 const SpotCard = ({ spot, isFavorite }) => {
+
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
 
@@ -14,15 +15,17 @@ const SpotCard = ({ spot, isFavorite }) => {
     if (spot.avgRating === 'no reviews yet') spot.avgRating = 'New';
 
     const [like, setLike] = useState(isFavorite)
+    useEffect(() => { setLike(isFavorite) }, [isFavorite]);
 
     const handleLike = async (e) => {
         e.preventDefault();
-        setLike(!like);
 
-        if (like) {
+        if (!like) {
             await dispatch(addFavorite(spot.id))
+            await dispatch(getFavoritesCurrent())
         } else {
             await dispatch(deleteFavorite(spot.id))
+            await dispatch(getFavoritesCurrent());
         }
 
     }

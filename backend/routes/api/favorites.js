@@ -91,11 +91,10 @@ router.post('/:spotId', requireAuth, async (req, res) => {
     res.statusCode = 201;
     res.json(newFavorite)
 })
-''
 
 // ************************************ DELETE routes ************************************ //
 
-/// DELETE A FRIEND REQUEST
+/// DELETE A FAVORITE
 router.delete('/:spotId', requireAuth, async (req, res) => {
     let userId = req.user.id;
 

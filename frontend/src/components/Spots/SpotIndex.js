@@ -18,9 +18,10 @@ const SpotIndex = () => {
 
     }, [dispatch, user])
 
-    let spots = useSelector(state => state.spots.allSpots)
     let favorites = useSelector(state => state.favorites.allFavorites)
-    if (!spots) return null;
+    let spots = useSelector(state => state.spots.allSpots)
+
+    if (!spots || !favorites) return null;
     spots = Object.values(spots);
 
     const isFavorite = (spot) => {

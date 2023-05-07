@@ -69,17 +69,19 @@ const favoritesReducer = (state = initialState, action) => {
 
         }
         case ADD_FAVORITE: {
-            const newState = { ...state };
-            const allFavorites = { ...state.allFavorites };
-            allFavorites[action.favorite.id] = action.favorite;
-            return { ...newState, allFavorites };
+            // const newState = { ...state };
+            // const allFavorites = { ...state.allFavorites };
+            // allFavorites[action.favorite.id] = action.favorite;
+            // return { ...newState, allFavorites };
+            return { ...state };
         }
 
         case DELETE_FAVORITE: {
-            const newState = { ...state };
-            const allFavorites = { ...state.allFavorites }
-            delete allFavorites[action.favorite.id];
-            return { ...newState, allFavorites };
+            // const newState = { ...state };
+            // const allFavorites = { ...state.allFavorites }
+            // delete allFavorites[action.favorite.id];
+            // return { ...newState, allFavorites };
+            return { ...state };
         }
         default:
             return state;
