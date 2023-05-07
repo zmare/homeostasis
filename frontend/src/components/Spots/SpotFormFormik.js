@@ -83,10 +83,9 @@ const SignupForm = ({ spot, formType }) => {
                         .required('Latitude is required'),
 
                     longitude: Yup.number()
-                        .min('Longitude must be greater than -180')
-                        .max('Longitude must be less than 180')
+                        .min(-180, 'Longitude must be greater than -180')
+                        .max(180, 'Longitude must be less than 180')
                         .required('Longitude is required'),
-
                     description: Yup.string()
                         .min(30, 'Must be 30 characters or more')
                         .required('Description is required'),

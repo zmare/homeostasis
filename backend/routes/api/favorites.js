@@ -92,33 +92,40 @@ router.post('/:spotId', requireAuth, async (req, res) => {
     res.json(newFavorite)
 })
 
-
 // ************************************ DELETE routes ************************************ //
 
-/// DELETE A FRIEND REQUEST
-router.delete('/:requestId', requireAuth, async (req, res) => {
-    //check if review exists
-    let requestPromise = await Request.findByPk(req.params.requestId);
+/// DELETE A FAVORITE
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    let userId = req.user.id;
 
-    if (!requestPromise) {
+    //check if review exists
+    let favoritePromise = await Favorite.findOne({
+        where: {
+            userId: userId,
+            spotId: +req.params.spotId
+        }
+
+    })
+
+    if (!favoritePromise) {
         res.statusCode = 404;
         res.json({
-            message: "Request couldn't be found",
+            message: "This spot is not favorited",
             statusCode: res.statusCode
         })
     }
 
     //authorization check
-    const request = requestPromise.toJSON();
+    const favorite = favoritePromise.toJSON();
 
-    if (request.receiverId !== req.user.id && request.requestorId !== req.user.id) {
+    if (favorite.userId !== req.user.id) {
         res.statusCode = 403;
         res.json({
             message: 'Forbidden',
             statusCode: res.statusCode
         })
     } else {
-        await requestPromise.destroy();
+        await favoritePromise.destroy();
 
         res.statusCode = 200;
         res.json({
@@ -128,10 +135,5 @@ router.delete('/:requestId', requireAuth, async (req, res) => {
     }
 
 })
-
-
-
-
-
 
 module.exports = router;
