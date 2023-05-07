@@ -1,5 +1,5 @@
 import SpotForm from './SpotForm';
-import SignupForm from './SpotFormFormik';
+import SpotFormFormik from './SpotFormFormik';
 
 const CreateSpotForm = () => {
     const spot = {
@@ -14,8 +14,8 @@ const CreateSpotForm = () => {
     };
 
     return (
-        //<SpotForm spot={spot} formType="Create Your Spot" />
-        <SignupForm spot={spot} formType="Create Your Spot" />
+        <SpotForm spot={spot} formType="Create Your Spot" />
+        //<SpotFormFormik spot={spot} formType="Create Your Spot" />
     );
 }
 

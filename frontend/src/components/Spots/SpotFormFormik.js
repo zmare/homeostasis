@@ -43,7 +43,9 @@ const MySelect = ({ label, ...props }) => {
     );
 };
 
-const SignupForm = ({ spot, formType }) => {
+const SpotFormFormik = ({ spot, formType }) => {
+    const newArray = new Array(5).fill('')
+    const URL = "(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\\.(?:jpg|gif|png))(?:\\?([^#]*))?(?:#(.*))?"
 
     return (
         <>
@@ -60,8 +62,12 @@ const SignupForm = ({ spot, formType }) => {
                     name: '',
                     price: '',
                     acceptedTerms: false, // added for our checkbox
-                    // jobType: '', // added for our select
-
+                    // jobType: '', // added for our select,
+                    spotImage1: '',
+                    spotImage2: '',
+                    spotImage3: '',
+                    spotImage4: '',
+                    spotImage5: '',
                 }}
 
                 validationSchema={Yup.object({
@@ -96,6 +102,10 @@ const SignupForm = ({ spot, formType }) => {
                     price: Yup.number()
                         .required('Price is required'),
 
+                    spotImage1: Yup.string()
+                        .matches(URL, "URL must end in .png, .jpg, or .jpeg")
+                        .required('Image is required'),
+
                     acceptedTerms: Yup.boolean()
                         .required('Required')
                         .oneOf([true], 'You must accept the terms and conditions.'),
@@ -115,7 +125,7 @@ const SignupForm = ({ spot, formType }) => {
                         setSubmitting(false);
                     }, 400);
 
-                    window.alert('hi');
+
                 }}
 
             >
@@ -216,6 +226,32 @@ const SignupForm = ({ spot, formType }) => {
                         <option value="other">Other</option>
                     </MySelect> */}
 
+                    <div style={{ borderBottom: '1px solid black' }}>
+                        <h3>Liven your spot up with photos</h3>
+                        <p>Submit a link to atleast one photo to publish your spot</p>
+
+                        <MyTextInput
+                            placeholder='Preview Image URL ending in .jpg, .jpeg. or .png'
+                            name="spotImage1"
+                            type="text"
+                        />
+                        {/* <br></br>
+                        {newArray.slice(1).map((arr, index) => (
+                            <div key={index + 1}>
+                                <input
+                                    placeholder='Image URL'
+                                    // onChange={handleUpdate}
+                                    name={`SpotImages${index + 1}`}
+                                // value={spotImages[index]}
+                                >
+                                </input>
+                                <br></br>
+                                <br></br>
+                            </div>
+                        ))} */}
+                    </div>
+
+
                     <MyCheckbox name="acceptedTerms">
                         I accept the terms and conditions
                     </MyCheckbox>
@@ -226,4 +262,4 @@ const SignupForm = ({ spot, formType }) => {
     );
 };
 
-export default SignupForm;
+export default SpotFormFormik;

@@ -82,8 +82,6 @@ const SpotForm = ({ spot, formType }) => {
         newSpot['lat'] = +lat;
         newSpot['lng'] = +lng;
 
-        console.log(newSpot);
-
         try {
             let createdSpot = await dispatch(addSpot(newSpot));
             let mySpotImages;

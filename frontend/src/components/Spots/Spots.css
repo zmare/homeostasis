@@ -5,8 +5,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
 
 /* Parent container div */
@@ -272,7 +270,8 @@
     font-size: 11pt;
 }
 
-.text-input {
+.form_parent_container input,
+textarea {
     background: #E8F0FE;
     font-family: 'Manrope', sans-serif;
     border: 2px solid darkgray;
