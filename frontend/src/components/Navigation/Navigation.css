@@ -51,6 +51,10 @@
     align-items: center;
 }
 
+.header-right a:hover {
+    font-weight: bold;
+}
+
 .profile-dropdown {
     padding: 20px;
     margin: 0
