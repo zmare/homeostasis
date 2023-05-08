@@ -1,6 +1,6 @@
 # homeostasis
 
-Homeostasis is a web application inspired by Airbnb that allows users to look and create spots. The app aims to replicate the successful business model of Airbnb, allowing users to browse properites availble for rent. Homeostasis is built with a Express/Sequelize backend and a React/Redux frontend for responsiveness.
+Homeostasis is a web application inspired by Airbnb that allows users to look and create spots. The app aims to replicate the successful business model of Airbnb, allowing users to browse properties availble for rent. Homeostasis is built with a Express/Sequelize backend and a React/Redux frontend for responsiveness.
 
 [Click here to view homeostasis' Live Site](https://homeostasis.onrender.com/)
 
