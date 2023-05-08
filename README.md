@@ -1,6 +1,6 @@
 # homeostasis
 
-Homeostasis is a web application inspired by Airbnb that allows users to look and create spots. The app aims to replicate the successful business model of Airbnb, allowing users to browse properties availble for rent. Homeostasis is built with a Express/Sequelize backend and a React/Redux frontend for responsiveness.
+Homeostasis is a web application that aims to replicate Airbnb, allowing users to browse properties available for rent. Homeostasis is built with a Express/Sequelize backend and a React/Redux frontend for responsiveness.
 
 [Click here to view homeostasis' Live Site](https://homeostasis.onrender.com/)
 
@@ -53,9 +53,10 @@ Homeostasis is a web application inspired by Airbnb that allows users to look an
 
 <img width="700" alt="Screen Shot 2023-05-08 at 1 50 10 PM" src="https://user-images.githubusercontent.com/108374623/236907372-8a09b87e-197d-40df-a162-2d25c5f74bb1.png">
 
-## User Login and Authentication:
+## User Login, Authentication, and Authorization:
 
 * You are able to login as long as your credentials are stored within the database (hashed)
+  * Authorization is handled using JWT 
 * If there are no matching credentials an error message is displayed
 * Login button is disabled if there are null fields or if the amount of characters entered is not within the acceptable range
 
