@@ -54,7 +54,11 @@ function ProfileButton({ user }) {
                         <div style={{ display: "flex", flexDirection: 'column' }}>
                             Hello {user.firstName}! <br></br>
                             {user.email} <br></br>
-                            <NavLink className='manage-spots-btn' to={`/spots/current`}>Manage Spots</NavLink>
+                            <div className='manage-spots-btn'>
+                                <NavLink className='profile-btn-options' to={`/spots/current`}>Manage Spots</NavLink>
+                                <br></br>
+                                <NavLink className='profile-btn-options' to={'/spots/favorites'}>My Favorites</NavLink>
+                            </div>
                             <button className='logout-btn' onClick={logout}>Log Out</button>
                         </div>
                     ) : (
@@ -74,7 +78,7 @@ function ProfileButton({ user }) {
                         </div>
                     )}
                 </ul>
-            </div>
+            </div >
         </div >
     );
 }

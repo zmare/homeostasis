@@ -1,13 +1,17 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteFavorite, getFavoritesCurrent } from "../../store/favorites";
 import DeleteSpot from "./DeleteSpot";
 import "./Spots.css";
 
-const ManageSpotCard = ({ spot }) => {
+const ManageSpotCard = ({ spot, type }) => {
+    const dispatch = useDispatch();
 
-    // if (!spot.previewImage || spot.previewImage === 'no image found' || spot.previewImage === 'image testing url') {
-    //     spot.previewImage = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ghk010121homefeature-008-1671137680.png'
-    // }
-
+    const handleFavoriteDelete = async (e) => {
+        e.preventDefault();
+        await dispatch(deleteFavorite(spot.id))
+        await dispatch(getFavoritesCurrent());
+    }
 
     return (
         <div className='spot_card'>
@@ -28,16 +32,21 @@ const ManageSpotCard = ({ spot }) => {
                 <div style={{
                     display: 'flex', flexDirection: 'row', width: '50%', justifyContent: 'space-between'
                 }}>
-                    <Link to={`/spots/${spot.id}/edit`}>
-                        <button className="create_new_spot_btn" type='button'>Update</button>
-                    </Link>
+                    {type === 'favorites' ?
+                        <button onClick={handleFavoriteDelete} style={{ marginLeft: '19px' }} className='create_new_spot_btn'>Remove Favorite</button>
+                        :
+                        <>
+                            <Link to={`/spots/${spot.id}/edit`}>
+                                <button className="create_new_spot_btn" type='button'>Update</button>
+                            </Link>
 
-                    <Link to={`/spots/current`}>
-                        <div><DeleteSpot spot={spot} /></div>
-                    </Link>
-                    {/* <DeleteSpot spot={spot} /> */}
+                            <Link to={`/spots/current`}>
+                                <div><DeleteSpot spot={spot} /></div>
+                            </Link>
+                            {/* <DeleteSpot spot={spot} /> */}
+                        </>
 
-
+                    }
 
                 </div>
 

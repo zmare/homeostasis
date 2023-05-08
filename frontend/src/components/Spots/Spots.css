@@ -323,7 +323,6 @@ textarea:invalid {
     justify-content: center;
     background-color: #FF5A5F;
     width: 100vw;
-    max-width: 100%;
     padding-bottom: 32px;
     padding-top: 32px;
     font-size: 16px;

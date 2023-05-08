@@ -8,6 +8,7 @@ import SpotDetail from './components/Spots/SpotDetail';
 import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import EditSpotForm from "./components/Spots/EditSpotForm";
 import ManageSpots from "./components/Spots/ManageSpots";
+import FavoriteSpots from "./components/Spots/FavoriteSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path='/spots/current'>
             <ManageSpots />
+          </Route>
+          <Route path='/spots/favorites'>
+            <FavoriteSpots />
           </Route>
           <Route exact path='/spots/:spotId/edit'>
             <EditSpotForm />

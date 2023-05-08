@@ -3,13 +3,33 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { useHistory } from "react-router-dom";
 
 function LoginFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+
+    const handleDemoLogin = async (e) => {
+        e.preventDefault();
+        setErrors([]);
+
+        try {
+            await dispatch(sessionActions.login({
+                credential: 'demo@user.io',
+                password: 'password'
+            }))
+            closeModal();
+            history.push('/');
+        } catch (response) {
+            const data = await response.json();
+            if (data && data.errors) setErrors(data.errors);
+        }
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,7 +76,7 @@ function LoginFormModal() {
                 <span>
                     <button disabled={!credential || !password || (password.length < 6) || (credential.length < 4)} className={!credential || !password || (password.length < 6) || (credential.length < 4) ? "disabled-btn" : "login-button"} type="submit">Log In</button>
                 </span>
-                <button onClick={() => { setCredential('demo@user.io'); setPassword('password'); }} type="submit" className='demo-user-btn'>Log In Demo User</button>
+                <button onClick={handleDemoLogin} type="text" className='demo-user-btn'>Log In Demo User</button>
             </form>
         </div>
     );
