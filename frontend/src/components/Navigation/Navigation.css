@@ -73,9 +73,6 @@
 }
 
 .manage-spots-btn {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     margin-top: 10px;
@@ -84,7 +81,17 @@
     padding-bottom: 5px;
 }
 
-.manage-spots-btn:hover {
+.profile-btn-options {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    margin-top: 10px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.profile-btn-options a:hover {
     font-weight: bold;
 }
 
