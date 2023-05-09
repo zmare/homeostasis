@@ -72,7 +72,7 @@ Homeostasis is a web application that aims to replicate Airbnb, allowing users t
 <img width="700" alt="Screen Shot 2023-05-08 at 1 55 45 PM" src="https://user-images.githubusercontent.com/108374623/236908551-8a8b8b49-789a-4508-a0a1-07b7784a5615.png">
 
 ## Write a review 
-* Users can write, edit, and delete a reivew they leave for a spot
+* Users can write, edit, and delete a review they leave for a spot
 <img width="700" alt="Screen Shot 2023-05-08 at 1 56 40 PM" src="https://user-images.githubusercontent.com/108374623/236908737-f9bfaa65-63de-4012-bdc5-6c4f642ea2a1.png">
 
 
