@@ -81,7 +81,10 @@
 /* Span for word wrappin the spot name in card  */
 .spot_card_name {
     width: 80%;
-    overflow-wrap: break-word
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* overflow-wrap: break-word */
 }
 
 /* Div for star icon and rating in card */
